@@ -1,4 +1,4 @@
-<<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" lang="zh-CN"> 
+<<html  xml:lang="zh-CN" lang="zh-CN"> 
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>后门大街 朱光潜 | 每日一文</title>
@@ -114,72 +114,6 @@
   ga('create', 'UA-45311166-1', 'meiriyiwen.com');
   ga('send', 'pageview');
 </script>
-
-        <div id="mail" class="modal hide fade" aria-hidden="true"  style="display: none; ">
-            <a class="close" data-dismiss="modal" aria-hidden="true">x</a>
-            <div class="mail_img"/></div>
-            <div class="mail_text_top">发送《后门大街》到你的邮箱</div>
-            <form id="share_mail" method="post" action="#">
-                <input class="article_id" type="hidden" name="id" value="25203"/>
-                <div class="mail_div">
-                    <input class="user_email" type="text" name="email" value=""/>
-                    <input id="share_button" class="share_button click_button random_article" type="submit" value="发送">
-                </div>
-            </form>
-            <div class="follow_us" style="text-align:center;display:none;">
-                <div style="text-align:center;margin:20px 0 10px 0;">
-                    <img width="63px" src="http://tp4.sinaimg.cn/2085934591/180/5632143217/1"/>
-                </div>
-                <iframe class="add_num" width="63" height="24" frameborder="0" allowtransparency="true" marginwidth="0" marginheight="0" scrolling="no" border="0" src="http://widget.weibo.com/relationship/followbutton.php?language=zh_cn&width=63&height=24&uid=2085934591&style=1&btn=red&dpc=1"></iframe>
-                <p style="text-align:center;font-size:12px;color:#999;">
-                关注每日一文的新浪微博,和这个简单纯净的网站一起加油！
-                </p>
-            </div>
-            <div class="error"/></div>
-            <div class="mail_link">
-                <a href="http://meiriyiwen.com/surpport" target="_blank" style="background:#20b3d8;padding:3px 7px;color:#fff;">赞助我们</a>
-                <a href="http://meiriyiwen.com">meiriyiwen.com</a>
-            </div>
-        </div>
-        <script type="text/javascript" src="/script/jquery.js"></script>
-        <script src="/script/bootstrap.min.js"></script>
-        
-        <script type="text/javascript">
-            $(document).ready(function(){
-                    //add active nav
-                    $("#article_nav").addClass("article_nav");
-                    //random bg img
-                    var random_bg=Math.floor(Math.random()*99+1);
-                    var bg='url(http://meiriyiwen.com/images/new_feed/bg_'+random_bg+'.jpg)';
-                    $("body").css("background-image",bg);
-                    //tooltips
-                    $("a").tooltip();
-                    //share to mail
-                    $("#share_mail").submit(function(e){
-                        e.preventDefault();
-                        var aid=$(".article_id").val();
-                        var uemail=$(".user_email").val();
-                        var mail_test = $(".user_email").val().length;
-                        var  reg=/^([a-z0-9]*[-_\.]?[a-z0-9]+)*@([a-z0-9]*[-_]?[a-z0-9]+)+[\.][a-z]{2,3}([\.][a-z]{})?$/i;
-                        if(mail_test>5){
-                        if (reg.test(uemail)){
-                        $.post("/index/share", {id:aid,email:uemail}, function(data) {
-                            if(data.status == 1) {
-                            $("#share_mail").hide();
-                            $(".error").hide();
-                            $(".follow_us").show();
-                            $(".mail_text_top").text(" 发送成功");
-
-                            }else {}
-                            }, "json");
-                        }else{$(".error").text("邮箱格式不正确！");};
-                        }else{$(".error").text("email太短了...");}
-                        });
-            });
-
-
-</script>
-<!-- Baidu Button BEGIN -->
 <script type="text/javascript" id="bdshare_js" data="type=tools" ></script>
 <script type="text/javascript" id="bdshell_js"></script>
 <script type="text/javascript">

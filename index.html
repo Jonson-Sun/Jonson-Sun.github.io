@@ -7,7 +7,20 @@
           <!页面标题 显示在标签上>
           <style><!css 內容>
                h1{  text-align:center;}
-		  a{display:block;width:500;background-color:#330000;}
+	       .div-contienter
+		  {
+			   display: -webkit-flex;
+			    display: flex;
+			    width: 1000px;
+			    height: 760px;
+		  }
+		 .div-item
+		  {
+		  	 background-color: cornflowerblue;
+			    width: 500px;
+			    height: 380px;
+			    margin: 10px;
+		  }
           </style>
      </head>
      <body  style="background-color:Aqua;">
@@ -38,15 +51,21 @@
           <img src="images/img5.jpg" width="534" height="384">
           <br><!换行>
           <hr>
-          <br><br><br>
-          <a href="http://git-sun.github.io/html/book.html"><h1>我的个人图书收藏</h1></a>
-           <br><br><br>
-          <a href="http://git-sun.github.io/html/music.html"><h1>我的个人音乐收藏</h1></a>
-           <br><br><br>
-          <a href="http://git-sun.github.io/html/haowen.html"><h1>我的个人文章收藏</h1></a>
-           <br><br><br>
-          <a href="http://git-sun.github.io/html/link.html"><h1>我的网站收藏</h1></a>
-           <br><br><br>
+	     <div class='div-contiener'>
+		<div class='div-item'>
+		  <br><br><br>
+		  <a href="http://git-sun.github.io/html/book.html"><h1>我的个人图书收藏</h1></a>
+		   <br><br><br>
+		  <a href="http://git-sun.github.io/html/music.html"><h1>我的个人音乐收藏</h1></a>
+		   <br><br><br>
+		</div>
+		<div class='div-item'>
+		  <a href="http://git-sun.github.io/html/haowen.html"><h1>我的个人文章收藏</h1></a>
+		   <br><br><br>
+		  <a href="http://git-sun.github.io/html/link.html"><h1>我的网站收藏</h1></a>
+		   <br><br><br>
+		</div>
+	      </div>
           <time>
                <!时间标记>
                <div id="time1"> id is hang_2</div>

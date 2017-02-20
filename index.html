@@ -30,7 +30,7 @@
           <hr><!定义水平线>
           <!img src="images/img4.jpg" width="204" height="142">
           <!img src="images/cainiao.jpg" width="474" height="242">
-          <!img src="images/img1.jpg" width="524" height="242">
+          <img src="images/img1.jpg" width="534" height="384">
           <!img src="images/img2.jpg" width="474" height="242">
           <br>
           <a href="http://tieba.baidu.com/f?kw=%D0%A1%C0%BC&fr=ala0&tpl=5"><img src="images/img3.jpg" width="534" height="384"></a>
@@ -48,6 +48,10 @@
            <br><br><br>
           <time>
                <!时间标记>
+               <div id="time1"> id is hang_2</div>
+	          <script> 
+                    setInterval("document.getElementById('time1').innerHTML = new Date().toLocaleString();", 1000);
+               </script>
           </time>
           <hr>
           <b>END OF LINE</b>

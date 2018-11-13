@@ -12,7 +12,7 @@ body {
 body > *:first-child {margin-top: 0 !important; }
 body > *:last-child {margin-bottom: 0 !important; }
 
-a {color: DarkRed; }
+a {color: tomato; }
 
 h1,h2 {
 	text-align:center;

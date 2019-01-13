@@ -9,12 +9,13 @@
 
 ###资源
 - <a href="https://www.videograbber.net/zh/download-free-movies.html#_1" >国内优秀资源推荐页</a>
--  <a href="https://www.videograbber.net/zh/">资源下载网站 </a>
+- <a href="https://www.videograbber.net/zh/">资源下载网站 </a>
 
 
 
 ---
 ##电影
+
 |电影名|国家|导演|评论|
 :- |:-:|:-:|:-
 罗马假日|意大利|威廉 惠勒|人生就是一场经历过程论~人生
@@ -197,6 +198,7 @@ V字仇杀队|||骇客精神
 
 ---
 ##电视剧
+
 电视剧名称|评价|进度|注
 :-|:-|:-|:-
 冰与火之歌·权利的游戏|后面有点小气de感觉|7季

@@ -1,87 +1,74 @@
-[ toc ]  
+[TOC]  
 
 - 爱需要有新鲜感，所以相爱的两个人都需要是复杂的。不容易认识的。（神逻辑）
 
-#特殊符号
-&#9733;五角星 &#9734;五角星
-&#9650; 正三角 &#9660;倒三角 &#9670;黑菱形  
-&#9728;太阳
-&#9731;雪人  
+# 特殊符号
+# &#9733; &#9734; &#9650; 
+# &#9660; &#9670;&#9728;&#9731;
+---
+
+第一列|第二列
+:-|:-
+broken vertical bar 	&brvbar; 	&#166;  | section 	&sect;   段标题	&#167;  
+spacing diaeresis 	&uml; 	&#168;  |copyright 	&copy; 	&#169;  
+​feminine ordinal indicator 	&ordf; 	&#170;  |angle quotation mark (left) 	&laquo; 	&#171;  
+negation 	&not; 	&#172;  |soft hyphen 	&shy; 	&#173;  
+registered trademark 	&reg; 	&#174;  |spacing macron 	&macr; 	&#175;  
+degree 	&deg; 	&#176;  |plus-or-minus  	&plusmn; 	&#177;  
+superscript 2 	&sup2; 	&#178;  |superscript 3 	&sup3; 	&#179;  
+spacing acute 	&acute; 	&#180; | micro 	&micro; 	&#181;  
+paragraph 	&para; 	&#182;  |middle dot 	&middot; 	&#183;  
+spacing cedilla 	&cedil; 	&#184;  |superscript 1 	&sup1; 	&#185;  
+masculine ordinal indicator 	&ordm; 	&#186;  |angle quotation mark (right) 	&raquo; 	&#187;  
+fraction 1/4 	&frac14; 	&#188;  |fraction 1/2 	&frac12; 	&#189;  
+fraction 3/4 	&frac34; 	&#190;  
+ ---
+​inverted question mark 	&iquest; 	&#191;  |multiplication 	&times; 	&#215;  
+​division 	&divide;  |——
+&spades; 黑桃 |&clubs;黑花  
+&hearts; 黑心  |&diams; 黑钻
+ &loz;空心钻|&trade;商标trade mark
+ &euro;欧元|&fnof;    F  
+&dagger;   |&bull;   ==&#8226;  
+1958\. 斯蒂芬斯    
+​inverted exclamation mark 	&iexcl;	  	&#161;  |cent 	&cent;  	&#162;  
+pound 	&pound; 	&#163;  
+currency 	&curren; 	&#164;  |yen 	&yen; 	&#165;  
 &#9983; &#66312; &#68676;  
 &#70128;  &#70114;  &#118849;  
+&#119070;  音乐符号  &#126980; &#126992;
+&#128018;猴子&#128005;老虎|&#128019;公鸡&#128020;母鸡
+&#128015;&#128016;绵羊山羊| &#8584;&#9775;
+**&copy; **版权证书信息  &amp; |引用符号  4 &lt; 5    
+&nbsp; 空格|	&#160;
 
-# &#119070;  音乐符号  &#126980; &#126992;
+---
 
-# &#128018;猴子&#128005;老虎&#128019;公鸡&#128020;母鸡
+# 着重标记_角标
+**各两个星号进行文字[^1]加粗  **  
+上角标<sup>[[^1]]</sup>下角标<sub>[[^2]]</sub>
+*一个星号文字变为斜体*  
+***三个星号***  
+__请问恶气巍峨__  
 
-# &#128015;&#128016;绵羊山羊 &#8584;&#9775;
+#二级链接and脚注的使用
+I get 10 times more traffic from [Google][1] than from[Yahoo][^2] or [MSN][3].
 
-&copy; 版权证书信息  &amp; 引用符号  4 &lt; 5    
-&nbsp; 	&#160;
-​	inverted exclamation mark 	&iexcl;	  	&#161;  
- 	cent 	&cent;  	&#162;  
- 	pound 	&pound; 	&#163;  
- 	currency 	&curren; 	&#164;  
- 	yen 	&yen; 	&#165;  
- 	broken vertical bar 	&brvbar; 	&#166;  
-​	section 	&sect;   段标题	&#167;  
- 	spacing diaeresis 	&uml; 	&#168;  
- 	copyright 	&copy; 	&#169;  
-​	feminine ordinal indicator 	&ordf; 	&#170;  
-​	angle quotation mark (left) 	&laquo; 	&#171;  
- 	negation 	&not; 	&#172;  
-­ 	soft hyphen 	&shy; 	&#173;  
- 	registered trademark 	&reg; 	&#174;  
-​	spacing macron 	&macr; 	&#175;  
-​	degree 	&deg; 	&#176;  
- 	plus-or-minus  	&plusmn; 	&#177;  
-​	superscript 2 	&sup2; 	&#178;  
-​	superscript 3 	&sup3; 	&#179;  
- 	spacing acute 	&acute; 	&#180;  
- 	micro 	&micro; 	&#181;  
- 	paragraph 	&para; 	&#182;  
-​	middle dot 	&middot; 	&#183;  
-​	spacing cedilla 	&cedil; 	&#184;  
-​	superscript 1 	&sup1; 	&#185;  
-​	masculine ordinal indicator 	&ordm; 	&#186;  
-​	angle quotation mark (right) 	&raquo; 	&#187;  
- 	fraction 1/4 	&frac14; 	&#188;  
- 	fraction 1/2 	&frac12; 	&#189;  
- 	fraction 3/4 	&frac34; 	&#190;  
-​	inverted question mark 	&iquest; 	&#191;  
- 	multiplication 	&times; 	&#215;  
-​	division 	&divide;  
-&spades; 黑桃 
-&clubs;黑花  
-&hearts; 黑心  
-&diams; 黑钻
- &loz;空心钻
- &trade;商标trade mark
- &euro;欧元
-&fnof;    F  
-&dagger;   
-&bull;   ==&#8226;  
-1958\. 斯蒂芬斯    
-
----------
-#二级链接
-I get 10 times more traffic from [Google][1] than from
-[Yahoo][2] or [MSN][3].
-
-[1]: http://google.com/        "Google"
-[2]: http://search.yahoo.com/  "Yahoo Search"
+[^1]: http://google.com/        "Google"
+[^2]: http://search.yahoo.com/  "Yahoo Search"
 [3]: http://search.msn.com/    "MSN Search"
 
 I start my morning with a cup of coffee and
-[The New York Times][NY Times].
-[ny times]: http://www.nytimes.com/
-#不转义
+[The New York Times][NY].
+
+[ny]: http://www.nytimes.com/
+# 不转义
 I strongly recommend against using any `<blink>` tags.
 I wish SmartyPants used named entities like  `&mdash;`
 instead of decimal-encoded entites like `&#8212;`.
 
 # 标题示例
-居中由css文件设置
+(居中由css文件设置)
 # 这是一级标题
 ## 这是二级标题
 ### 这是三级标题
@@ -89,27 +76,22 @@ instead of decimal-encoded entites like `&#8212;`.
 ##### 这是五级标题
 ###### 这是六级标题
 
-#着重标记
-**各两个星号进行文字加粗<sup>asd</sup><sub>asd</sub>**  
-*一个星号文字变为斜体*  
-***三个星号***  
-__请问恶气巍峨__  
-#引用
+# 引用
 > 一层引用{>space}
 > >二层引用
 > >>三层引用
 > >>
 > >>>四层引用  
 
-#分割线
+# 分割线
 ***
 分割线1:{*** 别忘了空一行}  
-#图片
+# 图片
 ![图片下方显示字](/home/asen/图片/自由.png  "鼠标停在图片上显示的文字")  
 
-#超链接
+# 超链接
 [超链接的名字：百度的网站](http://www.baidu.com)  
-#列表
+# 列表
 - 列表1
 - 列表11 //结尾无需space换行
     * 列表2
@@ -120,12 +102,14 @@ __请问恶气巍峨__
 
 1.有序列表:结尾由空格换行  
 8.有序列表中间无空格  
-##表格
-表头123|表1头 |     表2头
+# 表格:
+
+表头1|表头2 |     表头3
 :-|:-----:|-:
-左对齐:- |居中:-: |右对齐-: 
-内容啊四大看见了困境|内容啊四大的|撒34考古考古内容
-内容|啊四大的内u开发与考古容|内容
+第一列：左对齐方式 （:-） |第二列：居中对齐方式（:-:） |第三列右对齐（-: ）
+第二行：左对齐|第二行：居中|第二行右对齐
+第三行|第三行|第三行
+（4,1）|（4，2）|（4, 3）
 
 ---------------------
 
@@ -144,7 +128,7 @@ __请问恶气巍峨__
 	#代码块的点为~键
 ```
 
-```C
+```python
     #include<python.h>
     #include<boost/css>
     int main()
@@ -159,7 +143,7 @@ __请问恶气巍峨__
 <center>河北:居中显示</center>
 
 <http://www.baidu.com>:自动链接
-#数学公式的使用
+# 数学公式的使用
 Math in ReText will work only when using WebKit renderer.  
 
 - sudo apt-get install libjs-mathjax
@@ -344,7 +328,7 @@ $$ 50 \textrm{ apples} \times 100
 $$
 [wiki latex](https://en.wikibooks.org/wiki/LaTeX/Mathematics)  
 [MathJax basic tutorial and quick reference](https://math.meta.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference)
-####常见的特殊数学符号
+#### 常见的特殊数学符号
 ![](mathjex.png)
 
 ![](mathjax1.png)
@@ -353,14 +337,18 @@ $$
 <u>那里 本行文字添加下划线ctrl+u</u>  
 ​	~ 删除线 ~  
 **加粗ctrl+b **  
-*倾斜*  ： ctrl+i  
-唤起表格：ctrl+t {no used}
+*倾斜  *  ： ctrl+i   
+唤起表格：ctrl+t {no used}  
+---
 
 ---------
 # markdown简介
 
 - Markdown是一种纯文本标记语言   
 - HyperText Markup Language 超文本标记语言
-- retext的数学公式及数据溜图 还无法解析
+- retext的数据图 还无法解析
 - pygmentsStyle 语法高亮工具
-
+	- sudo apt-get install python-pygments
+- sudo apt-get install libjs-mathjax  //数学公式
+- markdown语法扩展：mathjax, codehilite
+---

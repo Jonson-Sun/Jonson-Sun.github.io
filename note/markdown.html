@@ -1,0 +1,853 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="generator" content="ReText 7.0.1">
+<link type="text/css" rel="stylesheet" href="/css/github.css">
+<title>markdown语法学习整理</title>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  config: ["MMLorHTML.js"],
+  jax: ["input/TeX", "output/HTML-CSS", "output/NativeMML"],
+  extensions: ["MathMenu.js", "MathZoom.js"],
+  TeX: {
+    extensions: ["AMSmath.js", "AMSsymbols.js"],
+    equationNumbers: {autoNumber: "AMS"}
+  }
+});
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js"></script></head>
+<body>
+<h3>[ toc] 自动提取目录（retext不支持）</h3>
+<p>[TOC]  </p>
+<h3>普通文本直接输入</h3>
+<p>爱需要有新鲜感，所以相爱的两个人都需要是复杂的。不容易认识的。（神逻辑）</p>
+<h3>特殊符号</h3>
+<p>格式：&#xxxx;</p>
+<h1>&#9733;9733  |&#9734;9734| &#9650; 9650</h1>
+<h1>&#9660;9660| &#9670;9670|  &#9728;9728|&#9731;9731</h1>
+<h3>分割线为三个减号（英文）</h3>
+<hr>
+<h3>相关符号示例：</h3>
+<table>
+<thead>
+<tr>
+<th align="left">第一列</th>
+<th align="left">第二列</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">broken vertical bar     &brvbar;    &#166;</td>
+<td align="left">section   &sect;   段标题    &#167;</td>
+</tr>
+<tr>
+<td align="left">spacing diaeresis   &uml;   &#168;</td>
+<td align="left">copyright  &copy;  &#169;</td>
+</tr>
+<tr>
+<td align="left">​feminine ordinal indicator     &ordf;  &#170;</td>
+<td align="left">angle quotation mark (left)    &laquo;     &#171;</td>
+</tr>
+<tr>
+<td align="left">negation    &not;   &#172;</td>
+<td align="left">soft hyphen    &shy;   &#173;</td>
+</tr>
+<tr>
+<td align="left">registered trademark    &reg;   &#174;</td>
+<td align="left">spacing macron     &macr;  &#175;</td>
+</tr>
+<tr>
+<td align="left">degree  &deg;   &#176;</td>
+<td align="left">plus-or-minus      &plusmn;    &#177;</td>
+</tr>
+<tr>
+<td align="left">superscript 2   &sup2;  &#178;</td>
+<td align="left">superscript 3  &sup3;  &#179;</td>
+</tr>
+<tr>
+<td align="left">spacing acute   &acute;     &#180;</td>
+<td align="left">micro  &micro;     &#181;</td>
+</tr>
+<tr>
+<td align="left">paragraph   &para;  &#182;</td>
+<td align="left">middle dot     &middot;    &#183;</td>
+</tr>
+<tr>
+<td align="left">spacing cedilla     &cedil;     &#184;</td>
+<td align="left">superscript 1  &sup1;  &#185;</td>
+</tr>
+<tr>
+<td align="left">masculine ordinal indicator     &ordm;  &#186;</td>
+<td align="left">angle quotation mark (right)   &raquo;     &#187;</td>
+</tr>
+<tr>
+<td align="left">fraction 1/4    &frac14;    &#188;</td>
+<td align="left">fraction 1/2   &frac12;    &#189;</td>
+</tr>
+<tr>
+<td align="left">fraction 3/4    &frac34;    &#190;</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">---</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">​inverted question mark     &iquest;    &#191;</td>
+<td align="left">multiplication     &times;     &#215;</td>
+</tr>
+<tr>
+<td align="left">​division   &divide;</td>
+<td align="left">——</td>
+</tr>
+<tr>
+<td align="left">&spades; 黑桃</td>
+<td align="left">&clubs;黑花</td>
+</tr>
+<tr>
+<td align="left">&hearts; 黑心</td>
+<td align="left">&diams; 黑钻</td>
+</tr>
+<tr>
+<td align="left">&loz;空心钻</td>
+<td align="left">&trade;商标trade mark</td>
+</tr>
+<tr>
+<td align="left">&euro;欧元</td>
+<td align="left">&fnof;    F</td>
+</tr>
+<tr>
+<td align="left">&dagger;</td>
+<td align="left">&bull;   ==&#8226;</td>
+</tr>
+<tr>
+<td align="left">1958. 斯蒂芬斯</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">​inverted exclamation mark  &iexcl;     &#161;</td>
+<td align="left">cent   &cent;      &#162;</td>
+</tr>
+<tr>
+<td align="left">pound   &pound;     &#163;</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">currency    &curren;    &#164;</td>
+<td align="left">yen    &yen;   &#165;</td>
+</tr>
+<tr>
+<td align="left">&#9983; &#66312; &#68676;</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">&#70128;  &#70114;  &#118849;</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">&#119070;  音乐符号  &#126980; &#126992;</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">&#128018;猴子&#128005;老虎</td>
+<td align="left">&#128019;公鸡&#128020;母鸡</td>
+</tr>
+<tr>
+<td align="left">&#128015;&#128016;绵羊山羊</td>
+<td align="left">&#8584;&#9775;</td>
+</tr>
+<tr>
+<td align="left"><strong>&copy; </strong>版权证书信息  &amp;</td>
+<td align="left">引用符号  4 &lt; 5</td>
+</tr>
+<tr>
+<td align="left">&nbsp; 空格</td>
+<td align="left">&#160;</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3>着重标记_角标</h3>
+<p><strong>各两个星号进行文字<sup id="fnref:1"><a class="footnote-ref" href="#fn:1" rel="footnote">1</a></sup>加粗  </strong><br>
+上角标<sup>[<sup id="fnref2:1"><a class="footnote-ref" href="#fn:1" rel="footnote">1</a></sup>]</sup>下角标<sub>[<sup id="fnref:2"><a class="footnote-ref" href="#fn:2" rel="footnote">2</a></sup>]</sub>
+<em>一个星号文字变为斜体</em><br>
+<strong><em>前后三个星号</em></strong><br>
+<strong>前后两个下划线</strong>  </p>
+<h1>二级链接and脚注的使用</h1>
+<p>I get 10 times more traffic from [Google][1] than from[Yahoo]<sup id="fnref2:2"><a class="footnote-ref" href="#fn:2" rel="footnote">2</a></sup> or [MSN][3].</p>
+<p>I start my morning with a cup of coffee and<a href="http://www.nytimes.com/">The New York Times</a>.</p>
+<h1>不转义</h1>
+<p>I strongly recommend against using any <code>&lt;blink&gt;</code> tags.
+I wish SmartyPants used named entities like  <code>&amp;mdash;</code>
+instead of decimal-encoded entites like <code>&amp;#8212;</code>.</p>
+<h1>标题示例</h1>
+<p>(居中可由css文件设置)</p>
+<h1>这是一级标题：一个井</h1>
+<h2>这是二级标题：两个井</h2>
+<h3>这是三级标题</h3>
+<h4>这是四级标题</h4>
+<h5>这是五级标题</h5>
+<h6>这是六级标题</h6>
+<h1>引用</h1>
+<blockquote>
+<p>一层引用{&gt;space}</p>
+<blockquote>
+<p>二层引用{&gt;&gt;space}</p>
+<blockquote>
+<p>三层引用<br>
+三层引用{&gt;&gt;&gt;space}</p>
+<blockquote>
+<p>四层引用  </p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+<h1>分割线</h1>
+<hr>
+<p>分割线1:{*** 别忘了空一行}  </p>
+<h1>图片格式: ![]()</h1>
+<p><img alt="图片下方显示字" src="/home/asen/图片/自由.png" title="鼠标停在图片上显示的文字">  </p>
+<h1>超链接格式：[]()</h1>
+<p><a href="http://www.baidu.com">超链接的名字：百度的网站</a>  </p>
+<h1>列表:{-space|+space|*space}</h1>
+<ul>
+<li>列表1</li>
+<li>列表11 //结尾无需space换行<ul>
+<li>列表2</li>
+<li>劣表22 //别忘了中间的space</li>
+</ul>
+</li>
+<li>列表3<ul>
+<li>列表33<ul>
+<li>列表333</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ol>
+<li>有序列表:结尾由空格换行</li>
+<li>有序列表中间无空格  </li>
+</ol>
+<h1>表格:{|}区分每行的不同项</h1>
+<table>
+<thead>
+<tr>
+<th align="left">表头1</th>
+<th align="center">表头2</th>
+<th align="right">表头3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">第一列：左对齐方式 （:-）</td>
+<td align="center">第二列：居中对齐方式（:-:）</td>
+<td align="right">第三列右对齐（-: ）</td>
+</tr>
+<tr>
+<td align="left">第二行：左对齐</td>
+<td align="center">第二行：居中</td>
+<td align="right">第二行右对齐</td>
+</tr>
+<tr>
+<td align="left">第三行</td>
+<td align="center">第三行</td>
+<td align="right">第三行</td>
+</tr>
+<tr>
+<td align="left">（4,1）</td>
+<td align="center">（4，2）</td>
+<td align="right">（4, 3）</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h1 三个键盘1左边的点包围>代码块:</h1>
+<div class="codehilite"><pre><span></span>    <span class="kn">import</span> <span class="nn">os</span>
+    <span class="kn">import</span> <span class="nn">tk</span>
+    <span class="k">def</span> <span class="nf">opensource</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">):</span>
+        <span class="n">a</span><span class="o">+=</span><span class="n">b</span><span class="p">;</span>
+        <span class="k">return</span> <span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">;</span>
+
+    <span class="n">opensource</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+    <span class="c1">#代码块的点为~键</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>    <span class="c1">#include&lt;python.h&gt;</span>
+    <span class="c1">#include&lt;boost/css&gt;</span>
+    <span class="nb">int</span> <span class="n">main</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="err">!</span><span class="n">a</span><span class="p">;</span>
+        <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">a</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
+</pre></div>
+
+
+<hr>
+<p>分個线2
+<center>华北:居中显示</center></p>
+<h3>自动链接</h3>
+<p><a href="http://www.baidu.com">http://www.baidu.com</a>:尖括号直接包围</p>
+<h1>数学公式的使用（与latex中相同）</h1>
+<p>Math in ReText will work only when using WebKit renderer.  </p>
+<ul>
+<li>sudo apt-get install libjs-mathjax  //linux需要的包</li>
+<li>
+<script type="math/tex">E=mc^2</script>
+<ul>
+<li>|文本表示| E=mc^2</li>
+</ul>
+</li>
+<li>
+<script type="math/tex">lim_{x\to\infty}\exp(-x)=0</script>
+<ul>
+<li>|文本表示|lim_{x\to\infty}\exp(-x)=0</li>
+</ul>
+</li>
+<li>
+<script type="math/tex">1+1=2</script> 内连数学表达式<ul>
+<li>一个$包围</li>
+</ul>
+</li>
+<li>
+<script type="math/tex; mode=display">1+1=2 </script>
+<ul>
+<li>独立成行的数学表达式两个$包围居中显示</li>
+</ul>
+</li>
+<li>
+<script type="math/tex">1=1+1 </script>
+<ul>
+<li>\小括号 包围</li>
+</ul>
+</li>
+<li>
+<script type="math/tex; mode=display">  2+2=2</script>
+<ul>
+<li>\中括号 包围居中显示</li>
+</ul>
+</li>
+<li>
+<script type="math/tex"> I(u)=\frac{4}{\text{i}\,\cos^2(u)}\,\oint_\gamma\,\frac{z}{\big(z+\sec(u)-\tan(u)\big)^2\,\big(z+\sec(u)+\tan(u)\big)^2}\,\text{d}z\,.</script>
+<ul>
+<li>I(u)=\frac{4}{\text{i}\,\cos^2(u)}\,\oint_\gamma\,\frac{z}{\big(z+\sec(u)-\tan(u)\big)^2\,\big(z+\sec(u)+\tan(u)\big)^2}\,\text{d}z\,.</li>
+</ul>
+</li>
+<li>
+<script type="math/tex">\text{Re}\big(\sqrt{1-r^2}\big)>0\text{ for every }r\in\mathbb{C}\setminus\big((-\infty,-1]\cup[+1,+\infty)\big)\,. </script>
+<ul>
+<li>\text{Re}\big(\sqrt{1-r^2}\big)&gt;0\text{ for every }r\in\mathbb{C}\setminus\big((-\infty,-1]\cup[+1,+\infty)\big)\,.</li>
+</ul>
+</li>
+<li>
+<script type="math/tex; mode=display">-\frac{2\pi}{\sin^3(u)}\,.</script>
+<ul>
+<li>-\frac{2\pi}{\sin^3(u)}\,.</li>
+</ul>
+</li>
+<li>
+<script type="math/tex; mode=display">\begin{equation}  f(x)=(x+a)(x+b)    \end{equation}</script>
+<ul>
+<li>\ begin{equation}  f(x)=(x+a)(x+b)\end{equation}  等式自动计数</li>
+</ul>
+</li>
+</ul>
+<p>
+<script type="math/tex; mode=display">\begin{equation}  W(x)=(a+2)(c+3) \\ a = bq + r  \end{equation}</script>
+</p>
+<div class="codehilite"><pre><span></span>\begin{equation} 
+ W(x)=(a+2)(c+3) \\
+  a = bq + r
+\end{equation}
+</pre></div>
+
+
+<p>Maxwell's equations:
+<script type="math/tex; mode=display">\begin{align}
+​        B'&=-\nabla \times E \\
+​        E'&=\nabla \times B - 4\pi j,
+\end{align}</script>
+</p>
+<div class="codehilite"><pre><span></span>\begin{align}​     
+   B&#39;&amp;=-\nabla \times E \\​       
+   E&#39;&amp;=\nabla \times B - 4\pi j,
+\end{align}
+</pre></div>
+
+
+<p>
+<script type="math/tex; mode=display"> A \overset{!}{=} B; A \stackrel{!}{=} B  </script>
+<code>\ [ A \overset{!}{=} B; A \stackrel{!}{=} B  \ ]</code></p>
+<p>
+<script type="math/tex; mode=display">
+ \lim_{x\to 0}{\frac{e^x-1}{2x}}
+ \overset{\left[\frac{0}{0}\right]}{\underset{\mathrm{H}}{=}}
+ \lim_{x\to 0}{\frac{e^x}{2}}={\frac{1}{2}}
+</script>
+</p>
+<div class="codehilite"><pre><span></span>\[
+ \lim_{x\to 0}{\frac{e^x-1}{2x}}
+ \overset{\left[\frac{0}{0}\right]}{\underset{\mathrm{H}}{=}}
+ \lim_{x\to 0}{\frac{e^x}{2}}={\frac{1}{2}}
+\]
+</pre></div>
+
+
+<h2>横着的大括号：</h2>
+<p>
+<script type="math/tex; mode=display">
+ z = \overbrace{
+   \underbrace{x}_\text{real} + i
+   \underbrace{y}_\text{imaginary}
+  }^\text{complex number}
+</script>
+</p>
+<div class="codehilite"><pre><span></span>\[
+ z = \overbrace{
+   \underbrace{x}_\text{real} + i
+   \underbrace{y}_\text{imaginary}
+  }^\text{complex number}
+\]
+</pre></div>
+
+
+<p>
+<script type="math/tex; mode=display">
+ y = a + f(\underbrace{b x}_{
+​                    \ge 0 \text{ by assumption}})  
+   = a + f(\underbrace{b x}_{
+​          {\ge 0 \text{ by assumption}}})
+</script>
+</p>
+<div class="codehilite"><pre><span></span>\[
+ y = a + f(\underbrace{b x}_{
+​                    \ge 0 \text{ by assumption}}) 
+   = a + f(\underbrace{b x}_{
+​          {\ge 0 \text{ by assumption}}})
+\]
+</pre></div>
+
+
+<p>
+<script type="math/tex; mode=display">
+ A \xleftarrow{\text{this the way}} B  \xrightarrow[\text{or that way}]{ } C
+</script>
+</p>
+<div class="codehilite"><pre><span></span>\[
+ A \xleftarrow{\text{this the way}} B  \xrightarrow[\text{or that way}]{ } C
+\]
+</pre></div>
+
+
+<p>
+<script type="math/tex; mode=display">\begin{align*}
+ f(x) &= (x+a)(x+b) \\
+​      &= x^2 + (a+b)x + ab\\
+​      &= x^2 + bx
+\end{align*}</script>
+</p>
+<div class="codehilite"><pre><span></span>\begin{align*}
+ f(x) &amp;= (x+a)(x+b) \\
+​      &amp;= x^2 + (a+b)x + ab\\
+​      &amp;= x^2 + bx
+\end{align*}
+</pre></div>
+
+
+<p>
+<script type="math/tex; mode=display">\begin{align}
+ f(x) &= x^4 + 7x^3 + 2x^2 \nonumber \\
+​      &\qquad {} + 10x + 12
+\end{align}</script>
+</p>
+<h2>单行显示多个公式</h2>
+<p>
+<script type="math/tex; mode=display">\begin{align*}
+ f(x)  &= a x^2+b x +c   &   g(x)  &= d x^3 & a+b=u\\
+ f'(x) &= 2 a x +b       &   g'(x) &= 3 d x^2
+\end{align*}</script>
+</p>
+<div class="codehilite"><pre><span></span>\begin{align*}
+ f(x)  &amp;= a x^2+b x +c   &amp;   g(x)  &amp;= d x^3 &amp; a+b=u\\
+ f&#39;(x) &amp;= 2 a x +b       &amp;   g&#39;(x) &amp;= 3 d x^2
+\end{align*}
+</pre></div>
+
+
+<h2>分段函数：</h2>
+<p>
+<script type="math/tex; mode=display">f(x) = \left\{
+  \begin{array}{lr}
+​    x^2 & : x < 0\\
+​    x^3 & : x \ge 0
+  \end{array}
+\right\}
+</script>
+</p>
+<div class="codehilite"><pre><span></span>\[f(x) = \left\{
+  \begin{array}{lr}
+​    x^2 &amp; : x &lt; 0\\
+​    x^3 &amp; : x \ge 0
+  \end{array}
+\right\}
+正常情况将\} -&gt;.即可
+\]
+</pre></div>
+
+
+<h2>右括号：</h2>
+<p>
+<script type="math/tex; mode=display">\begin{equation}
+ \left.\begin{aligned}
+​        B'&=-\partial \times E,\\
+​        E'&=\partial \times B - 4\pi j,
+​       \end{aligned}
+ \right\}
+ \qquad \text{Maxwell's equations}
+\end{equation}</script>
+</p>
+<div class="codehilite"><pre><span></span>\begin{equation}
+ \left.\begin{aligned}
+​        B&#39;&amp;=-\partial \times E,\\
+​        E&#39;&amp;=\partial \times B - 4\pi j,
+​       \end{aligned}
+ \right\}
+ \qquad \text{Maxwell&#39;s equations}
+\end{equation}
+</pre></div>
+
+
+<p>
+<script type="math/tex; mode=display">\begin{alignat}{2}
+ \sigma_1 &= x + y  &\quad \sigma_2 &= \frac{x}{y} \\   
+ \sigma_1' &= \frac{\partial x + y}{\partial x} & \sigma_2' 
+​    &= \frac{\partial \frac{x}{y}}{\partial x}
+\end{alignat}</script>
+</p>
+<div class="codehilite"><pre><span></span>\begin{alignat}{2}
+ \sigma_1 &amp;= x + y  &amp;\quad \sigma_2 &amp;= \frac{x}{y} \\   
+ \sigma_1&#39; &amp;= \frac{\partial x + y}{\partial x} &amp; \sigma_2&#39; 
+​    &amp;= \frac{\partial \frac{x}{y}}{\partial x}
+\end{alignat}
+</pre></div>
+
+
+<h2>方框：</h2>
+<p>
+<script type="math/tex; mode=display">\begin{equation}
+ \boxed{x^2+y^2 = z^2}
+\end{equation}</script>
+</p>
+<div class="codehilite"><pre><span></span>\begin{equation}
+ \boxed{x^2+y^2 = z^2}
+\end{equation}
+</pre></div>
+
+
+<h2>两种下标</h2>
+<p>
+<script type="math/tex; mode=display">
+ \operatorname{arg\,max}_a f(a) 
+ = \operatorname*{arg\,max}_b f(b)
+</script>
+</p>
+<div class="codehilite"><pre><span></span>\[
+ \operatorname{arg\,max}_a f(a) 
+ = \operatorname*{arg\,max}_b f(b)
+\]
+</pre></div>
+
+
+<p>
+<script type="math/tex; mode=display">
+\DeclareMathOperator*{\argmax}{arg\,max}
+\argmax_c f(c)
+</script>
+</p>
+<div class="codehilite"><pre><span></span>\[
+\DeclareMathOperator*{\argmax}{arg\,max}
+\argmax_c f(c)
+\]
+</pre></div>
+
+
+<h2>多个公式</h2>
+<p>
+<script type="math/tex; mode=display">\begin{equation}  
+ \lim_{a\to \infty} \tfrac{1}{a}  \\
+ \lim\nolimits_{a\to \infty} \tfrac{1}{a} \\
+ \int_a^b x^2  \mathrm{d} x \\
+ \int\limits_a^b x^2  \mathrm{d} x \\
+ \sum\nolimits' C_n \\
+ \sideset{_a^b}{_c^d}\sum \\
+ {\sum\limits_{n=1} }'C_n \\
+\end{equation}</script>
+</p>
+<div class="codehilite"><pre><span></span>\begin{equation}  
+ \lim_{a\to \infty} \tfrac{1}{a}  \\
+ \lim\nolimits_{a\to \infty} \tfrac{1}{a} \\
+ \int_a^b x^2  \mathrm{d} x \\
+ \int\limits_a^b x^2  \mathrm{d} x \\
+ \sum\nolimits&#39; C_n \\
+ \sideset{_a^b}{_c^d}\sum \\
+ {\sum\limits_{n=1} }&#39;C_n \\
+\end{equation}
+</pre></div>
+
+
+<p>
+<script type="math/tex; mode=display">\begin{equation}
+  \prod_{\substack{1\le i \le n \\
+​            1\le j \le m}}  M_{i,j}
+\end{equation}</script>
+</p>
+<div class="codehilite"><pre><span></span>\begin{equation}
+  \prod_{\substack{1\le i \le n \\
+​            1\le j \le m}}  M_{i,j}
+\end{equation}
+</pre></div>
+
+
+<p>
+<script type="math/tex; mode=display">\begin{align*}
+if \\
+   A &= \sigma_1+\sigma_2\\
+   B &= \rho_1+\rho_2\\
+then \\
+C(x) &= e^{Ax^2+\pi}+B
+\end{align*}</script>
+</p>
+<div class="codehilite"><pre><span></span>\begin{align*}
+if \\
+   A &amp;= \sigma_1+\sigma_2\\
+   B &amp;= \rho_1+\rho_2\\
+then \\
+C(x) &amp;= e^{Ax^2+\pi}+B
+\end{align*} 
+</pre></div>
+
+
+<p>
+<script type="math/tex; mode=display">\begin{equation}
+  x = a_0 + \frac{1}{a_1 + \frac{1}{a_2 + \frac{1}{a_3 + a_4}}}
+\end{equation}</script>
+<script type="math/tex; mode=display">\begin{pmatrix}
+​    a & b\\
+​    c & d\\
+  \hline
+​    1 & 0\\
+​    0 & 1
+  \end{pmatrix}</script>
+</p>
+<div class="codehilite"><pre><span></span>\begin{equation}
+  x = a_0 + \frac{1}{a_1 + \frac{1}{a_2 + \frac{1}{a_3 + a_4}}}
+\end{equation}
+  \begin{pmatrix}
+​    a &amp; b\\
+​    c &amp; d\\
+  \hline
+​    1 &amp; 0\\
+​    0 &amp; 1
+  \end{pmatrix}
+</pre></div>
+
+
+<h2>逻辑</h2>
+<p>
+<script type="math/tex; mode=display"> \forall x \in X, \quad \exists y \leq \epsilon</script>
+</p>
+<div class="codehilite"><pre><span></span>$$ \forall x \in X, \quad \exists y \leq \epsilon$$
+</pre></div>
+
+
+<h2>希腊字母：</h2>
+<p>
+<script type="math/tex; mode=display">\alpha, \beta, \gamma, \pi,  \phi, \varphi, \mu, \Phi</script>
+</p>
+<div class="codehilite"><pre><span></span>$$\alpha, \beta, \gamma, \pi,  \phi, \varphi, \mu, \Phi$$
+</pre></div>
+
+
+<p>
+<script type="math/tex; mode=display">x \equiv a \pmod{b} \\ ^3/_7</script>
+</p>
+<div class="codehilite"><pre><span></span>$$x \equiv a \pmod{b} \\ ^3/_7$$
+</pre></div>
+
+
+<h2>竖着的公式：</h2>
+<p>
+<script type="math/tex; mode=display">\begin{equation}
+\frac{
+​    \begin{array}[b]{r}
+​      \left( x_1 x_2 \right)\\
+​      \times \left( x'_1 x'_2 \right)
+​    \end{array}
+  }{
+​    \left( y_1y_2y_3y_4 \right)
+  }
+\end{equation}</script>
+</p>
+<div class="codehilite"><pre><span></span>\begin{equation}
+\frac{
+​    \begin{array}[b]{r}
+​      \left( x_1 x_2 \right)\\
+​      \times \left( x&#39;_1 x&#39;_2 \right)
+​    \end{array}
+  }{
+​    \left( y_1y_2y_3y_4 \right)
+  }
+\end{equation}
+</pre></div>
+
+
+<h2>各种定界符</h2>
+<p>
+<script type="math/tex; mode=display">( a ), [ b ], \{ c \}, | d |, \| e \|,
+\langle f \rangle, \lfloor g \rfloor,
+\lceil h \rceil, \ulcorner i \urcorner</script>
+</p>
+<div class="codehilite"><pre><span></span>$$( a ), [ b ], \{ c \}, | d |, \| e \|,
+\langle f \rangle, \lfloor g \rfloor,
+\lceil h \rceil, \ulcorner i \urcorner$$
+</pre></div>
+
+
+<p>
+<script type="math/tex; mode=display">( \big( \Big( \bigg( \Bigg(</script>
+<script type="math/tex; mode=display">\begin{matrix}
+  -1 & 3 \\
+  2 & -4
+ \end{matrix}</script>
+</p>
+<div class="codehilite"><pre><span></span>$$( \big( \Big( \bigg( \Bigg($$
+\begin{matrix}
+  -1 &amp; 3 \\
+  2 &amp; -4
+ \end{matrix}
+$$
+</pre></div>
+
+
+<h2>矩阵</h2>
+<p>
+<script type="math/tex; mode=display">
+A_{m,n} = 
+ \begin{pmatrix}
+  a_{1,1} & a_{1,2} & \cdots & a_{1,n} \\
+  a_{2,1} & a_{2,2} & \cdots & a_{2,n} \\
+  \vdots  & \vdots  & \ddots & \vdots  \\
+  a_{m,1} & a_{m,2} & \cdots & a_{m,n} 
+ \end{pmatrix}
+</script>
+</p>
+<div class="codehilite"><pre><span></span>$$
+A_{m,n} = 
+ \begin{pmatrix}
+  a_{1,1} &amp; a_{1,2} &amp; \cdots &amp; a_{1,n} \\
+  a_{2,1} &amp; a_{2,2} &amp; \cdots &amp; a_{2,n} \\
+  \vdots  &amp; \vdots  &amp; \ddots &amp; \vdots  \\
+  a_{m,1} &amp; a_{m,2} &amp; \cdots &amp; a_{m,n} 
+ \end{pmatrix}
+$$
+</pre></div>
+
+
+<h2>十字</h2>
+<p>
+<script type="math/tex; mode=display">  
+\begin{array}{c|c}
+  1 & 2 \\ 
+  \hline
+  3 & 4
+ \end{array} 
+ </script>
+</p>
+<div class="codehilite"><pre><span></span> $$  
+\begin{array}{c|c}  
+  1 &amp; 2 \\ 
+  \hline
+  3 &amp; 4
+ \end{array} 
+ $$
+</pre></div>
+
+
+<h2>矩阵2</h2>
+<p>
+<script type="math/tex; mode=display">  M = \begin{bmatrix}
+​       \frac{5}{6} & \frac{1}{6} & 0           \\[0.3em]
+​       \frac{5}{6} & 0           & \frac{1}{6} \\[0.3em]
+​       0           & \frac{5}{6} & \frac{1}{6}
+​     \end{bmatrix}
+</script>
+</p>
+<div class="codehilite"><pre><span></span> $$  M = \begin{bmatrix}
+​       \frac{5}{6} &amp; \frac{1}{6} &amp; 0           \\[0.3em]
+​       \frac{5}{6} &amp; 0           &amp; \frac{1}{6} \\[0.3em]
+​       0           &amp; \frac{5}{6} &amp; \frac{1}{6}
+​     \end{bmatrix}
+$$
+</pre></div>
+
+
+<h2>文字</h2>
+<p>
+<script type="math/tex; mode=display"> 50 \textrm{apples} \times 100 \textbf{ apples} = \textit{lots of apples}^2\\
+ k = {\color{red}X} \mathbin{\color{blue}-} 2 \\
+ \pm \mp
+</script>
+</p>
+<div class="codehilite"><pre><span></span>$$ 50 \textrm{ apples} \times 100
+ \textbf{ apples} = \textit{lots of apples}^2\\
+ k = {\color{red}X} \mathbin{\color{blue}-} 2 \\
+ \pm \mp
+$$
+</pre></div>
+
+
+<h2>进一步学习的内容</h2>
+<p><a href="https://en.wikibooks.org/wiki/LaTeX/Mathematics">wiki latex</a><br>
+<a href="https://math.meta.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference">MathJax basic tutorial and quick reference</a></p>
+<h4>常见的特殊数学符号</h4>
+<p><img alt="" src="/markdown/mathjex.png"></p>
+<p><img alt="" src="/markdown/mathjax1.png"></p>
+<h1>常见的markdown语法的快捷键</h1>
+<p><u>那里 本行文字添加下划线ctrl+u</u><br>
+​   ~ 删除线 ~<br>
+<strong>加粗ctrl+b </strong><br>
+*倾斜  *  ： ctrl+i <br>
+唤起表格：ctrl+t {no used}  </p>
+<hr>
+<hr>
+<h1>markdown简介</h1>
+<ul>
+<li>Markdown是一种纯文本标记语言   </li>
+<li>HyperText Markup Language 超文本标记语言</li>
+<li>retext的数据图 还无法解析</li>
+<li>pygmentsStyle 语法高亮工具<ul>
+<li>sudo apt-get install python-pygments</li>
+</ul>
+</li>
+<li>sudo apt-get install libjs-mathjax  //数学公式</li>
+<li>markdown语法扩展：mathjax, codehilite</li>
+</ul>
+<hr>
+<div class="footnote">
+<hr>
+<ol>
+<li id="fn:1">
+<p>http://google.com/        "Google"&#160;<a class="footnote-backref" href="#fnref:1" rev="footnote" title="Jump back to footnote 1 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:1" rev="footnote" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:2">
+<p>http://search.yahoo.com/  "Yahoo Search"
+[3]: http://search.msn.com/    "MSN Search"&#160;<a class="footnote-backref" href="#fnref:2" rev="footnote" title="Jump back to footnote 2 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:2" rev="footnote" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+</body>
+</html>

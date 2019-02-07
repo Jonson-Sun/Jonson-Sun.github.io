@@ -1,5 +1,5 @@
-#Graphviz的布局使用手册
-##简体中文版
+# Graphviz的布局使用手册
+## 简体中文版
 [dot,circo,fdp,neato,sfdp,twopi的布局手册页(Layout manual pages) ]
 ### 名字
 dot —用于绘制有向图的工具（filter：滤器）  

@@ -150,7 +150,7 @@ table {padding: 0;border-collapse: collapse;margin:0 auto;/*表格居中设置*/
 /* 图片设置 */
 img {
 	max-width: 100%; 
-	float: right; /*left; set image and words position*/
+	/* float: right; left; set image and words position*/
 }
 /*   ?? */
 span.frame {

@@ -89,11 +89,14 @@ instead of decimal-encoded entites like `&#8212;`.
 ***
 分割线1:{*** 别忘了空一行}  
 # 图片格式: !\[]()
+
 ![图片下方显示字](/home/asen/图片/自由.png  "鼠标停在图片上显示的文字")  
 
 # 超链接格式：\[]()
 [超链接的名字：百度的网站](http://www.baidu.com)  
-# 列表:{-space|+space|*space}
+# 列表格式 : 
+{-space|+space|*space}
+
 - 列表1
 - 列表11 //结尾无需space换行
     * 列表2

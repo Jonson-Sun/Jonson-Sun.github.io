@@ -1,0 +1,388 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="generator" content="ReText 7.0.1">
+<link type="text/css" rel="stylesheet" href="/css/style.css">
+<title>shell-bash基础</title>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  config: ["MMLorHTML.js"],
+  jax: ["input/TeX", "output/HTML-CSS", "output/NativeMML"],
+  extensions: ["MathMenu.js", "MathZoom.js"],
+  TeX: {
+    extensions: ["AMSmath.js", "AMSsymbols.js"],
+    equationNumbers: {autoNumber: "AMS"}
+  }
+});
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js"></script></head>
+<body>
+<h1>家用笔记本电脑清灰:</h1>
+<ul>
+<li>拆开后盖 电吹风一吹就行</li>
+</ul>
+<h1>快捷键:</h1>
+<ul>
+<li>alt+?:展示可用的补全</li>
+<li>alt+*:按照可能性补全</li>
+<li>Ctrl+r:反向搜索</li>
+<li>如何保存top 的显示设置?</li>
+<li>xload没用</li>
+<li>md5sum</li>
+<li>文件定位:locate,find</li>
+<li>xargs:将stdin输入作为参数</li>
+<li></li>
+</ul>
+<h1>shell 编程范例</h1>
+<h2>2019-2-3:下午</h2>
+<ol>
+<li>执行：  <ol>
+<li>bash file.sh</li>
+<li>source file.sh</li>
+<li>./path/file.sh</li>
+</ol>
+</li>
+<li>添加执行权限：chmod +x  file.sh</li>
+<li>bash 的调试：<ul>
+<li>"-x"选项可用来跟踪脚本的执行，是调试shell脚本的强有力工具 :bash -x</li>
+<li>“-n”可用于测试shell脚本是否存在语法错误，但不会实际执行命令:bash -n</li>
+<li>trap 'echo "before execute line:<script type="math/tex">LINENO, a=</script>a,b=<script type="math/tex">b,c=</script>c"' DEBUG</li>
+</ul>
+</li>
+<li>bash数值运算：（python更直观）<ul>
+<li>expr $i + 1</li>
+<li>((i++))</li>
+<li><code>echo $i 1 | awk '{printf $1+$2}'</code></li>
+<li>echo "5^2" | bc</li>
+<li>echo "5^2" | bc  //浮点运算</li>
+<li>产生随机数:echo "" | awk '{srand(); printf("%f", rand());}'</li>
+<li>{sed awk grep uniq sort}</li>
+</ul>
+</li>
+<li>time file.sh :查看file.sh的运行时间</li>
+<li>bool运算:if false;then echo "YES"; else echo "NO"; fi</li>
+<li>&amp;&amp; \ || \  !</li>
+<li>字符串: iconv   cut  tr  sed awk join read cat</li>
+<li>文件操作:<ul>
+<li>stat file.c ,file file.c :查看文件属性</li>
+<li>touch,mkdir,mkfifo,mknod</li>
+<li>chown,chmod,chattr</li>
+<li>tree,ls,rm,cp,ln,mv</li>
+<li>tar ,gzip,bzip</li>
+<li>find,locate,which,whereis,updatedb</li>
+</ul>
+</li>
+<li>文件系统操作:<ul>
+<li>lsmod,rmmod,insmod</li>
+<li>dd,od,fdisk,proc,dmesg(u盘),mkfs</li>
+<li>diff,fuse开发自己的文件系统</li>
+</ul>
+</li>
+<li>进程操作:<ul>
+<li>sync,&amp;后台,sleep,pidof:查看进程ID,ulimit,kill,jobs,killall</li>
+<li>ps,pstree,top,renice:调整进程优先级</li>
+<li>pipe:|    ,mkfifo</li>
+</ul>
+</li>
+<li>作业控制:<ul>
+<li>bg %作业号;启动停止的作业;jobs查看当前作业</li>
+</ul>
+</li>
+<li>网络:<ul>
+<li>工具:ethereal\tcpdump,hping,nmap,netstat,netpipe,netpref,vnstat,ntop</li>
+</ul>
+</li>
+<li>用户管理:<ul>
+<li>/etc/passwd ,/etc/shadow, /etc/group ,/etc/gshadow</li>
+<li>useradd,userdel,usermod{groupadd,groupdel,groupmod ]</li>
+<li>更改密码:passwd</li>
+</ul>
+</li>
+</ol>
+<h1>linux 编程白皮书</h1>
+<h3>linux 内核</h3>
+<ol>
+<li>cpu,存储器,总线(地址\数据\控制),控制器,外设,地址空间,时钟</li>
+<li>内核数据结构:链表\散列表\抽象接口</li>
+<li>进程间通信:信号(kill -L),管道(pipe),socket,消息队列,信号量,共享存储区</li>
+</ol>
+<h3>linux 内核模块</h3>
+<ul>
+<li>/proc/ksyms 中的函数是内核函数</li>
+<li>直接使用系统调用!</li>
+</ul>
+<h3>linux程序员指南</h3>
+<ul>
+<li>瑞士军刀:ioctl</li>
+<li>linux内核由5个子系统组成;进程调度程序\内存管理程序\虚拟文件系统\网络接口\进程间通讯接口</li>
+<li>人类知识和推理:<ul>
+<li>自顶向下策略\自底向上策略\基于模型策略\随机应变策略</li>
+</ul>
+</li>
+<li>基于linux2.2</li>
+</ul>
+<hr>
+<h1>正则表达式（python）</h1>
+<h2>2019-2-6</h2>
+<ol>
+<li>元字符是"[" 和 "]"。它们常用来指定一个字符类别，所谓字符类别就是你想匹配的一个字符集：[a-z]</li>
+<li>大多数字母和字符一般都会和自身匹配</li>
+<li>元字符：. ^ $ * + ? { [ ] \ | ( )</li>
+<li>可以用补集来匹配不在区间范围内的字符。其做法是把"^"作为类别的首个字符</li>
+<li>如果你需要匹配字符 "[" 或 "\"，你可以在它们之前用反斜杠来取消它们的特殊意义： [ 或 \。</li>
+<li>预定义字符集:<ul>
+<li>\d  匹配任何十进制数；它相当于类 [0-9]。</li>
+<li>\D  匹配任何非数字字符；它相当于类 [^0-9]。</li>
+<li>\s  匹配任何空白字符；它相当于类  [ \t\n\r\f\v]。</li>
+<li>\S  匹配任何非空白字符；它相当于类 [^ \t\n\r\f\v]。</li>
+<li>\w  匹配任何字母数字字符；它相当于类 [a-zA-Z0-9_]。</li>
+<li>\W  匹配任何非字母数字字符；它相当于类 [^a-zA-Z0-9_]。</li>
+</ul>
+</li>
+<li>"." : 它匹配除了换行字符外的任何字符</li>
+<li>第一个重复功能的元字符是 * : 它指定前一个字符可以被匹配零次或更多次，而不是只有一次<ul>
+<li>RE 引擎有各种来自 C 的整数类型大小的内部限制.</li>
+<li>匹配引擎一开始会尽其所能进行匹配，如果没有匹配然后就逐步退回并反复尝试 RE 剩下来的部分{贪婪}</li>
+</ul>
+</li>
+<li>+，表示匹配一或更多次</li>
+<li>问号 ? 匹配一次或零次</li>
+<li>最复杂的重复限定符是 {m,n}(注意m,n之间不能有空格)，其中 m 和 n 是十进制整数。该限定符的意思是至少有 m 个重复，至多到 n 个重复</li>
+<li>为正则表达式使用 Python 的 raw 字符串表示；在字符串前加个 "r" 反斜杠就不会被任何特殊方式处理，所以 r"\n" 就是包含"\" 和 "n" 的两个字符</li>
+</ol>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">re</span>
+<span class="n">pattern</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">complie</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;a{1,3}b*&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<ul>
+<li>正则方法：<blockquote>
+<p>match()   决定 RE 是否在字符串刚开始的位置匹配{m=pattern.match("string");m.group(),m.span();}<br>
+search()    扫描字符串，找到这个 RE 匹配的位置<br>
+findall()   找到 RE 匹配的所有子串，并把它们作为一个列表返回<br>
+finditer()  找到 RE 匹配的所有子串，并把它们作为一个迭代器返回  </p>
+</blockquote>
+</li>
+<li>编译标志：<blockquote>
+<p>DOTALL, S     使 . 匹配包括换行在内的所有字符<br>
+IGNORECASE, I   使匹配对大小写不敏感<br>
+LOCALE, L   做本地化识别（locale-aware）匹配<br>
+MULTILINE, M    多行匹配，影响 ^ 和 $<br>
+VERBOSE, X  能够使用 REs 的 verbose 状态，使之被组织得更清晰易懂   </p>
+</blockquote>
+</li>
+<li>修改字符串：<blockquote>
+<p>split()   将字符串在 RE 匹配的地方分片并生成一个列表，<br>
+sub()   找到 RE 匹配的所有子串，并将其用一个不同的字符串替换<br>
+subn()  与 sub() 相同，但返回新的字符串和替换次数 </p>
+</blockquote>
+</li>
+<li>match() 只报告一次成功的匹配,search() 将扫描整个字符串，并报告它找到的第一个匹配</li>
+<li>使用不贪婪的限定符 *?、+?、?? 或 {m,n}?，尽可能匹配小的文本</li>
+<li></li>
+</ul>
+<hr>
+<h1>《linux 操作系统技术合集》</h1>
+<h2>初，中级学习者教程2007</h2>
+<ol>
+<li>linux提速：<ul>
+<li>选择一个轻量的桌面应用环境：gnome，KDE，enlightenment，fluxbox，xfce</li>
+<li>给电脑加上更多的内存</li>
+<li>终止不必要的进程</li>
+<li>移除多余的虚拟终端</li>
+<li>使用轻量级应用程序</li>
+<li>删除多余的系统启动服务</li>
+</ul>
+</li>
+<li>linux 特殊文件：<ul>
+<li>/dev ：设备文件，链接文件，字符文件，</li>
+<li>socket文件：/tmp/*.sock ;文件属性带有i，文件无法删除：<ul>
+<li>chattr -i file ：去掉文件属性</li>
+<li>chattr +i file ：添加文件不可删除属性</li>
+<li>lsattr ：查看文件属性</li>
+</ul>
+</li>
+<li>避免磁盘碎片：将文件全部移出，格式化盘符，再全部移入{连续的写避免碎片}</li>
+</ul>
+</li>
+<li>rar-for-linux:rar格式文件打开方式</li>
+<li>编程三方面：开发环境、语言语法、标准库</li>
+<li>linux命令：tar、unzip，gnuzip，uuencode{二进制-》文本}</li>
+<li>文件和目录操作：<ul>
+<li>/proc：内存映射</li>
+</ul>
+</li>
+<li>病毒的制造者是一些精通编写代码的黑客</li>
+<li>病毒只不过是一个能不经过你的同意而感染和摧毁其他程序的程序。</li>
+<li>蠕虫是一个不经过你的同意而自我复制的代码块</li>
+<li>{很多东西已经过时，讲的很泛泛}</li>
+</ol>
+<hr>
+<h1>《ubuntu参考手册》</h1>
+<h2>内容全面，实用（存在/pdf中）</h2>
+<ul>
+<li>keep it short and simple ：KISS</li>
+<li>man ：unix；info：gnu</li>
+<li>下载软件源代码： apt source app<blockquote>
+<p>4MB: Linux 内核运行的最低配置。
+16MB: 控制台系统运行的最低配置。
+32MB: 简单 X 系统运行的最低配置。
+64MB: GNOME/KDE 系统运行最低配置。
+128MB: 流畅运行 GNOME/KDE。</p>
+</blockquote>
+</li>
+<li>重要的子目录：<blockquote>
+<p>/etc 和它的字目录。
+/var/log 和它的字目录。
+/usr/share/doc 和它的字目录。
+/sbin and /bin</p>
+</blockquote>
+</li>
+<li>whatis app :一句话帮助</li>
+<li>通配符：<ul>
+<li>*:任意个字符；</li>
+<li>?：一个字符；</li>
+<li>[a-z]:任意一个小写字符</li>
+<li>[^a-z]:任意一个非小写字母</li>
+</ul>
+</li>
+<li>以不变应万变：文件</li>
+<li>文件类型：<blockquote>
+<p>l:符号链接<br>
+c:字符型设备节点<br>
+b:块设备节点<br>
+p:命名管道<br>
+s:套接字  </p>
+</blockquote>
+</li>
+<li>umask 0022 ：设置新建文件的默认访问权限</li>
+<li>strace: 跟踪系统调用和消息· ltrace: 跟踪库函数调用</li>
+<li>有文学的程序员书写包含代码的文档来代替包含文档的代码</li>
+<li></li>
+</ul>
+<h2>Debian Developer’s Reference</h2>
+<p>September 25, 2018  </p>
+<ol>
+<li>关于软件包开发，维护所需要的资源和注意事项（共83页）</li>
+<li>https://www.debian.org/Bugs/</li>
+<li>Best practices：<ul>
+<li>debian/rules</li>
+<li>debian/patches</li>
+<li>debian/control</li>
+<li>debian/changelog</li>
+</ul>
+</li>
+<li>https://www.debian.org/Bugs/Reporting</li>
+<li>https://translationproject.org/html/welcome.html</li>
+<li>https://wiki.gnome.org/TranslationProject</li>
+<li>工具：<ul>
+<li>dpkg-dev</li>
+<li>debconf</li>
+<li>fakeroot</li>
+<li>Package lint tools</li>
+<li>debdiff</li>
+<li>debhelper</li>
+<li>dh-make</li>
+<li>equivs is another package for making package</li>
+<li>git-buildpackage</li>
+<li>debootstrap</li>
+<li>pbuilder</li>
+<li>sbuild is another automated builder</li>
+<li>dupload、dput、dcut</li>
+<li>devscripts</li>
+<li>autotools-dev</li>
+<li>dpkg-repack</li>
+<li>alien</li>
+<li>dpkg-dev-el</li>
+<li>dpkg-depcheck</li>
+<li>dpkg-cross is a tool for installing libraries and headers for cross-compiling in a way similar to dpkg</li>
+<li>docbook-xml provides the DocBook XML DTDs</li>
+<li>debiandoc-sgml provides the DebianDoc SGML DTD</li>
+<li>debian-keyring</li>
+<li>debian-el provides an Emacs mode for viewing Debian binary packages</li>
+</ul>
+</li>
+<li>Core tools；<ul>
+<li>dpkg-dev、debconf、fakeroot、   lintian、debdiff</li>
+<li>debhelper、dh-make、equivs、git-buildpackage</li>
+</ul>
+</li>
+</ol>
+<h2>linux sea</h2>
+<h3>Sven Vermeulen</h3>
+<ol>
+<li>网络管理；iwlist iwconfig ifconfig iw</li>
+<li>/etc/conf.d/keymaps ：键盘映射</li>
+<li>面向gentoo</li>
+<li>备份：First of all, take a copy of your /etc folder. The /etc directory contains all system settings</li>
+<li>/var/lib/portage/world is your world-file, which contains a list of all software you’ve installed</li>
+<li>/proc/config.gz (or /usr/src/linux/.config ) is your kernel configuration</li>
+<li>系统备份工具：PartImage</li>
+</ol>
+<h2>The GNU C LibraryReference Manual</h2>
+<ol>
+<li>errno.h：错误报告</li>
+<li>内存申请：malloc.h,内存检查mcheck.h<ul>
+<li>The prototype for alloca is in stdlib.h</li>
+</ul>
+</li>
+<li>ctype.h:字符操作：判断字符类型<ul>
+<li>wctype.h:宽字符操作</li>
+</ul>
+</li>
+<li>串和数组操作：string.h<ul>
+<li>串的复制连接比较搜索</li>
+<li>envz.h:</li>
+<li>wchar.h\gconv.h.</li>
+</ul>
+</li>
+<li>国际化：locale.h、langinfo.h.</li>
+<li>message translation：nl_types.h</li>
+<li>搜索，排序：search.h stdlib.h</li>
+<li>模式匹配：fnmatch.h glob.h  regex.h wordexp.h</li>
+<li>io：stdio：getline（）printf.h sys/uio.h sys/mman.h</li>
+<li>格式化message：fmtmsg.h</li>
+<li>fcntl.h、unistd.h sys/ioctl.h</li>
+<li>File System Interface:unistd.h dirent.h  sys/param.h sys/stat.h </li>
+<li>utime.h sys/time.h sys/timex.h time,h<ul>
+<li>The sleep function is declared in unistd.h</li>
+<li>nanosleep function is declared in time.h</li>
+</ul>
+</li>
+<li>pipe function is declared in the header file unistd.h<ul>
+<li>mkfifo function is declared in the header file sys/stat.h</li>
+</ul>
+</li>
+<li>sys/socket.h  sys/un.h  netinet/in.h netdb.h </li>
+<li>Syslog:/etc/syslog.conf  syslog.h</li>
+<li>math.h complex.h  rand{stdlib.h}  stdint.h</li>
+<li>系统资源使用：sys/resource.h sys/vtimes.h  sys/vlimit.h<ul>
+<li>This type is a GNU extension and is defined in sched.h</li>
+<li>sys/sysinfo.h</li>
+</ul>
+</li>
+<li>setjmp.h  ucontext.h</li>
+<li>The signal names are defined in the header file signal.h.</li>
+<li>The system starts a C program by calling the function main<ul>
+<li>argp.h： 参数分析</li>
+<li>syscall is declared in unistd.h</li>
+</ul>
+</li>
+<li>system 在stdlib。fork in unistd.h<ul>
+<li>sys/wait.h</li>
+</ul>
+</li>
+<li>user and group:sys/types.h and unistd.h  pwd.h<ul>
+<li>accessing the system group database:grp.h</li>
+</ul>
+</li>
+<li>sys/utsname.h  fstab.h{internal representation for entries of the file}</li>
+<li>sys/mount.h  sys/sysctl.h limits.h{系统限制}</li>
+<li>加密：crypt.h</li>
+<li>debug：execinfo.h{backtrace}</li>
+<li>thread：threads.h</li>
+<li>The assert macro, defined in the header file assert.h</li>
+</ol>
+</body>
+</html>

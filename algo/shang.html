@@ -1,0 +1,148 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="generator" content="ReText 7.0.1">
+<link rel="stylesheet" type="text/css" href="/css/style.css">
+<title>shang</title>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  config: ["MMLorHTML.js"],
+  jax: ["input/TeX", "output/HTML-CSS", "output/NativeMML"],
+  extensions: ["MathMenu.js", "MathZoom.js"],
+  TeX: {
+    extensions: ["AMSmath.js", "AMSsymbols.js"],
+    equationNumbers: {autoNumber: "AMS"}
+  }
+});
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js"></script></head>
+<body>
+<h1>信息论中的熵(entropy)</h1>
+<h2>《统计自然预言处理》概念</h2>
+<ul>
+<li>X是一个离散型随机变量,概率为<script type="math/tex">p(x)=P(X=x)</script>熵H(X)的定义为:
+<script type="math/tex; mode=display"> H(X)=-\sum p(x)log_2 p(x) </script>
+</li>
+<li>单位为bit</li>
+<li>熵又称为自信息(self-information)可以视为描述一个随机变量的不确定性的数量</li>
+<li><strong>越不确定的随机变量越需要大的信息量用以确定其值</strong></li>
+</ul>
+<h2>计算语料的熵代码:</h2>
+<h3>第二版:内存占用有所降低</h3>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">math</span> <span class="k">import</span> <span class="n">log2</span>
+<span class="k">def</span>  <span class="nf">file_deal</span><span class="p">(</span><span class="n">dir_name</span><span class="p">):</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">dir_name</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">F</span><span class="p">:</span>
+        <span class="n">File_line</span><span class="o">=</span><span class="n">F</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>  <span class="c1"># readlines don&#39;t forget &quot;s&quot;</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">File_line</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="p">)</span><span class="o">&lt;</span><span class="mi">5</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="k">yield</span> <span class="n">line</span><span class="p">[</span><span class="mi">9</span><span class="p">:</span><span class="o">-</span><span class="mi">11</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">compute_entropy_less_memory</span><span class="p">():</span>
+    <span class="sd">&#39;&#39;&#39; 减少了18%的内存使用:48%-&gt;30%;</span>
+<span class="sd">        结束后11%;8G</span>
+<span class="sd">        语料文本大小:1.6 G</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;start...&quot;</span><span class="p">)</span>
+    <span class="n">dir_name</span><span class="o">=</span><span class="s2">&quot;/path(...)/corpus.txt&quot;</span>
+    <span class="n">str_list</span><span class="o">=</span><span class="p">[]</span>
+    <span class="n">word_freq_table</span><span class="o">=</span><span class="nb">dict</span><span class="p">()</span>
+    <span class="n">Global_entropy</span><span class="p">,</span><span class="n">all_num</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;table build start ...;&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">file_deal</span><span class="p">(</span><span class="n">dir_name</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">word</span> <span class="ow">is</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="k">if</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">word_freq_table</span><span class="p">:</span>
+                <span class="n">word_freq_table</span><span class="p">[</span><span class="n">word</span><span class="p">]</span><span class="o">+=</span><span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">word_freq_table</span><span class="p">[</span><span class="n">word</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span>
+
+    <span class="n">word_num</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">word_freq_table</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;词频表的长度为&quot;</span><span class="p">,</span><span class="n">word_num</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;计算分母...&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">word_freq_table</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+        <span class="n">all_num</span><span class="o">+=</span><span class="n">i</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;计算熵...&quot;</span><span class="p">)</span> 
+    <span class="n">entropy</span><span class="o">=</span><span class="k">lambda</span> <span class="n">freq</span> <span class="p">:</span><span class="o">-</span><span class="p">(</span><span class="n">freq</span><span class="o">/</span><span class="n">all_num</span><span class="p">)</span><span class="o">*</span><span class="n">log2</span><span class="p">(</span><span class="n">freq</span><span class="o">/</span><span class="n">all_num</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">freq_num</span> <span class="ow">in</span> <span class="n">word_freq_table</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+        <span class="n">Global_entropy</span><span class="o">+=</span><span class="n">entropy</span><span class="p">(</span><span class="n">freq_num</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;the entropy is : &quot;</span><span class="p">,</span><span class="n">Global_entropy</span><span class="p">)</span>
+
+<span class="n">compute_entropy_less_memory</span><span class="p">()</span>
+</pre></div>
+
+
+<h3>第一版代码:存在高内存占用问题</h3>
+<div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">compute_entropy</span><span class="p">():</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;start...&quot;</span><span class="p">)</span>
+    <span class="n">dir_name</span><span class="o">=</span><span class="s2">&quot;/path/corpus.txt&quot;</span>
+    <span class="n">str_list</span><span class="o">=</span><span class="p">[]</span>
+    <span class="n">word_freq_table</span><span class="o">=</span><span class="nb">dict</span><span class="p">()</span>
+    <span class="n">Global_entropy</span><span class="p">,</span><span class="n">all_num</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span>
+
+    <span class="c1">#multi_file_deal(dir_name)</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">dir_name</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">F</span><span class="p">:</span>
+        <span class="n">File_line</span><span class="o">=</span><span class="n">F</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>  <span class="c1"># readlines don&#39;t forget &quot;s&quot;</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">File_line</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="p">)</span><span class="o">&lt;</span><span class="mi">5</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="n">str_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">9</span><span class="p">:</span><span class="o">-</span><span class="mi">11</span><span class="p">])</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;file read end;&quot;</span><span class="p">,</span><span class="n">str_list</span><span class="p">[</span><span class="mi">1</span><span class="p">][:</span><span class="mi">10</span><span class="p">])</span>        
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">str_list</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">word</span> <span class="ow">is</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="k">if</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">word_freq_table</span><span class="p">:</span>
+                <span class="n">word_freq_table</span><span class="p">[</span><span class="n">word</span><span class="p">]</span><span class="o">+=</span><span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">word_freq_table</span><span class="p">[</span><span class="n">word</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;table build end;&quot;</span><span class="p">)</span>
+    <span class="n">word_num</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">word_freq_table</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;词频表的长度为&quot;</span><span class="p">,</span><span class="n">word_num</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;计算分母...&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">word_freq_table</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+        <span class="n">all_num</span><span class="o">+=</span><span class="n">i</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;计算熵...&quot;</span><span class="p">)</span> 
+    <span class="n">entropy</span><span class="o">=</span><span class="k">lambda</span> <span class="n">freq</span> <span class="p">:</span><span class="o">-</span><span class="p">(</span><span class="n">freq</span><span class="o">/</span><span class="n">all_num</span><span class="p">)</span><span class="o">*</span><span class="n">log2</span><span class="p">(</span><span class="n">freq</span><span class="o">/</span><span class="n">all_num</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">freq_num</span> <span class="ow">in</span> <span class="n">word_freq_table</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+        <span class="n">Global_entropy</span><span class="o">+=</span><span class="n">entropy</span><span class="p">(</span><span class="n">freq_num</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;the entropy is : &quot;</span><span class="p">,</span><span class="n">Global_entropy</span><span class="p">)</span>
+
+<span class="n">compute_entropy</span><span class="p">()</span>
+</pre></div>
+
+
+<h2>计算结果:</h2>
+<h3>1.6G汉字的熵:</h3>
+<blockquote>
+<p>词频表的长度为 9124<br>
+the entropy is :  9.561760817055223</p>
+</blockquote>
+<h3>115.2 k 的英文字母的熵：</h3>
+<blockquote>
+<p>词频表的长度为 105<br>
+the entropy is :  4.796600336973779</p>
+</blockquote>
+<h3>21M英文wiki百科(主题,链接,基本介绍)的英文字母熵值:</h3>
+<blockquote>
+<p>词频表的长度为 2620<br>
+the entropy is :  5.05736257154819</p>
+</blockquote>
+<hr>
+<h2>问题:</h2>
+<h3>为什么要用概率乘以概率的对数?</h3>
+<blockquote>
+<p>每个bit都有0|1两种可能.<script type="math/tex">2^3=8,log_28=3</script>要覆盖八种情况就需要3bit<br>
+再用概率乘以空间需求即为实际空间需求</p>
+</blockquote>
+<h3>按前一问题的理解,熵最适合用于数据压缩,传输.有别的理解吗?</h3>
+<blockquote>
+<p>最大熵:使熵值最大的概率分布最真实的反映了事件的分布情况</p>
+</blockquote>
+</body>
+</html>

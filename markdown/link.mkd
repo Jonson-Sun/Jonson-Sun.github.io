@@ -6,8 +6,8 @@
 [維基百科](https://en.wikipedia.org)|https://zh.wikipedia.org，中文版已被墙，英文版可用，https://en.wikipedia.org|4
 [学术网站大全](http://kbs.cnki.net)|http://kbs.cnki.net
 [民富康](https://www.mfk.com/)|https://www.mfk.com/,医学网站|5
-[]()|
-[]()|
+[古登堡](http://www.gutenberg.org/)|http://www.gutenberg.org/|5
+[快速技术学习](https://learnxinyminutes.com)|https://learnxinyminutes.com
 []()|
 []()|
 []()|
@@ -182,7 +182,7 @@
 [脚本之家:电子书](https://www.jb51.net/books/)|https://www.jb51.net/books/
 [必应壁纸](https://bing.coliu.cn)|https://bing.coliu.cn"|5
 [美国的国债统计](http://usdebtclock.org/)|http://usdebtclock.org/|6
-[]()|
+[宠物天下](http://fanyi.sougou.com/)|http://fanyi.sougou.com/
 []()|
 []()|
 []()|

@@ -8,6 +8,15 @@
 [民富康](https://www.mfk.com/)|https://www.mfk.com/,医学网站|5
 [古登堡](http://www.gutenberg.org/)|http://www.gutenberg.org/|5
 [快速技术学习](https://learnxinyminutes.com)|https://learnxinyminutes.com
+[汉典](http://www.zdic.net/)|http://www.zdic.net/
+[中国农村研究网](http://www.ccrs.org.cn/list/Default.aspx?tid=510)|http://www.ccrs.org.cn
+[中国鸡蛋网](http://www.cnjidan.com/hebei/)|http://www.cnjidan.com/hebei/
+[]()|
+[]()|
+[]()|
+[]()|
+[]()|
+[]()|
 []()|
 []()|
 []()|
@@ -91,7 +100,7 @@
 [中国宏观经济网](http://www.macrochina.cn/info.shtml)|http://www.macrochina.cn/info.shtml
 [观察者：观察动物网](https://www.guancha.cn/)|https://www.guancha.cn/
 [新加坡联合早报](http://www.zaobao.com/)|http://www.zaobao.com/
-[]()|
+[诗歌网](http://www.cnpoet.com/waiguo/)|http://www.cnpoet.com/waiguo/
 []()|
 []()|
 []()|
@@ -193,7 +202,7 @@
 []()|
 
 
-<hr><!橫線>
+<hr>
 </body>
 <center>
        <a href="https://jonson-sun.github.io/index.html">返回主页</a>

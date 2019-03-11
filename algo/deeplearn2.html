@@ -1,0 +1,356 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="generator" content="ReText 7.0.1">
+<link type="text/css" rel="stylesheet" href="/css/style.css">
+<title>深度学习</title>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  config: ["MMLorHTML.js"],
+  jax: ["input/TeX", "output/HTML-CSS", "output/NativeMML"],
+  extensions: ["MathMenu.js", "MathZoom.js"],
+  TeX: {
+    extensions: ["AMSmath.js", "AMSsymbols.js"],
+    equationNumbers: {autoNumber: "AMS"}
+  }
+});
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js"></script></head>
+<body>
+<h1>深度学习</h1>
+<h2>第三部分：深度学习研究</h2>
+<blockquote>
+<p>当前应用于工业的最先进技术的缺点是我们的学习算法需要大量的监督数据才能实现良好的精度{标注太麻烦}</p>
+</blockquote>
+<ul>
+<li>通过 <em>无监督学习</em> 和 <em>半监督学习</em> 减少标注</li>
+<li>没有一个算法能以同样的方式真正解决无监督学习问题</li>
+<li>无监督学习困难的核心原因是被建模的随机变量的<strong>高维度</strong>。这带来了两个不同的挑战:统计挑战和计算挑战(维度爆炸)</li>
+<li>面对这些难以处理的计算的一种方法是近似它们</li>
+<li>前几章都是基本理论介绍;最后一章讲模型理论</li>
+</ul>
+<h3>13 线性因子模型</h3>
+<ul>
+<li>具有潜变量<script type="math/tex">h</script>的概率模型:<script type="math/tex">p_{model}e(x)=E_h p_{model}(x|h)</script>
+</li>
+<li>基于潜变量的分布式表示继承了表示学习的所有优点</li>
+<li>一些基于潜变量的最简单的概率模型: 线性因子模型(linear factor model)</li>
+<li>线性因子模型通过随机线性解码器函数来定义
+<script type="math/tex; mode=display"> x=Wh+b+noise </script>
+</li>
+<li>
+<script type="math/tex">h</script>解释型因子；<script type="math/tex">p(h)</script>因子分布，其满足：
+<script type="math/tex"> p(h)= \prod_i p(h_i)</script>
+</li>
+<li>概率PCA和因子分析:上述等式的特殊情况 </li>
+<li>独立成分分析(independent component analysis, ICA)是最古老的表示学习算法之一 (分离信号)</li>
+<li>ICA 的所有变种均要求 p(h) 是非高斯的</li>
+<li>ICA 多被用作分离信号的分析工具,而不是用于生成数据或估计其密度</li>
+<li>慢特征分析(slow feature analysis, SFA)是使用来自时间信号的信息学习不变特征的线性因子模型</li>
+<li>慢性原则(slowness principle):与场景中起描述作用的单个量度相比,场景的重要特性通常变化得非常缓慢</li>
+<li>应用慢性原则可向代价函数添加:
+<script type="math/tex; mode=display"> \lambda \sum_i L(f(x^{t+1}),f(x^t)) </script>
+<script type="math/tex">f是正则化的特征提取器;L是损失函数(均方误差); \lambda 是超参数项;</script>
+</li>
+<li>深度 SFA 模型能够学习的特征与大鼠脑中用于导航的神经元学到的特征有许多共同特性</li>
+<li>慢性原则鼓励模型忽略具有高速度的对象的位置</li>
+<li>稀疏编码模型通常假设线性因子有一个各向同性精度为 β 的高斯噪声</li>
+<li>像其他线性因子模型一样,稀疏编码经常产生糟糕的样本</li>
+<li>PCA目的是使重构的 x 尽可能接近于原始的 x。</li>
+<li>线性因子模型,包括 PCA 和因子分析,可以理解为学习一个流形</li>
+<li>编码器表示;
+<script type="math/tex; mode=display"> h=f(x)=W^T(x- \mu) </script>
+</li>
+<li>解码器表示
+<script type="math/tex; mode=display"> x'=g(h)=b+Vh </script>
+</li>
+<li>最小化重构误差:
+<script type="math/tex; mode=display">E[||x-x'||^2]</script>
+</li>
+<li>某种程度上说,线性因子模型是最简单的生成模型和学习数据表示的最简单模型</li>
+</ul>
+<h3>14 自编码器</h3>
+<ul>
+<li>自编码器(autoencoder)是神经网络的一种,经过训练后能尝试将输入复制到输出
+<script type="math/tex; mode=display"> h=f(x);r=g(h)</script>
+<script type="math/tex; mode=display">x输入,r:输出;h:隐层;</script>
+<script type="math/tex; mode=display">p_{encoder}(h|x);p_{decoder}(x|h)</script>
+</li>
+<li>欠完备自编码器:h的维度比x的维度小(抽取主要特征)</li>
+<li>学习过程即为最小化损失函数L
+<script type="math/tex; mode=display">L(x,g(f(x)))</script>
+</li>
+<li><strong>欠完备的自编码器</strong>会学习出与 PCA 相同的生成子空间(L为均方误差)</li>
+<li>不幸的是,如果编码器和解码器被赋予过大的容量,自编码器会执行复制任务而捕捉不到任何有关数据分布的有用信息</li>
+<li>编码维数小于输入维数的欠完备自编码器可以学习数据分布最显著的特征</li>
+<li><strong>正则自编码器</strong>使用的损失函数可以鼓励模型学习其他特性</li>
+<li>稀疏自编码器简单地在训练时结合编码层的 *稀疏惩罚 Ω(h) * 和重构误差
+<script type="math/tex; mode=display">L(x,g(f(x)))+\Omega(h);h=f(x)</script>
+</li>
+<li><strong>去噪自编码器</strong>
+<script type="math/tex; mode=display">L(x,g(f(x')));x':添加噪声的x副本</script>
+</li>
+<li>万能近似定理保证至少有一层隐藏层且隐藏单元足够多的前馈神经网络能以任意精度近似任意函数</li>
+<li>深度可以指数地降低表示某些函数的计算成本。深度也能指数地减少学习一些函数所需的训练数据量</li>
+<li>自编码器本质上是一个前馈网络</li>
+<li>得分匹配是最大似然的代替</li>
+<li>不幸的是,AI 问题中涉及的流形可能具有非常复杂的结构</li>
+<li>去噪自编码器能抵抗小且有限的输入扰动,而收缩自编码器使特征提取函数能抵抗极小的输入扰动</li>
+<li>收缩自编码器惩罚项:
+<script type="math/tex; mode=display">\Omega(h)=\lambda \|\frac{\partial f(x)}{\partial x}\|^2_F</script>
+</li>
+<li>预测稀疏分解(predictive sparse decomposition, PSD)是稀疏编码和参数化自编码器的混合模型</li>
+<li>自编码器已成功应用于降维和信息检索任务</li>
+<li><strong>低维表示</strong>可以提高许多任务的性能,例如分类。小空间的模型消耗更少的内存和运行时间</li>
+<li>如果我们训练降维算法生成一个低维且二值的编码,那么我们就可以将所有数据库条目在哈希表映为二值编码向量:<strong>语义哈希</strong></li>
+</ul>
+<h3>15 表示学习</h3>
+<ul>
+<li>共享表示有助于处理多模式或多领域,或是将已学到的知识迁移到样本很少或没有、但任务表示依然存在的任务上</li>
+<li>很多信息处理任务可能非常容易,也可能非常困难,这取决于信息是如何表示的。这是一个广泛适用于日常生活、计算机科学及机器学习的<strong>基本原则</strong></li>
+<li>在非常有限的标注数据集上监督学习通常会导致严重的<strong>过拟合</strong></li>
+<li>人类和动物能够从非常少的标注样本中学习。我们至今仍不知道这是如何做到的</li>
+<li><strong>贪心逐层无监督预训练</strong>依赖于单层表示学习算法,每一层使用无监督学习预训练,将前一层的输出作为输入,输出数据的新的表示</li>
+<li>深度神经网络初始参数的选择对其性能具有很强的正则化效果.why?</li>
+<li>学习算法可以使用无监督阶段学习的信息,在监督学习的阶段表现得更好</li>
+<li>从无监督预训练作为正则化项的角度来看,我们可以期望无监督预训练在标注样本数量非常小时很有帮助</li>
+<li>神经网络训练是<strong>非确定性</strong>的,并且每次运行都会收敛到不同的函数</li>
+<li>一个重要的问题是无监督预训练是如何起到正则化项作用的</li>
+<li>在自然语言处理领域中,通过预训练来学习词语表示</li>
+<li><strong>迁移学习</strong>和领域自适应指的是利用一个情景中已经学到的内容去改善另一个情景中的泛化情况</li>
+<li>这是具有共享底层和任务相关上层的学习框架</li>
+<li>有时不同任务之间共享的不是输入的语义,而是输出的语义</li>
+<li>只有一个标注样本的迁移任务被称为<strong>一次学习</strong>;没有标注样本的迁移任务被称为<strong>零次学习</strong></li>
+<li>表示学习的一个重要问题是 ‘‘什么原因能够使一个表示比另一个表示更好?</li>
+<li>在实践中,暴力求解是不可行的,因为不可能捕获影响观察的所有或大多数变化因素</li>
+<li>半监督学习的一个重要研究前沿是确定每种情况下要编码什么</li>
+<li>分布式表示非常强大,因为他们能用具有 k 个值的 n 个特征去描述 <script type="math/tex">k^n</script>个不同的概念</li>
+<li>许多深度学习算法基于的假设是,隐藏单元能够学习表示出解释数据的潜在因果因子</li>
+<li>多层感知机是万能近似器</li>
+<li>关于深层架构表达能力的理论结果表明,有些函数族可以高效地通过深度 k 层的网络架构表示,但是深度不够时会需要指数级(相对于输入大小而言)的隐藏单元</li>
+<li>正则化策略对于获得良好泛化是很有必要的。</li>
+<li>当不可能找到一个普遍良好的正则化策略时,深度学习的一个目标是找到一套相当通用的正则化策略,使其能够适用于各种各样的 AI 任务</li>
+<li>正则化策略的列表:<ol>
+<li>平滑:<script type="math/tex">f(x) \approx f(x+\epsilon d);单位d,小量\epsilon</script>
+</li>
+<li>线性:很多学习算法假定一些变量之间的关系是线性的</li>
+<li>多个解释因子</li>
+<li>因果因子</li>
+<li>深度,或者解释因子的层次组织:高级抽象概念能够通过将简单概念层次化来定义</li>
+<li>任务间共享因素</li>
+<li>流形:概率质量集中,并且集中区域是局部连通的,且占据很小的体积</li>
+<li>自然聚类</li>
+<li>时间和空间相干性</li>
+<li>稀疏性:假设大部分特征和大部分输入不相关</li>
+<li>简化因子依赖</li>
+</ol>
+</li>
+<li>表示学习的概念将许多深度学习形式联系在了一起</li>
+</ul>
+<h3>16 结构化概率模型:图模型</h3>
+<ul>
+<li>结构化概率模型(structured probabilistic model)</li>
+<li>结构化概率模型使用图来描述概率分布中随机变量之间的直接相互作用,从而描述一个概率分布。</li>
+<li>深度学习的目标是使得机器学习能够解决许多人工智能中亟需解决的挑战。这也意味着它们能够理解具有丰富结构的高维数据</li>
+<li><strong>分类问题</strong>可以把这样一个来自高维分布的数据作为输入,然后使用一个类别的标签来概括它</li>
+<li>对上千甚至是上百万随机变量的分布建模,无论从计算上还是从统计意义上说,都是一个极具挑战性的任务</li>
+<li>结构化概率模型为随机变量之间的直接作用提供了一个正式的建模框架</li>
+<li>相比表格方式:模型大大减小了在模型存储、模型推断以及从模型中采样时的计算开销</li>
+<li>结构化概率模型使用<strong>图</strong>来表示随机变量之间的相互作用。每一个结点代表一个随机变量。每一条边代表一个直接相互作用</li>
+<li><strong>有向图模型</strong>(directed graphical model)是一种结构化概率模型,也被称为 <strong>信念网络</strong>(belief network)或者 <strong>贝叶斯网络</strong>(Bayesian network)</li>
+<li>通常意义上说,对每个变量都能取 k 个值的 n 个变量建模,基于建表的方法需要的复杂度是 <script type="math/tex">O(k^n )</script>.如果 m 代表图模型的单个条件概率分布中最大的变量数目,那么对这个有向模型建表的复杂度大致为 <script type="math/tex">O(k^m )</script>.只要我们在设计模型时使其满足 <script type="math/tex">m ≪ n</script>,那么复杂度就会被大大地减小</li>
+<li>决定哪些信息需要被包含在图中而哪些不需要是很重要的</li>
+<li><strong>无向模型</strong>(undirected Model),也被称为 <strong>马尔可夫随机场</strong>(Markov randomfield, MRF)或者是 <strong>马尔可夫网络</strong>(Markov network)</li>
+<li>有向模型中,经常存在我们理解的具有因果关系以及因果关系有明确方向的情况</li>
+<li>当相互的作用并没有本质性的指向,或者是明确的双向相互作用时,使用无向模型更加合适</li>
+<li>为了得到一个有效的概率分布,我们需要使用对应的归一化的概率分布:概率之和或者积分为1
+<script type="math/tex; mode=display">p(x) =\frac{1}{Z}p̃(x) </script>
+</li>
+<li>归一化常数 Z 被称作是<strong>配分函数</strong>.从统计物理学中借鉴的术语</li>
+<li>有向模型是通过从起始点的概率分布直接定义的,反之无向模型的定义显得更加宽松,通过 <script type="math/tex">φ</script> 函数转化为率分布而定义</li>
+<li>一个无向模型是一个定义在无向模型<script type="math/tex"> G</script> 上的结构化概率模型。对于图中的每一个团 <script type="math/tex">C</script>,一个 因子(factor)  <script type="math/tex">φ(C)</script>(也称为 团势能(clique potential))</li>
+<li>基于能量的模型(Energy-based model, EBM)
+<script type="math/tex; mode=display"> p̃(x) = exp(−E(x))</script>
+</li>
+<li>E(x) 被称作是 能量函数(energy function)</li>
+<li>对所有的 z,exp(z) 都是正的,这保证了没有一个能量函数会使得某一个状态 x 的概率为 0</li>
+<li>服从(EBM公式)形 式 的 任 意 分 布 都 是 玻 尔 兹 曼 分 布(Boltzmann distribution</li>
+<li>关于什么时候称之为基于能量的模型,什么时候称之为玻尔兹曼机不存在一个公认的判别标准</li>
+<li>一开始玻尔兹曼机这个术语是用来描述一个只有二值变量的模型,但是时至今日玻尔兹曼机这个术语通常用于指拥有潜变量的模型,而没有潜变量的玻尔兹曼机则经常被称为马尔可夫随机场或对数线性模型</li>
+<li>基于能量的模型只是一种特殊的马尔可夫网络:求幂使能量函数中的每个项对应于不同团的一个因子</li>
+<li>自由能(free energy):
+<script type="math/tex; mode=display"> F(x) = − log\sum_h exp(−E(x, h))</script>
+</li>
+<li>如果连接两个变量 a 和 b 的连接路径仅涉及未观察变量,那么这些变量不是<strong>分离</strong>的</li>
+<li>在有向模型中,这些概念被称为 d-分离(d-separation).d代表 依赖的意思</li>
+<li>图中隐含的条件独立性称为 分离(separation)</li>
+<li>尤其重要的是要记住分离和d-分离只能告诉我们图中隐含的条件独立性</li>
+<li>图模型的优势在于图能够包含一些变量不直接相互作用的信息</li>
+<li>因子图(factor graph)是从无向模型中抽样的另一种方法,它可以解决标准无向模型语法中图表达的模糊性</li>
+<li>因子图是一个包含无向二分图的无向模型的图形化表示</li>
+<li>原始采样的一个缺点是其仅适用于有向图模型</li>
+<li>结构化概率模型的主要优点是它们能够显著降低表示概率分布、学习和推断的成本</li>
+<li><strong>结构学习</strong>(structure learning)设计图模型时需要连接那些紧密相关的变量,并忽略其他变量之间的作用</li>
+<li>解决变量之间如何相互关联的问题是我们使用概率模型的一个主要方式</li>
+<li>对于大多数有趣的深度模型来说,即使我们使用结构化图模型来简化这些推断问题,它们仍然是<strong>难以处理</strong>的</li>
+<li>图结构允许我们用合理数量的参数来表示复杂的高维分布</li>
+<li>深度学习从业者通常与其他从事结构化概率模型研究的机器学习研究者使用相同的基本计算工具</li>
+<li>深度学习基本上总是利用分布式表示的思想</li>
+<li>深度学习模型通常具有比可观察变量更多的潜变量。变量之间复杂的非线性相互作用通过多个潜变量的间接连接来实现</li>
+<li>分布式表示有一个缺点就是很难产生对于精确推断和环状信念传播等传统技术来说足够稀疏的图</li>
+<li><strong>受限玻尔兹曼机</strong>(Restricted Boltzmann Machine, RBM)是图模型如何用于深度学习的典型例子</li>
+<li>能量函数:
+<script type="math/tex; mode=display"> E(v, h) = −b^⊤ v − c^⊤ h − v^⊤ Wh</script>
+<blockquote>
+<p>b, c 和 W 都是无约束、实值的可学习参数;可见单元v,隐藏单元h;<br>
+受限:在任何两个可见单元之间或任何两个隐藏单元之间没有直接的相互作用</p>
+</blockquote>
+</li>
+<li>图模型为描述概率模型提供了一种优雅、灵活、清晰的语言</li>
+</ul>
+<h3>17 蒙特卡罗方法</h3>
+<ul>
+<li>随机算法可以粗略地分为两类:Las Vegas 算法和蒙特卡罗算法</li>
+<li>Las Vegas 算法总是精确地返回一个正确答案(或者返回算法失败了)</li>
+<li>在任意固定的计算资源下,蒙特卡罗算法可以得到一个近似解</li>
+<li>对于机器学习中的许多问题来说,我们很难得到精确的答案</li>
+<li>蒙特卡罗采样</li>
+<li>大数定理(Law of large number),如果样本 <script type="math/tex">x ^{(i)}</script> 是独立同分布的,那么其平均值几乎必然收敛到期望值</li>
+<li>蒙特卡罗估计
+<script type="math/tex; mode=display"> s_p=\frac{1}{n} \sum^n_{i=1,x^{(i)}\approx q}f(x^{(i)})</script>
+</li>
+<li>重要采样:
+<script type="math/tex; mode=display">s_p=\frac{1}{n} \sum^n_{i=1,x^{(i)}\approx q}\frac{ p(x^{(i)}) f(x^{(i)})}{q(x^{(i)})}</script>
+</li>
+<li>有偏重要采样(biased importance sampling)不需要归一化的 p 或 q 分布</li>
+<li>一个好的 q 分布的选择可以显著地提高蒙特卡罗估计的效率,而一个糟糕的 q分布选择则会使效率更糟糕</li>
+<li>不均匀情况在高维数据屡见不鲜,因为在高维度分布中联合分布的动态域可能非大</li>
+<li>估计配分函数(一个概率分布的归一化常数)</li>
+<li>马尔可夫链蒙特卡罗方法:(Markov Chain Monte Carlo, MCMC)</li>
+<li>MCMC 技术最标准、最一般的理论保证只适用于那些各状态概率均不为零的模型</li>
+<li>所有的马尔可夫链方法都包括了重复、随机地更新直到最后状态开始从均衡分布中采样</li>
+<li>我们无法预先知道马尔可夫链需要运行多少步才能到达均衡分布</li>
+<li>我们通常无法知道马尔可夫链是否已经混合成功</li>
+<li>Gibbs 采样(Gibbs Sampling)是一种概念简单而又有效的方法</li>
+<li>使用 MCMC 方法的主要难点在于马尔可夫链的 混合(Mixing)通常不理想</li>
+<li>对于吉布斯链来说从分布的一个峰值转移到另一个仍然是很困难的</li>
+<li>堆叠越深的正则化自编码器或者 RBM,顶端 h 空间的边缘分布越趋向于均匀和发散</li>
+</ul>
+<h3>18 配分函数</h3>
+<ul>
+<li>无向图模型)由一个未归一化的概率分布<script type="math/tex"> p̃(x, θ)</script> 定义。我们必须通过除以配分函数<script type="math/tex"> Z(θ) </script>来归一化 <script type="math/tex">p̃</script>,以获得一个有效的概率分布
+<script type="math/tex; mode=display"> p(x; θ) =\frac{1}{Z(θ)}p̃(x; θ)</script>
+</li>
+<li>配分函数是未归一化概率所有状态的积分(对于连续变量)或求和(对于离散变量)
+<script type="math/tex; mode=display"> \sum_x p̃(x) </script>
+<script type="math/tex; mode=display"> \int p̃(x)dx </script>
+</li>
+<li>对于很多有趣的模型而言,以上积分或求和难以计算</li>
+<li>通过最大似然学习无向模型特别困难的原因在于配分函数依赖于参数</li>
+<li>对数似然梯度
+<script type="math/tex; mode=display"> ∇ θ log p(x; θ) = ∇ θ log p̃(x; θ) − ∇ θ log Z(θ) </script>
+</li>
+<li>这是机器学习中非常著名的 <strong>正相</strong>(positive phase)和 <strong>负相</strong>(negative phase)的分解</li>
+<li>正相可以解释为压低训练样本的能量,负相可以解释为提高模型抽出的样本的能量</li>
+<li>蒙特卡罗方法为学习无向模型提供了直观的框架</li>
+<li>负相已经被作为人类和其他动物做梦的一种可能解释<blockquote>
+<p>大脑维持着世界的概率模型,并且在醒着经历真实事件时会遵循 log p̃ 的梯度,在睡觉时会遵循<script type="math/tex"> log p̃</script> 的负梯度最小化 <script type="math/tex">log Z</script>,其经历的样本采样自当前的模型</p>
+</blockquote>
+</li>
+<li>基于 MCMC 的方法的一个关键优点是它们提供了 log Z 梯度的估计</li>
+<li>虽然伪似然估计没有显式地最小化 log Z,但是我们仍然认为它具有类似负相的效果</li>
+<li>得分匹配提供了另一种训练模型而不需要估计 Z 或其导数</li>
+<li>得分匹配不能应用于隐藏单元之间具有复杂相互作用的模型估计</li>
+<li>去噪得分匹配非常有用,因为在实践中,通常我们不能获取真实的 p data ,而只能得到其样本确定的经验分布</li>
+<li>SML 和 CD 只估计对数配分函数的梯度,而不是估计配分函数本身。得分匹配和伪似然避免了和配分函数相关的计算的一致性方法</li>
+<li>噪声对比估计是基于良好生成模型应该能够区分数据和噪声的想法</li>
+<li>良好的生成模型能够生成分类器无法将其与数据区分的样本:GAN</li>
+<li><strong>退火重要采样</strong>(AIS):是估计无向概率模型的配分函数的最常用方法</li>
+</ul>
+<h3>19 近似推断</h3>
+<ul>
+<li>许多概率模型很难训练的原因是很难进行推断</li>
+<li>在深度学习中难以处理的推断问题通常源于结构化图模型中潜变量之间的相互作用</li>
+<li><strong>精确推断问题</strong>可以描述为一个优化问题</li>
+<li>期望最大化(expectation maximiza-tion, EM)算法</li>
+<li>我们通常使用 <strong>推断</strong>(inference)这个术语来指代给定一些其他变量的情况下计算某些变量概率分布的过程</li>
+<li>不动点方程:
+<script type="math/tex; mode=display"> \frac{\partial}{\partial h_i}L=0</script>
+</li>
+<li>不动点方程的核心思想是我们寻找一个关于h的局部极大点,满足:
+<script type="math/tex; mode=display"> ∇ h L(v, θ, ĥ) = 0 </script>
+</li>
+<li>我们可以发现图模型中的推断和循环神经网络之间存在着紧密的联系。具体地说,均值场不动点方程定义了一个循环神经网络</li>
+<li>当我们不知道真实的分布时总是使用正态分布的一个原因。因为正态分布拥有最大的熵</li>
+<li>在学习算法中使用近似推断会影响学习的过程,反过来学习的过程也会影响推断算法的准确性</li>
+<li>估计变分近似对模型的破坏程度是很困难的</li>
+<li>人类和动物通常连续清醒几个小时,然后连续睡着几个小时。这个时间表如何支持无向模型的蒙特卡罗训练尚不清楚</li>
+<li><strong>做梦</strong>可以提供蒙特卡罗训练算法用于近似无向模型中对数配分函数负梯度的负相样本</li>
+<li>在<strong>学成推断网络</strong>中的单遍传递相比于在<strong>深度玻尔兹曼机</strong>中的迭代均值场不动点方程能够得到更快的推断</li>
+<li>近来学成近似推断已经成为了变分自编码器形式的生成模型中的主要方法之一</li>
+</ul>
+<h3>20 深度生成模型</h3>
+<ul>
+<li>本章介绍几种具体的生成模型,这些模型可以使用第十六章至第十九章中出现的技术构建和训练</li>
+<li><strong>玻尔兹曼机</strong>最初作为一种广义的 “联结主义’’ 引入,用来学习二值向量上的任意概率分布</li>
+<li>具有隐藏单元的玻尔兹曼机不再局限于建模变量之间的线性关系。相反,玻尔兹曼机变成了离散变量上概率质量函数的万能近似器</li>
+<li>对于大脑在多层感知机中实现的反向传播,似乎需要维持一个辅助通信的网络</li>
+<li>猜测:人类在睡眠时做梦可能是一种形式的负相采样</li>
+<li>RBM 是包含一层可观察变量和单层潜变量的<strong>无向概率图</strong>模型。RBM 可以堆叠起来(一个在另一个的顶部)形成更深的模型</li>
+<li>观察层或潜层中的任何单元之间不允许存在连接</li>
+<li>深度玻尔兹曼机,同时具备难处理的配分函数和难以推断的难题</li>
+<li>深度信念网络(deep belief network, DBN)是第一批成功应用深度架构训练的非卷积模型之一</li>
+<li>深度信念网络在 MNIST 数据集上表现超过内核化支持向量机,以此证明深度架构是能够成功的</li>
+<li>术语 ‘‘信念网络’’ 有时指纯粹的有向模型,而深度信念网络包含一个无向层。</li>
+<li>仅在相邻层的单元之间存在连接。没有层内连接</li>
+<li>二分图结构使 Gibbs 采样能在深度玻尔兹曼机中高效采样</li>
+<li>人脑使用许多自上而下的反馈连接</li>
+<li>DBM 中的学习必须面对难解配分函数的挑战,难解后验分布的挑战</li>
+<li>尖峰和平板 RBM 的主要缺点是参数的一些设置会对应于非正定的协方差矩阵</li>
+<li>对于玻尔兹曼机,由于各种原因很难改变输入尺寸</li>
+<li>至少使用现有的方法来看,RBM 似乎并不如 MLP 那样的监督学习器强大</li>
+<li>玻尔兹曼机框架是一个丰富的模型空间;开发新形式的玻尔兹曼机相比于开发新的神经网络层需要更多细心和创造力</li>
+<li>传统的神经网络对一些输入变量 x 施加确定性变换</li>
+<li>当开发生成模型时,我们经常希望扩展神经网络以实现 x 的随机变换</li>
+<li><strong>有向生成网络</strong></li>
+<li>将生成器网络与推断网络配对的变分自编码器</li>
+<li>将生成器网络与判别器网络配对的生成式对抗网络</li>
+<li>生成式建模似乎比分类或回归更困难,因为学习过程需要优化难以处理的准则</li>
+<li>变分自编码器(variational auto-encoder, VAE)</li>
+<li>变分自编码器背后的关键思想是,它们可以通过最大化与数据点 x 相关联的变分下界 L(q) 来训练</li>
+<li><strong>变分自编码器</strong>方法是优雅的,理论上令人愉快的,并且易于实现。它也获得了出色的结果,是生成式建模中的最先进方法之一</li>
+<li>主要缺点是从在图像上训练的变分自编码器中采样的样本往往有些模糊</li>
+<li>变分自编码器的一个缺点是它仅针对一个问题学习推断网络,即给定 x 推断 z</li>
+<li><strong>生成式对抗网络</strong>(generative adversarial network, GAN)</li>
+<li>形式化表示生成式对抗网络中学习的最简单方式是 零和游戏</li>
+<li>设计 GAN 的主要动机是学习过程既不需要<strong>近似推断</strong>也不需要<strong>配分函数梯度</strong>的近似</li>
+<li>稳定 GAN 学习仍然是一个开放的问题。幸运的是,当仔细选择模型架构和超参数时,GAN 学习效果很好</li>
+<li>GAN 训练过程中一个不寻常的能力是它可以拟合向训练点分配零概率的概率分布</li>
+<li><strong>生成矩匹配网络</strong>(generative moment matching network)不需要将生成器网络与任何其他网络配对;</li>
+<li>想法:令模型生成的样本的许多统计量尽可能与训练集中的样本相似</li>
+<li>矩(moment)是对随机变量不同幂的期望。例如,第一矩是均值,第二矩是平方值的均值,以此类推</li>
+<li>我们使用神经网络的野心是捕获复杂的非线性关系</li>
+<li>GAN 通过使用动态更新的判别器避免了穷举所有矩的问题</li>
+<li>深度学习中反复出现的主题——<strong>特征重用</strong></li>
+<li><strong>生成随机网络</strong>(generative stochastic network, GSN)是去噪自编码器的推广,除可见变量(通常表示为 x)之外,在生成马尔可夫链中还包括潜变量 h</li>
+<li>去噪自编码器和 GSN 不同于经典的概率模型(有向或无向),它们自己参数化生成过程而不是通过可见和潜变量的联合分布的数学形式</li>
+<li>生成式建模中最重要的研究课题之一不仅仅是如何提升生成模型,事实上还包括了设计新的技术来<em>衡量我们的进步</em>[评估]</li>
+<li>为了让模型理解表示在给定训练数据中的大千世界,训练具有隐藏单元的生成模型是一种有力方法</li>
+<li>继续探究<strong>学习</strong>和<strong>智能</strong>背后原理</li>
+</ul>
+<hr>
+<h2>note</h2>
+<ul>
+<li>确定方向的两种方法:<ul>
+<li>求导数</li>
+<li>求概率</li>
+</ul>
+</li>
+<li>最后一章:各种波尔兹曼机\生成网络</li>
+<li>概率方法中的先验假设存在合理性?还不知道数据就有假设?先天结构存在假设?</li>
+<li>比分类,回归更难的问题:生成式建模方法</li>
+</ul>
+<h2>end</h2>
+</body>
+</html>

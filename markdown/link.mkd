@@ -13,8 +13,8 @@
 [中国鸡蛋网](http://www.cnjidan.com/hebei/)|http://www.cnjidan.com/hebei/
 [中国考古](http://kaogu.cssn.cn/zwb/)|http://kaogu.cssn.cn/zwb/
 [考古中国](http://www.kgzg.cn/)|http://www.kgzg.cn/
-[]()|
-[]()|
+[央行](http://www.pbc.gov.cn/)|http://www.pbc.gov.cn/
+[中央编译局](http://www.cctb.net/wxzl/jd/maen/)|http://www.cctb.net/wxzl/jd/maen/
 []()|
 []()|
 []()|
@@ -64,9 +64,9 @@
 [ruby中国](https://ruby-china.org/)|https://ruby-china.org/
 [IBM](https://www.ibm.com/developerworks/cn/)|https://www.ibm.com/developerworks/cn/|4
 [C++库参考](https://zh.cppreference.com/w/%E9%A6%96%E9%A1%B5)|https://zh.cppreference.com/w/%E9%A6%96%E9%A1%B5|6
-[]()|
-[]()|
-[]()|
+[Julia包索引](https://github.com/svaksha/Julia.jl#index)|https://github.com/svaksha/Julia.jl#index
+[jupyter在线版](https://jupyter.org/try)|https://jupyter.org/try
+[jupyter(URL)](https://nbviewer.jupyter.org/)|https://nbviewer.jupyter.org/
 []()|
 []()|
 []()|

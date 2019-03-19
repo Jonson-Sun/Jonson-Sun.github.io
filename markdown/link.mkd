@@ -67,7 +67,7 @@
 [Julia包索引](https://github.com/svaksha/Julia.jl#index)|https://github.com/svaksha/Julia.jl#index
 [jupyter在线版](https://jupyter.org/try)|https://jupyter.org/try
 [jupyter(URL)](https://nbviewer.jupyter.org/)|https://nbviewer.jupyter.org/
-[]()|
+[一个德国程序员](http://www.call-with-current-continuation.org/index.html)|http://www.call-with-current-continuation.org/index.html
 []()|
 []()|
 []()|
@@ -192,10 +192,10 @@
 [必应壁纸](https://bing.coliu.cn)|https://bing.coliu.cn"|5
 [美国的国债统计](http://usdebtclock.org/)|http://usdebtclock.org/|6
 [宠物天下](http://fanyi.sougou.com/)|http://fanyi.sougou.com/
-[]()|
-[]()|
-[]()|
-[]()|
+[外国人学中文1](http://www-personal.umich.edu/~dporter/sampler/sampler.html)|http://www-personal.umich.edu/~dporter/sampler/sampler.html
+[中文网](http://zhongwen.com/)|http://zhongwen.com/
+[台湾异体字字典](http://140.111.1.40/)|http://140.111.1.40/
+[随便听听](http://fm.taihe.com/#)|http://fm.taihe.com/#
 []()|
 []()|
 []()|

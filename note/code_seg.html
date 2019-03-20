@@ -1,0 +1,402 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="generator" content="ReText 7.0.1">
+<link type="text/css" rel="stylesheet" href="/css/style.css">
+<title>代码片段</title>
+</head>
+<body>
+<h1>代码片段</h1>
+<h3>计算 菲波那切</h3>
+<div class="codehilite"><pre><span></span>    <span class="k">function</span> <span class="n">fib</span><span class="p">(</span><span class="n">n</span><span class="o">::</span><span class="kt">Int64</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="c">#1-&gt;40: 69s</span>
+        <span class="nd">@assert</span> <span class="n">n</span> <span class="o">&gt;=</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="n">n</span><span class="o">==</span><span class="mi">0</span> <span class="o">||</span> <span class="n">n</span><span class="o">==</span><span class="mi">1</span>
+            <span class="k">return</span> <span class="n">n</span><span class="o">==</span><span class="mi">0</span> <span class="o">?</span> <span class="mi">0</span> <span class="o">:</span> <span class="mi">1</span>
+        <span class="k">else</span>
+            <span class="k">return</span> <span class="n">fib</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">fib</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+
+    <span class="k">function</span> <span class="n">fib2</span><span class="p">(</span><span class="n">N</span><span class="o">::</span><span class="kt">Int</span><span class="p">)</span>
+    <span class="c"># 1-&gt;40: 0.31s</span>
+        <span class="nd">@assert</span> <span class="n">N</span> <span class="o">&gt;=</span> <span class="mi">0</span>
+        <span class="n">fib_list</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">N</span><span class="o">==</span><span class="mi">0</span> <span class="o">||</span> <span class="n">N</span><span class="o">==</span><span class="mi">1</span>
+            <span class="k">return</span> <span class="n">N</span><span class="o">==</span><span class="mi">0</span> <span class="o">?</span> <span class="mi">0</span> <span class="o">:</span> <span class="mi">1</span>
+        <span class="k">else</span>
+            <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">2</span><span class="o">:</span><span class="n">N</span>
+                <span class="n">push!</span><span class="p">(</span><span class="n">fib_list</span><span class="p">,(</span><span class="n">fib_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="n">fib_list</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="p">)</span>
+            <span class="k">end</span>
+        <span class="k">end</span>
+        <span class="k">return</span> <span class="n">fib_list</span><span class="p">[</span><span class="k">end</span><span class="p">]</span>
+    <span class="k">end</span>
+
+<span class="k">function</span> <span class="n">test</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="mi">40</span>
+        <span class="n">println</span><span class="p">(</span><span class="s">&quot;fib(</span><span class="si">$i</span><span class="s">)的结果为 ： &quot;</span><span class="p">,</span><span class="n">fib2</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="p">)</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+<span class="n">test</span><span class="p">()</span>
+</pre></div>
+
+
+<h3>摇奖</h3>
+<ul>
+<li>好像不太随机，试了几次，一直没抽到“阿呆”</li>
+</ul>
+<div class="codehilite"><pre><span></span><span class="k">function</span> <span class="n">开奖</span><span class="p">()</span>
+    <span class="n">奖级别</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>  <span class="c">#一等奖一个...</span>
+    <span class="n">选手名字</span><span class="o">=</span><span class="kt">Set</span><span class="p">([</span><span class="s">&quot;卡卡西&quot;</span><span class="p">,</span><span class="s">&quot;鸣人&quot;</span><span class="p">,</span><span class="s">&quot;佐助&quot;</span><span class="p">,</span><span class="s">&quot;小樱&quot;</span><span class="p">,</span><span class="s">&quot;志乃&quot;</span><span class="p">,</span><span class="s">&quot;新之助&quot;</span><span class="p">,</span><span class="s">&quot;风间彻&quot;</span><span class="p">,</span><span class="s">&quot;妮妮&quot;</span><span class="p">,</span><span class="s">&quot;正男&quot;</span><span class="p">,</span><span class="s">&quot;阿呆&quot;</span><span class="p">])</span>
+    <span class="n">中奖名单</span><span class="o">=</span><span class="kt">Dict</span><span class="p">()</span>  <span class="c">#可以保存名单到文件</span>
+
+    <span class="n">println</span><span class="p">(</span><span class="s">&quot;奖品类型&quot;</span><span class="p">,</span><span class="n">length</span><span class="p">(</span><span class="n">奖级别</span><span class="p">),</span><span class="s">&quot;选手数量&quot;</span><span class="p">,</span><span class="n">length</span><span class="p">(</span><span class="n">选手名字</span><span class="p">))</span>
+    <span class="nd">@assert</span> <span class="n">sum</span><span class="p">(</span><span class="n">奖级别</span><span class="p">)</span><span class="o">==</span><span class="n">length</span><span class="p">(</span><span class="n">选手名字</span><span class="p">)</span>  <span class="s">&quot;奖品数量和人的数量不匹配!&quot;</span>
+    <span class="n">N</span><span class="o">=</span><span class="mi">1</span>
+    <span class="k">for</span> <span class="n">奖品数量</span> <span class="kp">in</span> <span class="n">奖级别</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="o">:</span><span class="n">奖品数量</span>
+            <span class="n">获奖者</span><span class="o">=</span><span class="n">rand</span><span class="p">(</span><span class="n">选手名字</span><span class="p">)</span>
+            <span class="n">中奖名单</span><span class="p">[</span><span class="n">获奖者</span><span class="p">]</span><span class="o">=</span><span class="n">N</span>
+            <span class="n">pop!</span><span class="p">(</span><span class="n">选手名字</span><span class="p">,</span><span class="n">获奖者</span><span class="p">)</span>
+        <span class="k">end</span>
+        <span class="n">N</span><span class="o">+=</span><span class="mi">1</span>
+    <span class="k">end</span>
+    <span class="n">sort!</span><span class="p">(</span><span class="n">中奖名单</span><span class="p">,</span><span class="n">by</span>   <span class="n">x</span> <span class="o">=&gt;</span> <span class="n">values</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="p">)</span>
+    <span class="k">for</span> <span class="n">人</span> <span class="kp">in</span> <span class="n">keys</span><span class="p">(</span><span class="n">中奖名单</span><span class="p">)</span>
+        <span class="n">println</span><span class="p">(</span><span class="s">&quot;中奖人:</span><span class="si">$人</span><span class="s">  --- : </span><span class="si">$</span><span class="p">(</span><span class="n">中奖名单</span><span class="p">[</span><span class="n">人</span><span class="p">])</span><span class="s"> 等奖&quot;</span><span class="p">)</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+<span class="n">开奖</span><span class="p">()</span>
+</pre></div>
+
+
+<h3>给markdown文件添加目录索引</h3>
+<div class="codehilite"><pre><span></span><span class="k">function</span> <span class="n">startwith</span><span class="p">(</span><span class="n">head</span><span class="p">,</span><span class="n">line</span><span class="p">)</span>
+    <span class="c">#println(line[1],head,line[1]==head)</span>
+    <span class="k">if</span> <span class="n">line</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">head</span>  <span class="c">#第一个字符相同</span>
+        <span class="k">return</span> <span class="kc">true</span>
+    <span class="k">else</span>
+        <span class="k">return</span> <span class="kc">false</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="k">function</span> <span class="n">sub_head</span><span class="p">(</span><span class="n">head_list</span><span class="p">,</span><span class="n">need2sub</span><span class="o">=</span><span class="sc">&#39;#&#39;</span><span class="p">)</span>
+<span class="c">#使用数字替换掉所有的#</span>
+    <span class="n">count</span><span class="o">=</span><span class="mi">1</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="kp">in</span> <span class="n">head_list</span>
+        <span class="n">line</span><span class="o">=</span><span class="n">replace</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">need2sub</span> <span class="o">=&gt;</span> <span class="s">&quot;~&quot;</span> <span class="p">)</span>
+        <span class="n">head_list</span><span class="p">[</span><span class="n">count</span><span class="p">]</span><span class="o">=</span><span class="n">line</span>
+        <span class="n">count</span><span class="o">+=</span><span class="mi">1</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="k">function</span> <span class="n">包装</span><span class="p">(</span><span class="n">head_list</span><span class="p">)</span>
+    <span class="kd">local</span> <span class="n">mark_count</span><span class="o">=</span><span class="mi">1</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="kp">in</span> <span class="n">head_list</span>
+        <span class="n">head_list</span><span class="p">[</span><span class="n">mark_count</span><span class="p">]</span><span class="o">=</span><span class="s">&quot;&lt;a href=</span><span class="se">\&quot;</span><span class="s">#chapter-</span><span class="si">$mark_count</span><span class="se">\&quot;</span><span class="s">&gt;&quot;</span> <span class="o">*</span> <span class="n">line</span>  <span class="o">*</span>  <span class="s">&quot;&lt;/a&gt;  </span><span class="se">\n</span><span class="s">&quot;</span>
+        <span class="n">mark_count</span><span class="o">+=</span><span class="mi">1</span>
+    <span class="k">end</span>
+
+    <span class="n">pushfirst!</span><span class="p">(</span><span class="n">head_list</span><span class="p">,</span><span class="s">&quot;</span><span class="se">\n</span><span class="s"> ---  </span><span class="se">\n</span><span class="s"> &quot;</span><span class="p">)</span>
+    <span class="n">pushfirst!</span><span class="p">(</span><span class="n">head_list</span><span class="p">,</span><span class="s">&quot;目录：  &quot;</span><span class="p">)</span>
+    <span class="n">push!</span><span class="p">(</span><span class="n">head_list</span><span class="p">,</span><span class="s">&quot;</span><span class="se">\n</span><span class="s"> ---    </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
+<span class="k">end</span>
+
+<span class="k">function</span> <span class="n">add_index2markdown</span><span class="p">()</span>
+<span class="c">#给markdown文件按照头（#）添加目录索引</span>
+    <span class="n">Markdown_file</span><span class="o">=</span><span class="s">&quot;/home/asen/文档/war.md&quot;</span>
+    <span class="n">mark_count</span><span class="o">=</span><span class="mi">1</span>  <span class="c">#标记#头的出现次数</span>
+    <span class="n">head_list</span><span class="o">=</span><span class="p">[]</span>  <span class="c">#存储头内容</span>
+    <span class="n">new_str</span><span class="o">=</span><span class="s">&quot;&quot;</span>
+
+    <span class="n">open</span><span class="p">(</span><span class="n">Markdown_file</span><span class="p">,</span><span class="s">&quot;r+&quot;</span><span class="p">)</span> <span class="k">do</span> <span class="n">io</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="kp">in</span> <span class="n">eachline</span><span class="p">(</span><span class="n">io</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">length</span><span class="p">(</span><span class="n">line</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span>  <span class="c">#避免空行导致的bounderror</span>
+                <span class="k">continue</span>
+            <span class="k">end</span>
+            <span class="k">if</span> <span class="n">startwith</span><span class="p">(</span><span class="sc">&#39;#&#39;</span><span class="p">,</span><span class="n">line</span><span class="p">)</span>
+                <span class="n">push!</span><span class="p">(</span><span class="n">head_list</span><span class="p">,</span><span class="n">line</span><span class="p">)</span>
+                <span class="n">substr</span><span class="o">=</span><span class="s">&quot;&lt;a id=</span><span class="se">\&quot;</span><span class="s">chapter-</span><span class="si">$mark_count</span><span class="se">\&quot;</span><span class="s">&gt;&lt;/a&gt;    </span><span class="se">\n</span><span class="s">&quot;</span> 
+                <span class="n">new_str</span> <span class="o">*=</span> <span class="n">substr</span>  <span class="o">*</span>   <span class="n">line</span> <span class="o">*</span> <span class="sc">&#39;\n&#39;</span>
+                <span class="n">mark_count</span><span class="o">+=</span><span class="mi">1</span>
+            <span class="k">else</span>
+                <span class="n">new_str</span> <span class="o">*=</span> <span class="n">line</span>  <span class="o">*</span> <span class="sc">&#39;\n&#39;</span>
+            <span class="k">end</span>
+        <span class="k">end</span>
+        <span class="n">sub_head</span><span class="p">(</span><span class="n">head_list</span><span class="p">)</span>
+        <span class="n">包装</span><span class="p">(</span><span class="n">head_list</span><span class="p">)</span>
+    <span class="k">end</span>
+    <span class="n">open</span><span class="p">(</span><span class="n">Markdown_file</span><span class="p">,</span><span class="s">&quot;w&quot;</span><span class="p">)</span> <span class="k">do</span> <span class="n">io</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="kp">in</span> <span class="n">reverse</span><span class="p">(</span><span class="n">head_list</span><span class="p">)</span>
+            <span class="c">#println(line)</span>
+            <span class="n">new_str</span><span class="o">=</span><span class="n">line</span> <span class="o">*</span> <span class="n">new_str</span>
+        <span class="k">end</span>
+        <span class="c">#print(new_str)</span>
+        <span class="n">write</span><span class="p">(</span><span class="n">io</span><span class="p">,</span><span class="n">new_str</span><span class="p">)</span>
+    <span class="k">end</span>
+    <span class="n">println</span><span class="p">(</span><span class="s">&quot;markdown 文件添加目录（页内索引）完成。&quot;</span><span class="p">)</span>
+<span class="k">end</span>
+<span class="n">add_index2markdown</span><span class="p">()</span>
+</pre></div>
+
+
+<h3>熵值计算：Julia版</h3>
+<div class="codehilite"><pre><span></span><span class="cm">#============================================</span>
+<span class="cm">            计算熵（Julia version）232s</span>
+<span class="cm">============================================#</span>
+<span class="k">using</span> <span class="n">PyPlot</span>
+<span class="k">function</span> <span class="n">compute_entropy</span><span class="p">()</span>
+    <span class="n">dir_name</span><span class="o">=</span><span class="s">&quot;/path/corpus.txt&quot;</span>
+    <span class="n">word_freq_table</span><span class="o">=</span><span class="kt">Dict</span><span class="p">{</span><span class="kt">Char</span><span class="p">,</span><span class="kt">UInt64</span><span class="p">}()</span>   <span class="c">#时间缩短为57s</span>
+    <span class="n">Global_entropy</span><span class="p">,</span><span class="n">all_num</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span>
+
+    <span class="nd">@info</span> <span class="s">&quot;读取文件。。。&quot;</span>
+    <span class="n">open</span><span class="p">(</span><span class="n">dir_name</span><span class="p">,</span><span class="s">&quot;r&quot;</span><span class="p">)</span> <span class="k">do</span> <span class="n">F</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="kp">in</span> <span class="n">eachline</span><span class="p">(</span><span class="n">F</span><span class="p">)</span>   <span class="c">#去掉断行检查时间缩短为47s</span>
+            <span class="k">for</span> <span class="n">word</span> <span class="kp">in</span> <span class="n">line</span>
+                <span class="k">if</span> <span class="n">word</span> <span class="kp">in</span> <span class="n">keys</span><span class="p">(</span><span class="n">word_freq_table</span><span class="p">)</span>
+                    <span class="n">word_freq_table</span><span class="p">[</span><span class="n">word</span><span class="p">]</span><span class="o">+=</span><span class="mi">1</span>
+                <span class="k">else</span>
+                    <span class="n">word_freq_table</span><span class="p">[</span><span class="n">word</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span>
+                <span class="k">end</span>
+            <span class="k">end</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+    <span class="n">word_num</span><span class="o">=</span><span class="n">length</span><span class="p">(</span><span class="n">word_freq_table</span><span class="p">)</span>
+    <span class="nd">@show</span> <span class="s">&quot;词频表的长度为</span><span class="si">$word_num</span><span class="s">&quot;</span>
+    <span class="n">all_num</span><span class="o">=</span><span class="n">sum</span><span class="p">(</span><span class="n">values</span><span class="p">(</span><span class="n">word_freq_table</span><span class="p">))</span>  <span class="c">#sum 与for 性能相近</span>
+
+    <span class="n">println</span><span class="p">(</span><span class="s">&quot;all_num=</span><span class="si">$all_num</span><span class="s"> 计算熵。。。&quot;</span><span class="p">)</span>
+    <span class="n">P</span> <span class="o">=</span><span class="n">freq</span><span class="o">::</span><span class="kt">UInt64</span> <span class="o">-&gt;</span> <span class="n">freq</span><span class="o">/</span><span class="n">all_num</span>
+    <span class="n">entropy</span><span class="o">=</span> <span class="n">prob</span><span class="o">::</span><span class="kt">Float64</span> <span class="o">-&gt;</span> <span class="o">-</span><span class="n">prob</span><span class="o">*</span><span class="n">log2</span><span class="p">(</span><span class="n">prob</span><span class="p">)</span>
+<span class="cm">#=</span>
+<span class="cm">    open(&quot;entropy_tmp.txt&quot;,&quot;w&quot;) do io</span>
+<span class="cm">        for (k,v) in sort(collect(word_freq_table),by=x-&gt;x[2])</span>
+<span class="cm">            val1=P(v)</span>
+<span class="cm">            val2=entropy(val1)</span>
+<span class="cm">            write(io,&quot;$k \t freq  $v  \t 概率：$(val1)  \t 熵：$(val2)  \n&quot;)</span>
+<span class="cm">            Global_entropy+=val2</span>
+<span class="cm">        end</span>
+<span class="cm">    end</span>
+<span class="cm">=#</span>
+    <span class="nd">@info</span> <span class="n">Global_entropy</span>
+<span class="cm">#=</span>
+<span class="cm">    Global_entropy=sum(</span>
+<span class="cm">    [entropy(P(i)) for i in values(word_freq_table)]) </span>
+<span class="cm">     #表达方式更紧凑，没有性能提升</span>
+<span class="cm">    println(&quot;the entropy is : &quot;,Global_entropy)</span>
+
+<span class="cm">    @info (&quot;start plot ...&quot;)</span>
+<span class="cm">    tmp=[P(i) for i in values(word_freq_table)]</span>
+<span class="cm">    plot(tmp)</span>
+<span class="cm">    show()</span>
+<span class="cm">=#</span>
+<span class="k">end</span>
+<span class="c">#@time compute_entropy()</span>
+</pre></div>
+
+
+<h3>去掉字符串中的四种方法</h3>
+<div class="codehilite"><pre><span></span><span class="k">import</span> <span class="n">Base</span><span class="o">.</span><span class="n">Unicode</span><span class="o">.</span><span class="n">ispunct</span>
+
+<span class="k">function</span> <span class="n">del_punct</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+    <span class="c">#去掉标点符号的四种方法</span>
+    <span class="n">tmp</span><span class="o">=</span><span class="s">&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">word</span> <span class="kp">in</span> <span class="n">line</span>
+        <span class="c">#ispunct(word) || (tmp=tmp*word) </span>
+        <span class="c">#ispunct(word) ? true : tmp=tmp*word</span>
+        <span class="c">#if !ispunct(word) tmp=tmp*word  end</span>
+        <span class="o">!</span><span class="n">ispunct</span><span class="p">(</span><span class="n">word</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">tmp</span><span class="o">=</span><span class="n">tmp</span><span class="o">*</span><span class="n">word</span><span class="p">)</span>
+    <span class="k">end</span>
+    <span class="k">return</span> <span class="n">tmp</span>
+<span class="k">end</span>
+
+<span class="n">asd</span><span class="o">=</span><span class="s">&quot;asdfhg34,./,g56uuj678i78ol./p;oyjdthhs.;/lyjfgh&quot;</span>
+<span class="n">println</span><span class="p">(</span><span class="n">del_punct</span><span class="p">(</span><span class="n">asd</span><span class="p">))</span>
+</pre></div>
+
+
+<h3>通过存储链接名的文件下载内容</h3>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">Base.Iterators.Stateful</span>
+<span class="kn">import</span> <span class="nn">Base.Filesystem.filesize</span>
+<span class="kn">import</span> <span class="nn">Base.Filesystem.walkdir</span>
+<span class="kn">import</span> <span class="nn">Base.Filesystem.rm</span>
+
+
+<span class="n">function</span> <span class="n">get_PathName_from_dir</span><span class="p">(</span><span class="n">dir_name</span><span class="p">)</span>
+    <span class="c1">#目录名-&gt;iter(file_name)</span>
+    <span class="c1">#walkdir :是深度优先搜索</span>
+    <span class="n">filename_list</span><span class="o">=</span><span class="p">[]</span>
+    <span class="n">function</span> <span class="n">get_filename</span><span class="p">(</span><span class="n">dir_one</span><span class="p">)</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">root</span><span class="p">,</span><span class="n">dirs</span><span class="p">,</span><span class="n">files</span><span class="p">)</span> <span class="ow">in</span> <span class="n">walkdir</span><span class="p">(</span><span class="n">dir_one</span><span class="p">)</span>
+            <span class="k">for</span> <span class="nb">file</span> <span class="ow">in</span> <span class="n">files</span>
+                <span class="n">push</span><span class="err">!</span><span class="p">(</span><span class="n">filename_list</span><span class="p">,(</span><span class="n">root</span><span class="o">*</span><span class="s1">&#39;/&#39;</span><span class="o">*</span><span class="nb">file</span><span class="p">)</span> <span class="p">)</span>
+            <span class="n">end</span>
+        <span class="n">end</span>
+    <span class="n">end</span>
+    <span class="n">get_filename</span><span class="p">(</span><span class="n">dir_name</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">Stateful</span><span class="p">(</span><span class="n">filename_list</span><span class="p">)</span>
+<span class="n">end</span>
+
+
+<span class="n">function</span> <span class="n">get_url_from_file</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+    <span class="c1">#从存储链接的文件中获取：主题名-url</span>
+    <span class="n">NameUrl</span><span class="o">=</span><span class="n">Dict</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">eachline</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+        <span class="n">name</span><span class="p">,</span><span class="n">url</span><span class="p">,</span><span class="n">other</span><span class="o">=</span><span class="n">split</span><span class="p">(</span><span class="n">line</span><span class="p">,[</span><span class="s1">&#39;!&#39;</span><span class="p">,</span><span class="s1">&#39;?&#39;</span><span class="p">])</span>
+        <span class="n">NameUrl</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">=</span><span class="n">url</span>
+    <span class="n">end</span>
+    <span class="k">return</span> <span class="n">Stateful</span><span class="p">(</span><span class="n">collect</span><span class="p">(</span><span class="n">NameUrl</span><span class="p">)</span> <span class="p">)</span>
+<span class="n">end</span>
+
+<span class="n">function</span> <span class="n">get_context_from_net2</span><span class="p">()</span>
+    <span class="n">dir_name</span><span class="o">=</span><span class="s2">&quot;tmp/&quot;</span>
+    <span class="k">for</span> <span class="n">file_name</span> <span class="ow">in</span> <span class="n">get_PathName_from_dir</span><span class="p">(</span><span class="s2">&quot;Baidu&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="n">url</span><span class="p">)</span> <span class="ow">in</span> <span class="n">get_url_from_file</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span>
+            <span class="k">try</span>
+                <span class="n">download</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">dir_name</span><span class="o">*</span><span class="n">name</span><span class="o">*</span><span class="s2">&quot;.html&quot;</span><span class="p">)</span>
+            <span class="n">catch</span> 
+                <span class="k">continue</span>
+            <span class="n">end</span>
+        <span class="n">end</span>
+        <span class="k">break</span>
+    <span class="n">end</span>  
+    <span class="n">println</span><span class="p">(</span><span class="s2">&quot;文件下载完成&quot;</span><span class="p">)</span>
+<span class="n">end</span>
+
+<span class="n">function</span> <span class="n">get_context_from_net</span><span class="p">()</span>
+    <span class="n">proxy</span><span class="o">=</span><span class="sb">`-x 182.106.140.122:80`</span> <span class="c1">#curl 使用代理 -x ip：port</span>
+    <span class="n">retry</span><span class="o">=</span><span class="sb">`--retry 7  --retry-delay 10  --retry-max-time 10 `</span> <span class="c1">#重试次数，间隔</span>
+    <span class="c1">#直接通过url无法下载，why？</span>
+    <span class="c1">#command=`wget https://www.baidu.com -O filename`</span>
+    <span class="c1">#暂时使用名字代替</span>
+    <span class="c1">#curl: (56) Received HTTP code 502</span>
+    <span class="c1">#速度太慢，先下5万</span>
+    <span class="k">for</span> <span class="n">file_name</span> <span class="ow">in</span> <span class="n">get_PathName_from_dir</span><span class="p">(</span><span class="s2">&quot;Baidu&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="n">url</span><span class="p">)</span> <span class="ow">in</span> <span class="n">get_url_from_file</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span>
+            <span class="n">command</span><span class="o">=</span><span class="sb">`curl $(proxy) $(retry) https://baike.baidu.com/item/$(name) -o htmlfile/$(name).html`</span>
+            <span class="k">try</span>
+                <span class="n">run</span><span class="p">(</span><span class="n">command</span><span class="p">)</span>
+            <span class="n">catch</span> 
+                <span class="k">continue</span>
+            <span class="n">end</span>
+        <span class="n">end</span>
+    <span class="n">end</span>  
+    <span class="n">println</span><span class="p">(</span><span class="s2">&quot;文件下载完成&quot;</span><span class="p">)</span>
+<span class="n">end</span>
+
+<span class="n">function</span> <span class="n">rm_null_file</span><span class="p">()</span>
+    <span class="c1">#去掉空文件</span>
+    <span class="n">dir_name</span><span class="o">=</span><span class="s2">&quot;htmlfile/&quot;</span>
+    <span class="n">count</span><span class="p">::</span><span class="n">Int64</span><span class="o">=</span><span class="mi">0</span>
+    <span class="k">for</span> <span class="n">file_name</span> <span class="ow">in</span> <span class="n">readdir</span><span class="p">(</span><span class="n">dir_name</span><span class="p">)</span>  <span class="c1">#默认是本目录</span>
+        <span class="k">if</span> <span class="n">filesize</span><span class="p">(</span><span class="n">dir_name</span><span class="o">*</span><span class="n">file_name</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">10</span>
+            <span class="n">rm</span><span class="p">(</span><span class="n">dir_name</span><span class="o">*</span><span class="n">file_name</span><span class="p">)</span>
+            <span class="n">count</span><span class="o">+=</span><span class="mi">1</span>
+        <span class="n">end</span>
+    <span class="n">end</span>
+    <span class="nd">@info</span> <span class="s2">&quot;空文件的数量为： $count ;</span><span class="se">\n</span><span class="s2"> &quot;</span>
+<span class="n">end</span>
+
+<span class="n">function</span> <span class="n">main</span><span class="p">()</span>
+    <span class="n">get_context_from_net</span><span class="p">()</span>
+    <span class="n">rm_null_file</span><span class="p">()</span>
+<span class="n">end</span>
+
+<span class="n">main</span><span class="p">()</span>
+<span class="c1">#</span>
+<span class="c1">#   测试函数</span>
+<span class="c1">#</span>
+<span class="n">function</span> <span class="n">test_get_PathName_from_dir</span><span class="p">(</span><span class="n">dir_name</span><span class="p">)</span>
+    <span class="nb">iter</span><span class="o">=</span><span class="n">get_PathName_from_dir</span><span class="p">(</span><span class="n">dir_name</span><span class="p">)</span>
+    <span class="k">for</span> <span class="nb">file</span> <span class="ow">in</span> <span class="nb">iter</span>
+        <span class="n">println</span><span class="p">(</span><span class="nb">file</span><span class="p">)</span>       
+    <span class="n">end</span>
+<span class="n">end</span>
+
+<span class="n">function</span> <span class="n">test_get_url_from_file</span><span class="p">()</span>
+    <span class="nb">iter</span><span class="o">=</span><span class="n">get_url_from_file</span><span class="p">(</span><span class="s2">&quot;Baidu/地理/阿根廷.txt&quot;</span><span class="p">)</span>
+    <span class="n">count</span><span class="o">=</span><span class="mi">0</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">U</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">iter</span>
+        <span class="n">count</span><span class="o">+=</span><span class="mi">1</span>
+        <span class="n">println</span><span class="p">(</span><span class="s2">&quot;名字：$N  </span><span class="se">\t</span><span class="s2"> 链接：$U&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">count</span><span class="o">&gt;</span><span class="mi">10</span> <span class="k">break</span> <span class="n">end</span>
+    <span class="n">end</span>
+<span class="n">end</span>
+
+<span class="n">function</span> <span class="n">test</span><span class="p">()</span>
+    <span class="n">test_get_PathName_from_dir</span><span class="p">()</span>
+    <span class="n">test_get_url_from_file</span><span class="p">()</span>
+<span class="n">end</span>
+<span class="c1">#test()</span>
+</pre></div>
+
+
+<h3>提取本地目录中html文件的链接</h3>
+<div class="codehilite"><pre><span></span><span class="k">function</span> <span class="n">get_context_from_html!</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span><span class="n">url_list</span><span class="p">,</span><span class="n">Pattern</span><span class="p">,</span><span class="n">class</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+  <span class="c">#change url_list</span>
+  <span class="c">#class:1=&gt;url  ; 2=&gt;picture ;3=&gt;text</span>
+    <span class="n">tmp</span><span class="o">=</span><span class="s">&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="kp">in</span> <span class="n">eachline</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">occursin</span><span class="p">(</span><span class="n">Pattern</span><span class="p">,</span><span class="n">line</span><span class="p">)</span>
+            <span class="n">m</span><span class="o">=</span><span class="n">match</span><span class="p">(</span><span class="n">Pattern</span><span class="p">,</span><span class="n">line</span><span class="p">)</span>
+          <span class="c">#掐头去尾-&gt; 纯url</span>
+            <span class="n">tmp</span><span class="o">=</span><span class="n">m</span><span class="o">.</span><span class="n">match</span>
+            <span class="k">if</span> <span class="n">class</span><span class="o">==</span><span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">length</span><span class="p">(</span><span class="n">tmp</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">10</span>
+                <span class="k">try</span>
+                    <span class="c">#push!(url_list,tmp[7:end-1])</span>
+                    <span class="c">#StringIndexError :变长编码索引困难</span>
+                    <span class="n">push!</span><span class="p">(</span><span class="n">url_list</span><span class="p">,</span><span class="n">tmp</span><span class="p">[</span><span class="mi">7</span><span class="o">:</span><span class="n">prevind</span><span class="p">(</span><span class="n">tmp</span><span class="p">,</span><span class="n">lastindex</span><span class="p">(</span><span class="n">tmp</span><span class="p">))])</span>
+                <span class="k">catch</span> <span class="nb">e</span>
+                    <span class="n">println</span><span class="p">(</span><span class="n">tmp</span><span class="p">,</span><span class="n">length</span><span class="p">(</span><span class="n">tmp</span><span class="p">))</span>
+                    <span class="n">throw</span><span class="p">(</span><span class="nb">e</span><span class="p">)</span>
+                <span class="k">end</span>
+            <span class="k">end</span>
+            <span class="c">#println(m.match) #查看匹配的内容</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+    <span class="k">return</span> <span class="n">url_list</span>
+<span class="k">end</span>
+<span class="cm">#==================================</span>
+<span class="cm">    将本地目录中的html网页中的链接提取出来</span>
+<span class="cm">        html文件目录  -&gt;  superlink文件</span>
+<span class="cm">===============================#</span>
+<span class="k">function</span> <span class="n">deal_html</span><span class="p">(</span><span class="n">dir_name</span><span class="o">=</span><span class="s">&quot;htmlfile/&quot;</span><span class="p">)</span>
+  <span class="c">#正则表达式模式定义</span>
+    <span class="c">#Pattern=r&quot;^&lt;a .*&lt;/a&gt;$&quot;  #匹配&lt;a&gt;&lt;/a&gt;</span>
+    <span class="n">Pattern</span><span class="o">=</span><span class="sr">r&quot;href=\&quot;https?.+?\&quot;&quot;</span>  <span class="c">#匹配  href=“https：”</span>
+  <span class="c">#结构，变量定义</span>
+    <span class="n">class</span><span class="o">=</span><span class="mi">1</span>  <span class="c">#class:1=&gt;url  ; 2=&gt;picture ;3=&gt;text</span>
+    <span class="n">result_file</span><span class="o">=</span><span class="s">&quot;superlink.txt&quot;</span>
+    <span class="n">fileName_iter</span><span class="o">=</span><span class="n">get_PathName_from_dir</span><span class="p">(</span><span class="n">dir_name</span><span class="p">)</span>
+    <span class="n">url_list</span><span class="o">=</span><span class="kt">Array</span><span class="p">{</span><span class="n">String</span><span class="p">,</span><span class="mi">1</span><span class="p">}()</span>
+  <span class="nd">@info</span> <span class="s">&quot;逐个文件处理...&quot;</span>
+    <span class="k">for</span> <span class="n">fileName</span> <span class="kp">in</span> <span class="n">fileName_iter</span>
+        <span class="n">println</span><span class="p">(</span><span class="n">fileName</span><span class="p">)</span>
+        <span class="n">get_context_from_html!</span><span class="p">(</span><span class="n">fileName</span><span class="p">,</span><span class="n">url_list</span><span class="p">,</span><span class="n">Pattern</span><span class="p">,</span><span class="n">class</span><span class="p">)</span>
+      <span class="c">#break</span>
+    <span class="k">end</span>
+  <span class="c">#for url in url_list println(url) end</span>
+  <span class="nd">@info</span> <span class="s">&quot;结果存入文件&quot;</span>
+    <span class="n">open</span><span class="p">(</span><span class="n">result_file</span><span class="p">,</span><span class="s">&quot;w&quot;</span><span class="p">)</span> <span class="k">do</span> <span class="n">io</span>
+        <span class="k">for</span> <span class="n">node</span> <span class="kp">in</span> <span class="kt">Set</span><span class="p">(</span><span class="n">url_list</span><span class="p">)</span>
+            <span class="n">write</span><span class="p">(</span><span class="n">io</span><span class="p">,</span><span class="n">node</span><span class="o">*</span><span class="sc">&#39;\n&#39;</span><span class="p">)</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+    <span class="nd">@info</span> <span class="s">&quot;deal_html runing is end!&quot;</span>
+<span class="k">end</span>
+<span class="n">deal_html</span><span class="p">()</span>
+</pre></div>
+
+
+<h3></h3>
+<div class="codehilite"><pre><span></span>
+</pre></div>
+
+
+<h3></h3>
+<div class="codehilite"><pre><span></span>
+</pre></div>
+</body>
+</html>

@@ -9,13 +9,11 @@
 
 ###资源
 - <a href="https://www.videograbber.net/zh/download-free-movies.html#_1" >国内优秀资源推荐页</a>
-<<<<<<< HEAD
 -  <a href="https://www.videograbber.net/zh/">资源下载网站 </a>
 -  
 =======
 - <a href="https://www.videograbber.net/zh/">资源下载网站 </a>
 
->>>>>>> 576ab9ca1a7765779b403c796e89a58caade2eae
 
 
 ---
@@ -199,7 +197,7 @@ V字仇杀队|||骇客精神
 憨豆的黄金周|英国|史蒂夫·班德莱克|no see
 风雨哈佛路|美国|Peter Levin|no see
 莫斯科不相信眼泪|俄罗斯||勇敢面对生活
-
+绿皮书|美国||黑人音乐家
 
 ---
 ##电视剧
@@ -208,7 +206,7 @@ V字仇杀队|||骇客精神
 :-|:-|:-|:-
 冰与火之歌·权利的游戏|后面有点小气de感觉|7季
 名侦探柯南|解密到无聊|960
-蜡笔小新|笑翻天，神魔是人生的幸福|第五季
+蜡笔小新|笑翻天，神魔是人生的幸福|六季完
 淑女制造法|两集，英剧-soso|over
 笑傲江湖|书（nice），电视剧（许晴|over
 火影忍者|全720集,嘴遁|over

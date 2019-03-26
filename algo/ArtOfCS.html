@@ -1,0 +1,495 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="generator" content="ReText 7.0.1">
+<link type="text/css" rel="stylesheet" href="/css/style.css">
+<title>ArtOfCS</title>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  config: ["MMLorHTML.js"],
+  jax: ["input/TeX", "output/HTML-CSS", "output/NativeMML"],
+  extensions: ["MathMenu.js", "MathZoom.js"],
+  TeX: {
+    extensions: ["AMSmath.js", "AMSsymbols.js"],
+    equationNumbers: {autoNumber: "AMS"}
+  }
+});
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js"></script></head>
+<body>
+<h1>计算机程序设计艺术</h1>
+<h2>第二卷 半数值算法</h2>
+<h2>knuth</h2>
+<p>半数值算法:与数字有关的算法  </p>
+<hr>
+<h3>第三章 随机数</h3>
+<ul>
+<li>随机数的应用:仿真,抽样,数值分析,程序设计,决策,美学,娱乐,</li>
+<li>随机化算法通常比确定性算法优越的多?</li>
+<li>随机数:等概率序列抽样?元素独立性(无依赖)?</li>
+<li>平方取中: 容易出现重复元素的短循环</li>
+<li>随机数并不是通过随机选择的方法就能够生成的.</li>
+</ul>
+<h4>平方取中:python实现</h4>
+<div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">平方取中</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
+    <span class="c1">#十进制 平方取中随机算法</span>
+    <span class="n">tmp</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">num</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">tmp1</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">num</span><span class="p">))</span> <span class="c1">#输入数值的位数</span>
+    <span class="n">index</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="n">tmp1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>  <span class="c1">#计算前后索引</span>
+    <span class="c1">#print(num,index,tmp)</span>
+    <span class="c1">#print(int(tmp[tmp1-index:-index+1],10))</span>
+    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">tmp</span><span class="p">[</span><span class="n">tmp1</span><span class="o">-</span><span class="n">index</span><span class="p">:</span><span class="o">-</span><span class="n">index</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">平方取中</span><span class="p">(</span><span class="mi">12345</span><span class="p">)</span>  <span class="c1">#39902</span>
+<span class="n">平方取中</span><span class="p">(</span><span class="mi">1234</span><span class="p">)</span>   <span class="c1">#2275</span>
+</pre></div>
+
+
+<h4>线性同余序列</h4>
+<p>
+<script type="math/tex; mode=display">X_{n+1}=(aX_n+c)mod\quad m </script>
+<script type="math/tex; mode=display">n \ge 0;\quad 0 < m;\quad 0 \le a,c,X_0 < m</script>
+- 推广:<br>
+<script type="math/tex; mode=display"> X_{n+k}=(a^kX_n+(a^k-1)c/b)mod \quad m</script>
+<script type="math/tex; mode=display">n\ge 0; k \ge 0; a\ge 1; b\ge 2</script>
+- 线性同余序列总是存在循环周期</p>
+<div class="codehilite"><pre><span></span><span class="k">function</span> <span class="n">liner_mod</span><span class="p">(</span><span class="n">X_n</span><span class="p">)</span>
+    <span class="n">m</span><span class="o">=</span><span class="mi">1000</span>
+    <span class="n">a</span><span class="o">=</span><span class="mi">127632</span>
+    <span class="n">c</span><span class="o">=</span><span class="mi">7</span>
+    <span class="n">X_nplus1</span><span class="o">=</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">X_n</span><span class="o">+</span><span class="n">c</span><span class="p">)</span><span class="o">%</span><span class="n">m</span>
+    <span class="nd">@show</span> <span class="n">X_nplus1</span>
+    <span class="k">return</span> <span class="n">X_nplus1</span>
+<span class="k">end</span>
+<span class="n">liner_mod</span><span class="p">(</span><span class="mi">1234</span><span class="p">)</span>
+<span class="n">liner_mod</span><span class="p">(</span><span class="mi">12345</span><span class="p">)</span>
+</pre></div>
+
+
+<ul>
+<li>产生随机序列</li>
+</ul>
+<div class="codehilite"><pre><span></span><span class="k">function</span> <span class="n">seed</span><span class="p">(</span><span class="n">X_0</span><span class="o">=</span><span class="mi">4678_9298_0981</span><span class="p">)</span>
+    <span class="n">m</span><span class="o">=</span><span class="mi">1000_0000_0000</span>
+    <span class="n">a</span><span class="o">=</span><span class="mi">8276_3234_4621</span>
+    <span class="n">c</span><span class="o">=</span><span class="mi">7</span>
+    <span class="n">X_1</span><span class="o">=</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">X_0</span><span class="o">+</span><span class="n">c</span><span class="p">)</span><span class="o">%</span><span class="n">m</span>
+    <span class="k">return</span> <span class="n">X_1</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">c</span>
+<span class="k">end</span>
+<span class="k">function</span> <span class="n">linear_rand</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+    <span class="n">X_n</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="n">seed</span><span class="p">()</span>
+    <span class="n">num_list</span><span class="o">=</span><span class="kt">Array</span><span class="p">{</span><span class="kt">Int64</span><span class="p">,</span><span class="mi">1</span><span class="p">}()</span>
+    <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">num</span>
+        <span class="n">X_nplus1</span><span class="o">=</span><span class="n">abs</span><span class="p">((</span><span class="n">a</span><span class="o">*</span><span class="n">X_n</span><span class="o">+</span><span class="n">c</span><span class="p">)</span><span class="o">%</span><span class="n">m</span><span class="p">)</span>
+        <span class="nd">@show</span> <span class="n">X_nplus1</span>
+        <span class="n">push!</span><span class="p">(</span><span class="n">num_list</span><span class="p">,</span><span class="n">X_nplus1</span><span class="p">)</span>
+        <span class="n">X_n</span><span class="o">=</span><span class="n">X_nplus1</span>
+    <span class="k">end</span>
+    <span class="k">return</span> <span class="n">num_list</span>
+<span class="k">end</span>
+<span class="n">linear_rand</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+</pre></div>
+
+
+<ul>
+<li>平方搅浑法:无论Z如何(二值/十进)都会使0变多
+<script type="math/tex; mode=display">X_{n+1}=X_{n}^2mod M \quad B_n=X_n \cdot Z mod 2</script>
+</li>
+<li>如何判断随机数的随机性?<ul>
+<li>由已知无法推断出未知的?不可预测性</li>
+</ul>
+</li>
+<li>
+<script type="math/tex">\chi ^2</script>检验(离散变量)<br>
+<script type="math/tex">k个范畴,n词独立观察,p_s每次观察落入范畴s的概率,Y_s真正落入s的观察数量</script>
+<br>
+<script type="math/tex; mode=display">V=\sum_{s=1}^k \frac{(Y_s-np_s)^2}{np_s}</script>
+</li>
+</ul>
+<h4>经验检验</h4>
+<ul>
+<li>KS检验:使用分布函数<script type="math/tex">F(x)和F_n(x)</script>(连续变量)<br>
+<script type="math/tex; mode=display">F_n(x)=\frac{小于等于x的观察数目}{n}</script>
+<script type="math/tex; mode=display"> K_{n}^+=\sqrt{n}\max_{-\inf <x<\inf}(F_n(x)-F(x)) </script>
+<script type="math/tex; mode=display"> K_{n}^-=\sqrt{n}\max_{-\inf <x<\inf}(F(x)-F_n(x)) </script>
+</li>
+<li>julia随机数检验:sort!(rand(100))<br>
+<img alt="" src="pict/julia.png"></li>
+<li>julia:sort!(randn(1000)) <br>
+<img alt="" src="pict/randn.png">   </li>
+<li>检验上面自己写的的随机序列代码:(正整数)<br>
+<img alt="" src="pict/xulie.png"></li>
+<li>未排序的上述结果rand的分布更均匀些</li>
+</ul>
+<h4>理论检验</h4>
+<ul>
+<li>间隔检验 集券检验 运行检验(上/下行区间长度)</li>
+</ul>
+<div class="codehilite"><pre><span></span><span class="k">using</span> <span class="n">Random</span>
+<span class="n">Random</span><span class="o">.</span><span class="n">seed!</span><span class="p">(</span><span class="mi">123123123</span><span class="p">)</span>
+<span class="k">function</span> <span class="n">间隔检验</span><span class="p">()</span>
+    <span class="n">rand_list</span><span class="o">=</span><span class="n">rand</span><span class="p">(</span><span class="kt">Int</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span>
+    <span class="n">pipe</span><span class="o">=</span><span class="kt">Channel</span><span class="p">{</span><span class="kt">Int</span><span class="p">}(</span><span class="mi">1000</span><span class="p">)</span>
+    <span class="n">task</span><span class="o">=</span><span class="nd">@async</span> <span class="k">begin</span>
+        <span class="k">while</span> <span class="kc">true</span>
+            <span class="n">put!</span><span class="p">(</span><span class="n">pipe</span><span class="p">,</span><span class="n">rand</span><span class="p">(</span><span class="kt">Int</span><span class="p">))</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+    <span class="n">bind</span><span class="p">(</span><span class="n">pipe</span><span class="p">,</span><span class="n">task</span><span class="p">)</span>
+    <span class="nd">@show</span> <span class="n">rand_list</span>
+    <span class="n">i</span><span class="o">=</span><span class="mi">0</span>
+    <span class="k">for</span> <span class="n">num</span> <span class="kp">in</span> <span class="n">rand_list</span>
+        <span class="n">ct</span><span class="o">::</span><span class="kt">BigInt</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">iter_num</span> <span class="kp">in</span> <span class="n">pipe</span>
+            <span class="k">if</span> <span class="n">iter_num</span> <span class="o">==</span> <span class="n">num</span>
+                <span class="n">i</span><span class="o">+=</span><span class="mi">1</span>
+                <span class="k">if</span> <span class="n">i</span><span class="o">&gt;=</span><span class="mi">10</span> <span class="nd">@goto</span> <span class="n">endplace</span> <span class="k">end</span>
+                <span class="nd">@info</span> <span class="s">&quot;</span><span class="si">$num</span><span class="s"> 的间隔为 </span><span class="si">$ct</span><span class="s">&quot;</span>
+                <span class="k">break</span>
+            <span class="k">else</span>
+                <span class="n">ct</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">end</span>
+            <span class="k">if</span> <span class="n">ct</span> <span class="o">&gt;</span> <span class="mi">10000_0000</span> 
+                <span class="nd">@info</span> <span class="s">&quot;</span><span class="si">$num</span><span class="s"> 的间隔大于1亿&quot;</span>
+                <span class="k">break</span>
+            <span class="k">end</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+    <span class="nd">@label</span> <span class="n">endplace</span>
+    <span class="nd">@info</span> <span class="s">&quot;程序运行结束&quot;</span>
+<span class="k">end</span>
+<span class="n">间隔检验</span><span class="p">()</span>
+<span class="c">#两层for循环反过来较好:每个随机数都检验10次</span>
+</pre></div>
+
+
+<ul>
+<li>谱检验:离散傅立叶变换(3.3.4 -&gt; 3.4.1)</li>
+<li>格约简?</li>
+<li>实时流抽样,因为不知道什么时候结束所以形成一个pool,实时更新.</li>
+<li>洗牌时为了达到10%以内的一致分布,对52张的一副牌至少要洗7次.</li>
+<li>我们说的"随机行为"精确的说究竟指的是什么?</li>
+<li>概率的直观思以频率为基础.</li>
+<li><strong>真正的随机序列将显示局部的非随机性</strong></li>
+<li>不存在对于每个应用都适当的"随机数"序列</li>
+<li>可计算:给定输入,能够确定输出.<blockquote>
+<p>1010110111,1010101010,0000000.这三个数的随机性.测不准原理?</p>
+</blockquote>
+</li>
+<li>既然线性同余可以产生伪随机数,别的函数呢?</li>
+<li>一台机器不能做任何新的东西,她只能服从程序员的命令?<ul>
+<li>随机数的不确定算法的出想,机器完全可以做出一件新事情.</li>
+</ul>
+</li>
+</ul>
+<div class="codehilite"><pre><span></span><span class="k">function</span> <span class="n">ge_count</span><span class="p">()</span>
+<span class="c">#区间检查</span>
+<span class="nd">@info</span> <span class="s">&quot;使用管道传递随机数&quot;</span>
+    <span class="n">pipe</span><span class="o">=</span><span class="kt">Channel</span><span class="p">{</span><span class="kt">Int</span><span class="p">}(</span><span class="mi">1000</span><span class="p">)</span>
+    <span class="n">task</span><span class="o">=</span><span class="nd">@async</span> <span class="k">begin</span>
+        <span class="k">while</span> <span class="kc">true</span>
+            <span class="n">put!</span><span class="p">(</span><span class="n">pipe</span><span class="p">,</span><span class="n">rand</span><span class="p">(</span><span class="mi">0</span><span class="o">:</span><span class="mi">10000</span><span class="p">))</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+    <span class="n">bind</span><span class="p">(</span><span class="n">pipe</span><span class="p">,</span><span class="n">task</span><span class="p">)</span>
+<span class="nd">@info</span> <span class="s">&quot;统计开始&quot;</span>
+    <span class="n">bai_12</span><span class="o">=</span><span class="kt">Set</span><span class="p">{</span><span class="kt">Int</span><span class="p">}()</span>
+    <span class="n">count</span><span class="o">::</span><span class="kt">BigInt</span><span class="o">=</span><span class="mi">0</span>
+    <span class="k">for</span> <span class="n">num</span> <span class="kp">in</span> <span class="n">pipe</span>
+        <span class="n">count</span><span class="o">+=</span><span class="mi">1</span>
+        <span class="k">if</span> <span class="mi">5000</span><span class="o">&lt;=</span> <span class="n">num</span> <span class="o">&lt;</span><span class="mi">6000</span>
+            <span class="n">push!</span><span class="p">(</span><span class="n">bai_12</span><span class="p">,</span><span class="n">num</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">length</span><span class="p">(</span><span class="n">bai_12</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">1000</span> <span class="k">break</span> <span class="k">end</span>
+            <span class="c">#@info &quot;100-200范围内收集到:$(length(bai_12))&quot;</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+    <span class="nd">@info</span> <span class="s">&quot;fill 1/10 set used times:</span><span class="si">$count</span><span class="s">&quot;</span>
+    <span class="c">#600-700:用了10884</span>
+    <span class="c">#900-1000:用了3582</span>
+    <span class="c">#其他区间在5000左右:50倍</span>
+<span class="k">end</span>
+<span class="n">ge_count</span><span class="p">()</span>
+</pre></div>
+
+
+<h3>第四章:算术 arithmetic</h3>
+<ul>
+<li>四种基本运算:加减乘除;算术是许多计算机应用的基础.</li>
+</ul>
+<div class="codehilite"><pre><span></span><span class="c1">//只用到加法器+移位</span>
+    <span class="err">加法</span><span class="o">:</span><span class="n">A</span><span class="o">+</span><span class="n">B</span><span class="o">+</span><span class="err">进位</span><span class="o">=</span><span class="n">result</span><span class="o">+</span><span class="err">进位</span>
+    <span class="err">减法</span><span class="o">:</span><span class="n">B</span><span class="o">=-</span><span class="n">B</span>
+    <span class="err">乘法</span><span class="o">=</span><span class="err">左移位</span><span class="o">+</span><span class="err">加法</span>
+    <span class="err">除法</span><span class="o">=</span><span class="err">右移位</span><span class="o">+</span><span class="err">加法</span>
+</pre></div>
+
+
+<ul>
+<li>定位计数系统:2进制-16进制,位置很重要:1在万位上和在个位上?</li>
+<li>1703年莱布尼茨阐明二进计数系统的四则运算</li>
+</ul>
+<h4>浮点算术</h4>
+<ul>
+<li>浮点数表示:<script type="math/tex">2.2e^{-16}</script>
+<ul>
+<li>指数(-16)和底数(2,2)分别运算:乘法0.2*0.3=<script type="math/tex">2e^{-1} * 3e^{-1}=(2*3)e^{-1+(-1)}=6e^{-2}=0.06</script>
+</li>
+<li>加法/减法:先指数对齐,再计算</li>
+<li>本质上,浮点算术是不精确的.如何控制误差?</li>
+</ul>
+</li>
+<li>没有一种舍入规则对每一种应用来说是最好的.</li>
+<li>人们对工具的欣赏乃是去的工作成功的一个必不可少的小成分.</li>
+<li>误差趋向于以非寻常的方式彼此抵消或者加强.</li>
+<li>前导数字为1的概率竟让大于30%:前导数字法则:<script type="math/tex">前导数字d以log_{10}(1+1/d)</script>
+</li>
+</ul>
+<div class="codehilite"><pre><span></span><span class="k">function</span> <span class="n">jiecheng</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+    <span class="n">one</span><span class="o">=</span><span class="mi">1</span>
+    <span class="k">if</span> <span class="n">num</span><span class="o">==</span><span class="mi">1</span> <span class="k">return</span> <span class="mi">1</span> <span class="k">end</span>
+    <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">2</span><span class="o">:</span><span class="n">num</span>
+        <span class="n">one</span><span class="o">*=</span><span class="n">i</span>
+    <span class="k">end</span>
+    <span class="k">return</span> <span class="n">one</span>
+<span class="k">end</span>
+<span class="k">function</span> <span class="n">check_one</span><span class="p">()</span>
+<span class="c">#计算前导数字为1的频率</span>
+    <span class="n">count</span><span class="o">=</span><span class="mi">0</span>
+    <span class="n">over</span><span class="o">=</span><span class="mi">1000</span>
+    <span class="n">tmp</span><span class="o">::</span><span class="kt">BigInt</span><span class="o">=</span><span class="mi">0</span>
+    <span class="n">pipe</span> <span class="o">=</span> <span class="kt">Channel</span><span class="p">{</span><span class="kt">Int</span><span class="p">}(</span><span class="mi">100</span><span class="p">)</span>
+    <span class="n">get_num</span><span class="o">=</span><span class="nd">@async</span> <span class="k">begin</span>
+        <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">over</span>
+            <span class="n">tmp</span><span class="o">=</span><span class="mi">2</span><span class="o">^</span><span class="n">i</span>  <span class="c">#jiecheng(i)</span>
+            <span class="n">push!</span><span class="p">(</span><span class="n">pipe</span><span class="p">,</span><span class="n">tmp</span><span class="p">)</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+    <span class="n">bind</span><span class="p">(</span><span class="n">pipe</span><span class="p">,</span><span class="n">get_num</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">num</span> <span class="kp">in</span> <span class="n">pipe</span>
+        <span class="k">if</span> <span class="n">repr</span><span class="p">(</span><span class="n">num</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">==</span><span class="sc">&#39;1&#39;</span>
+            <span class="n">count</span><span class="o">+=</span><span class="mi">1</span>
+            <span class="nd">@info</span> <span class="n">count</span><span class="p">,</span> <span class="n">num</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+    <span class="nd">@info</span> <span class="s">&quot;</span><span class="si">$</span><span class="p">(</span><span class="n">over</span><span class="p">)</span><span class="s"> 个数字中存在</span><span class="si">$</span><span class="p">(</span><span class="n">count</span><span class="p">)</span><span class="s">个值前导数字为1&quot;</span>
+<span class="k">end</span>
+<span class="n">check_one</span><span class="p">()</span>
+<span class="p">[</span> <span class="n">Info</span><span class="o">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>
+<span class="p">[</span> <span class="n">Info</span><span class="o">:</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">128</span><span class="p">)</span>
+<span class="p">[</span> <span class="n">Info</span><span class="o">:</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1024</span><span class="p">)</span>
+<span class="p">[</span> <span class="n">Info</span><span class="o">:</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">16384</span><span class="p">)</span>
+<span class="p">[</span> <span class="n">Info</span><span class="o">:</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">131072</span><span class="p">)</span>
+<span class="p">[</span> <span class="n">Info</span><span class="o">:</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">1048576</span><span class="p">)</span>
+<span class="p">[</span> <span class="n">Info</span><span class="o">:</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">16777216</span><span class="p">)</span>
+<span class="p">[</span> <span class="n">Info</span><span class="o">:</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">134217728</span><span class="p">)</span>
+<span class="p">[</span> <span class="n">Info</span><span class="o">:</span> <span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">1073741824</span><span class="p">)</span>
+<span class="p">[</span> <span class="n">Info</span><span class="o">:</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">17179869184</span><span class="p">)</span>
+<span class="p">[</span> <span class="n">Info</span><span class="o">:</span> <span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">137438953472</span><span class="p">)</span>
+<span class="p">[</span> <span class="n">Info</span><span class="o">:</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">1099511627776</span><span class="p">)</span>
+<span class="p">[</span> <span class="n">Info</span><span class="o">:</span> <span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mi">17592186044416</span><span class="p">)</span>
+<span class="p">[</span> <span class="n">Info</span><span class="o">:</span> <span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">140737488355328</span><span class="p">)</span>
+<span class="p">[</span> <span class="n">Info</span><span class="o">:</span> <span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">1125899906842624</span><span class="p">)</span>
+<span class="p">[</span> <span class="n">Info</span><span class="o">:</span> <span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">18014398509481984</span><span class="p">)</span>
+<span class="p">[</span> <span class="n">Info</span><span class="o">:</span> <span class="p">(</span><span class="mi">17</span><span class="p">,</span> <span class="mi">144115188075855872</span><span class="p">)</span>
+<span class="p">[</span> <span class="n">Info</span><span class="o">:</span> <span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">1152921504606846976</span><span class="p">)</span>
+<span class="p">[</span> <span class="n">Info</span><span class="o">:</span> <span class="mi">1000</span> <span class="n">个数字中存在18个值前导数字为1</span>
+<span class="c">#100,1000,10000都是18个</span>
+<span class="p">[</span> <span class="n">Info</span><span class="o">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="p">[</span> <span class="n">Info</span><span class="o">:</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">120</span><span class="p">)</span>
+<span class="p">[</span> <span class="n">Info</span><span class="o">:</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1307674368000</span><span class="p">)</span>
+<span class="p">[</span> <span class="n">Info</span><span class="o">:</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">121645100408832000</span><span class="p">)</span>
+<span class="p">[</span> <span class="n">Info</span><span class="o">:</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1096907932701818880</span><span class="p">)</span>
+<span class="p">[</span> <span class="n">Info</span><span class="o">:</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">1150331055211806720</span><span class="p">)</span>
+<span class="p">[</span> <span class="n">Info</span><span class="o">:</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">162129586585337856</span><span class="p">)</span>
+<span class="p">[</span> <span class="n">Info</span><span class="o">:</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">1585267068834414592</span><span class="p">)</span>
+<span class="p">[</span> <span class="n">Info</span><span class="o">:</span> <span class="mi">100</span> <span class="n">个数字中存在8个值前导数字为1</span>
+<span class="c">#阶乘的100,500,1000,5000结果与上面相同</span>
+</pre></div>
+
+
+<ul>
+<li>真正的分布本身也许随着分布的扩展而可以改变.</li>
+<li>乘法,除法可以计算的很快:<strong>大数乘法的公式如下</strong>
+<script type="math/tex; mode=display"> uv=(2^{2n}+2^n)U_1V_1+2^n(U_1-U_0)(V_0-V_1)+(2^n+1)U_0V_0  </script>
+<script type="math/tex">U_0是u的高位一半,U_1是u的低位一半;V同样</script>
+</li>
+</ul>
+<h5>数制转换</h5>
+<ul>
+<li>习惯了10进制,可以将10进制作为中间量<br>
+<img alt="" src="pict/jinzhi.svg"></li>
+</ul>
+<div class="codehilite"><pre><span></span><span class="cm">#========================</span>
+<span class="cm">数字的String表示和Int表示间的转换函数</span>
+<span class="cm">    julia实现</span>
+<span class="cm">======================#</span>
+<span class="k">function</span> <span class="n">str2int</span><span class="p">(</span><span class="n">num_str</span><span class="o">::</span><span class="n">String</span><span class="p">,</span><span class="n">base</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">number</span><span class="o">=</span><span class="mi">0</span>
+    <span class="n">map_table</span><span class="o">=</span><span class="kt">Dict</span><span class="p">(</span><span class="sc">&#39;0&#39;</span><span class="o">=&gt;</span><span class="mi">0</span><span class="p">,</span><span class="sc">&#39;1&#39;</span><span class="o">=&gt;</span><span class="mi">1</span><span class="p">,</span><span class="sc">&#39;2&#39;</span><span class="o">=&gt;</span><span class="mi">2</span><span class="p">,</span><span class="sc">&#39;3&#39;</span><span class="o">=&gt;</span><span class="mi">3</span><span class="p">,</span><span class="sc">&#39;4&#39;</span><span class="o">=&gt;</span><span class="mi">4</span><span class="p">,</span><span class="sc">&#39;5&#39;</span><span class="o">=&gt;</span><span class="mi">5</span><span class="p">,</span>
+            <span class="sc">&#39;6&#39;</span><span class="o">=&gt;</span><span class="mi">6</span><span class="p">,</span><span class="sc">&#39;7&#39;</span><span class="o">=&gt;</span><span class="mi">7</span><span class="p">,</span><span class="sc">&#39;8&#39;</span><span class="o">=&gt;</span><span class="mi">8</span><span class="p">,</span><span class="sc">&#39;9&#39;</span><span class="o">=&gt;</span><span class="mi">9</span><span class="p">,</span>
+            <span class="sc">&#39;a&#39;</span><span class="o">=&gt;</span><span class="mi">10</span><span class="p">,</span><span class="sc">&#39;b&#39;</span><span class="o">=&gt;</span><span class="mi">11</span><span class="p">,</span><span class="sc">&#39;c&#39;</span><span class="o">=&gt;</span><span class="mi">12</span><span class="p">,</span><span class="sc">&#39;d&#39;</span><span class="o">=&gt;</span><span class="mi">13</span><span class="p">,</span><span class="sc">&#39;e&#39;</span><span class="o">=&gt;</span><span class="mi">14</span><span class="p">,</span><span class="sc">&#39;f&#39;</span><span class="o">=&gt;</span><span class="mi">15</span><span class="p">)</span>
+    <span class="n">str_len</span><span class="o">=</span><span class="n">length</span><span class="p">(</span><span class="n">num_str</span><span class="p">)</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">num</span><span class="p">)</span> <span class="kp">in</span> <span class="n">enumerate</span><span class="p">(</span><span class="n">num_str</span><span class="p">)</span>
+        <span class="c">#@info i,str_len-i,num,map_table[num]</span>
+        <span class="n">number</span><span class="o">+=</span><span class="n">map_table</span><span class="p">[</span><span class="n">num</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">base</span><span class="o">^</span><span class="p">(</span><span class="n">str_len</span><span class="o">-</span><span class="n">i</span><span class="p">))</span>
+    <span class="k">end</span>
+    <span class="c">#@info number</span>
+    <span class="k">return</span> <span class="n">number</span>  <span class="c">#结果为一个十进制数字</span>
+<span class="k">end</span>
+<span class="k">function</span> <span class="n">进制转换</span><span class="p">(</span><span class="n">num</span><span class="o">::</span><span class="n">String</span><span class="p">,</span><span class="n">base_from</span><span class="o">::</span><span class="kt">Int</span><span class="p">,</span><span class="n">base_to</span><span class="o">::</span><span class="kt">Int</span><span class="p">)</span>
+<span class="c">#1:10进制作为中间环节</span>
+    <span class="k">if</span> <span class="mi">16</span><span class="o">&lt;</span><span class="n">base_from</span> <span class="o">||</span> <span class="mi">36</span><span class="o">&lt;</span><span class="n">base_to</span> <span class="o">||</span> <span class="n">base_from</span><span class="o">&lt;</span><span class="mi">2</span> <span class="o">||</span><span class="n">base_to</span><span class="o">&lt;</span><span class="mi">2</span>
+        <span class="nd">@error</span> <span class="s">&quot;无法转换该进制&quot;</span>
+        <span class="k">return</span> <span class="nb">nothing</span>
+    <span class="k">end</span> 
+    <span class="n">result_str</span><span class="o">=</span><span class="s">&quot;&quot;</span>
+    <span class="n">map_table</span><span class="o">=</span><span class="kt">Dict</span><span class="p">(</span><span class="mi">0</span><span class="o">=&gt;</span><span class="sc">&#39;0&#39;</span><span class="p">,</span><span class="mi">1</span><span class="o">=&gt;</span><span class="sc">&#39;1&#39;</span><span class="p">,</span><span class="mi">2</span><span class="o">=&gt;</span><span class="sc">&#39;2&#39;</span><span class="p">,</span><span class="mi">3</span><span class="o">=&gt;</span><span class="sc">&#39;3&#39;</span><span class="p">,</span><span class="mi">4</span><span class="o">=&gt;</span><span class="sc">&#39;4&#39;</span><span class="p">,</span><span class="mi">5</span><span class="o">=&gt;</span><span class="sc">&#39;5&#39;</span><span class="p">,</span>
+            <span class="mi">6</span><span class="o">=&gt;</span><span class="sc">&#39;6&#39;</span><span class="p">,</span><span class="mi">7</span><span class="o">=&gt;</span><span class="sc">&#39;7&#39;</span><span class="p">,</span><span class="mi">8</span><span class="o">=&gt;</span><span class="sc">&#39;8&#39;</span><span class="p">,</span><span class="mi">9</span><span class="o">=&gt;</span><span class="sc">&#39;9&#39;</span><span class="p">,</span><span class="mi">10</span><span class="o">=&gt;</span><span class="sc">&#39;a&#39;</span><span class="p">,</span><span class="mi">11</span><span class="o">=&gt;</span><span class="sc">&#39;b&#39;</span><span class="p">,</span><span class="mi">12</span><span class="o">=&gt;</span><span class="sc">&#39;c&#39;</span><span class="p">,</span>
+            <span class="mi">13</span><span class="o">=&gt;</span><span class="sc">&#39;d&#39;</span><span class="p">,</span><span class="mi">14</span><span class="o">=&gt;</span><span class="sc">&#39;e&#39;</span><span class="p">,</span><span class="mi">15</span><span class="o">=&gt;</span><span class="sc">&#39;f&#39;</span><span class="p">,</span><span class="mi">16</span><span class="o">=&gt;</span><span class="sc">&#39;g&#39;</span><span class="p">,</span><span class="mi">17</span><span class="o">=&gt;</span><span class="sc">&#39;h&#39;</span><span class="p">,</span><span class="mi">18</span><span class="o">=&gt;</span><span class="sc">&#39;i&#39;</span><span class="p">,</span><span class="mi">19</span><span class="o">=&gt;</span><span class="sc">&#39;j&#39;</span><span class="p">,</span>
+            <span class="mi">20</span><span class="o">=&gt;</span><span class="sc">&#39;k&#39;</span><span class="p">,</span><span class="mi">21</span><span class="o">=&gt;</span><span class="sc">&#39;l&#39;</span><span class="p">,</span><span class="mi">22</span><span class="o">=&gt;</span><span class="sc">&#39;m&#39;</span><span class="p">,</span><span class="mi">23</span><span class="o">=&gt;</span><span class="sc">&#39;n&#39;</span><span class="p">,</span><span class="mi">24</span><span class="o">=&gt;</span><span class="sc">&#39;o&#39;</span><span class="p">,</span><span class="mi">25</span><span class="o">=&gt;</span><span class="sc">&#39;p&#39;</span><span class="p">,</span><span class="mi">26</span><span class="o">=&gt;</span><span class="sc">&#39;q&#39;</span><span class="p">,</span>
+            <span class="mi">27</span><span class="o">=&gt;</span><span class="sc">&#39;r&#39;</span><span class="p">,</span><span class="mi">28</span><span class="o">=&gt;</span><span class="sc">&#39;s&#39;</span><span class="p">,</span><span class="mi">29</span><span class="o">=&gt;</span><span class="sc">&#39;t&#39;</span><span class="p">,</span><span class="mi">30</span><span class="o">=&gt;</span><span class="sc">&#39;u&#39;</span><span class="p">,</span><span class="mi">31</span><span class="o">=&gt;</span><span class="sc">&#39;v&#39;</span><span class="p">,</span><span class="mi">32</span><span class="o">=&gt;</span><span class="sc">&#39;w&#39;</span><span class="p">,</span><span class="mi">33</span><span class="o">=&gt;</span><span class="sc">&#39;x&#39;</span><span class="p">,</span>
+            <span class="mi">34</span><span class="o">=&gt;</span><span class="sc">&#39;y&#39;</span><span class="p">,</span><span class="mi">35</span><span class="o">=&gt;</span><span class="sc">&#39;z&#39;</span><span class="p">)</span>
+    <span class="k">function</span> <span class="n">change10toN</span><span class="p">(</span><span class="n">num0</span><span class="o">::</span><span class="kt">Int</span><span class="p">,</span><span class="n">base_to</span><span class="p">)</span>
+        <span class="c">#290页方法1a</span>
+        <span class="k">while</span> <span class="n">num0</span> <span class="o">!=</span> <span class="mi">0</span>
+            <span class="n">result_str</span><span class="o">=</span><span class="n">result_str</span><span class="o">*</span><span class="n">map_table</span><span class="p">[</span><span class="n">num0</span><span class="o">%</span><span class="n">base_to</span><span class="p">]</span>
+            <span class="n">num0</span><span class="o">=</span><span class="n">floor</span><span class="p">(</span><span class="n">num0</span><span class="o">/</span><span class="n">base_to</span><span class="p">)</span>
+        <span class="k">end</span>
+        <span class="k">return</span> <span class="n">result_str</span>
+    <span class="k">end</span>
+    <span class="n">num10</span><span class="o">::</span><span class="kt">Int</span><span class="o">=</span><span class="n">str2int</span><span class="p">(</span><span class="n">num</span><span class="p">,</span><span class="n">base_from</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">base_to</span><span class="o">==</span> <span class="mi">10</span>
+        <span class="k">return</span> <span class="n">num10</span>
+    <span class="k">else</span>
+        <span class="n">result_str</span><span class="o">=</span><span class="n">change10toN</span><span class="p">(</span><span class="n">num10</span><span class="p">,</span><span class="n">base_to</span><span class="p">)</span>
+        <span class="c">#@info  result_str</span>
+        <span class="k">return</span> <span class="n">result_str</span>
+    <span class="k">end</span>
+<span class="c">#2:直接转换???</span>
+<span class="k">end</span>
+<span class="n">进制转换</span><span class="p">(</span><span class="s">&quot;1234675678&quot;</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+
+
+<h5>有理算术(分数)</h5>
+<ul>
+<li>分数化简:分子分母同时除最大公因数</li>
+</ul>
+<h5>大数因子分解:分解素因子</h5>
+<div class="codehilite"><pre><span></span><span class="c">#page 351 算法C</span>
+<span class="k">function</span> <span class="n">div_N</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+<span class="c">#N 为奇数</span>
+    <span class="n">x</span><span class="o">=</span><span class="mi">2</span><span class="o">*</span><span class="n">floor</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="n">N</span><span class="p">))</span><span class="o">+</span><span class="mi">1</span>
+    <span class="n">y</span><span class="o">=</span><span class="mi">1</span>
+    <span class="n">r</span><span class="o">=</span><span class="p">(</span><span class="n">floor</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="n">N</span><span class="p">)))</span><span class="o">^</span><span class="mi">2</span><span class="o">-</span><span class="n">N</span>
+    <span class="k">while</span> <span class="n">r!</span><span class="o">=</span><span class="mi">0</span>
+        <span class="n">r</span><span class="o">=</span><span class="n">r</span><span class="o">+</span><span class="n">x</span>
+        <span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="o">+</span><span class="mi">2</span>
+    <span class="nd">@label</span> <span class="n">C4</span>
+        <span class="n">r</span><span class="o">=</span><span class="n">r</span><span class="o">-</span><span class="n">y</span>
+        <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="o">+</span><span class="mi">2</span>
+        <span class="k">if</span> <span class="n">r</span><span class="o">&gt;</span><span class="mi">0</span>
+            <span class="nd">@goto</span> <span class="n">C4</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+    <span class="n">solve_1</span><span class="o">=</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">y</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+    <span class="n">solve_2</span><span class="o">=</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+    <span class="nd">@info</span> <span class="kt">Int</span><span class="p">(</span><span class="n">solve_1</span><span class="p">),</span><span class="kt">Int</span><span class="p">(</span><span class="n">solve_2</span><span class="p">)</span>
+<span class="k">end</span>
+<span class="n">div_N</span><span class="p">(</span><span class="mi">9261_8546_9763</span><span class="p">)</span>
+</pre></div>
+
+
+<h5>素性检验</h5>
+<div class="codehilite"><pre><span></span><span class="c">#素数判断</span>
+<span class="k">function</span> <span class="n">素数</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">2</span><span class="o">:</span><span class="kt">Int</span><span class="p">(</span><span class="n">floor</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="n">N</span><span class="p">)))</span>
+        <span class="k">if</span> <span class="n">div</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">i</span><span class="p">)</span> <span class="o">==</span> <span class="n">N</span><span class="o">/</span><span class="n">i</span>
+            <span class="c">#能够整除,不是素数</span>
+            <span class="k">return</span> <span class="kc">false</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+    <span class="k">return</span> <span class="kc">true</span>
+<span class="k">end</span>
+<span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">2</span><span class="o">:</span><span class="mi">1000</span>  <span class="c">#1:2:n=&gt;1,3,5,7,9:个位</span>
+    <span class="k">if</span> <span class="n">素数</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="nd">@info</span> <span class="n">i</span><span class="p">,</span><span class="s">&quot;是素数&quot;</span>
+    <span class="k">end</span> 
+<span class="k">end</span>
+</pre></div>
+
+
+<h5>最大公因数,最小公倍数 gcd lcm</h5>
+<h5>page380,47题</h5>
+<blockquote>
+<p>ASCII编码的文字<script type="math/tex">x=x_1x_2</script>,(<script type="math/tex">x_1^3 \pmod{N},x_2^3 \pmod {N},N</script>)是三个十六进制表示的大数.求x?</p>
+</blockquote>
+<ol>
+<li>使用上文的进制转换程序可得到三个大数的十进制表示:a,b,n.</li>
+<li>
+<script type="math/tex">x_1=(zn+a)^{1/3},x_2=(yn+b)^{1/3},x=(zn+a)^{1/3}(yn+b)^{1/3}</script>
+</li>
+<li>
+<script type="math/tex">y,z</script>如何确定? 这两个数可以是任意值.</li>
+</ol>
+<blockquote>
+<p>有时间再做做这些有挑战性的题目</p>
+</blockquote>
+<h1>其他内容</h1>
+<hr>
+<h5>将判别模型看作一颗决策树如何?</h5>
+<p>一颗确定的决策树,节点的决策内容是清晰的.那么决策内容不清晰的决策树应该是什么样子呢?想不行一个多分类的神经网络???这样的话就可以解释等宽的神经网络映射(自编码器)没有效果了,输入输出相等,或者输出更大的决策树,就不是一个reduce决策过程,所以就行不成一颗决策树了.存在收集的信息与决策的结果规模等同的情况吗?</p>
+<hr>
+<h3>傅立叶半换:</h3>
+<ul>
+<li>任意周期函数都可以写成三角函数之和</li>
+<li>频域-函数  &lt;=&gt; 时域-向量</li>
+</ul>
+<h5>傅立叶级数</h5>
+<p>
+<script type="math/tex; mode=display">频域:f(x)=a_0+\sum_{n=1}^{\infty}\bigg(a_ncos(\frac{2\pi n}{T}x)+b_nsin(\frac{2\pi n}{T}x)\bigg),a_0 \in R</script>
+<script type="math/tex; mode=display">时域(卷积): f(x)=\sum_{n\to -\infty}^{\infty}c_n\cdot e^{i\frac{2\pi nx}{T}},c_n=\frac{1}{T} \int_{x_o}^{x_0+T}f(x)\cdot e^{i\frac{2\pi nx}{T}}dx</script>
+</p>
+<h5>欧拉公式</h5>
+<p>
+<script type="math/tex; mode=display">\begin{equation} e=\lim_{n \to \infty}(1+\frac{1}{n})^n =利息\end{equation}</script>
+</p>
+<div class="codehilite"><pre><span></span><span class="k">function</span> <span class="n">example</span><span class="p">()</span>
+    <span class="n">tmp</span><span class="o">=</span><span class="mf">1.0</span>
+    <span class="n">n</span><span class="o">=</span><span class="mi">9000_0000</span>
+    <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="mi">20</span>
+        <span class="n">tmp</span><span class="o">+=</span><span class="p">(</span><span class="mf">1.0</span><span class="o">/</span><span class="n">jiecheng</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>  <span class="c">#分数太大会变为inf</span>
+    <span class="k">end</span>
+    <span class="nd">@info</span> <span class="s">&quot;e的值为:</span><span class="si">$tmp</span><span class="s">&quot;</span>
+    <span class="nd">@info</span> <span class="s">&quot;e值定义:</span><span class="si">$</span><span class="p">((</span><span class="mi">1</span><span class="o">+</span><span class="mi">1</span><span class="o">/</span><span class="n">n</span><span class="p">)</span><span class="o">^</span><span class="n">n</span><span class="p">)</span><span class="s">&quot;</span>  <span class="c">#似乎不受n的大小的影响</span>
+<span class="k">end</span>
+<span class="n">example</span><span class="p">()</span>
+</pre></div>
+
+
+<p>
+<script type="math/tex; mode=display">\begin{equation} i=\sqrt{-1};i^2=-1; \end{equation}</script>
+<script type="math/tex; mode=display">\begin{equation} 欧拉公式: \theta \in R, e^{i\theta}=sin(\theta)+icos(\theta)=单位圆从x轴逆时针走\theta角的弧长 \end{equation}</script>
+<script type="math/tex; mode=display">e^{i\pi}=cos(\pi)+isin(\pi)=-1</script>
+<script type="math/tex; mode=display">\begin{equation}
+上帝公式:欧拉恒等式:  e^{i\pi}+1=0
+\end{equation}</script>
+</p>
+<h5>来源</h5>
+<p>令公式(4)(5)(6) 中的<script type="math/tex"> x=i\theta</script>
+<script type="math/tex; mode=display">\begin{equation} 
+e^x=1+x+\frac{x^2}{2!}+\frac{x^3}{3!}+\frac{x^4}{4!}+\frac{x^5}{5!}+\cdots \end{equation}</script>
+<script type="math/tex; mode=display">\begin{equation} sin(x)=x-\frac{x^3}{3!}+\frac{x^5}{5!}-\frac{x^7}{7!}+\cdots \end{equation}</script>
+<script type="math/tex; mode=display">\begin{equation} cos(x)=1-\frac{x^2}{2!}+\frac{x^4}{4!}-\frac{x^6}{6!}+\frac{x^8}{8!} \end{equation}</script>
+</p>
+<hr>
+<h2>其他的随机数生成</h2>
+<h5>计算公式 : X_nplus1=(round(ℯ^c)*X_n+a)%m:</h5>
+<p><img alt="" src="pict/e.png" title="X_nplus1=(round(ℯ^c)*X_n+a)%m">  </p>
+<h5>计算公式: X_nplus1=abs(round(ℯ^c)*X_n+a)%m</h5>
+<p><img alt="" src="pict/zhenge.png" title="X_nplus1=abs(round(ℯ^c)*X_n+a)%m">   </p>
+<h5>计算公式: X_nplus1=round(a*ℯ^(X_n/a))%m</h5>
+<h2><img alt="" src="pict/fushu1.png" title="X_nplus1=round(a*ℯ^(X_n/a))%m"></h2>
+<h1>end</h1>
+</body>
+</html>

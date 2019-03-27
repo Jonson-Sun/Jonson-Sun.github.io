@@ -1,0 +1,664 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="generator" content="ReText 7.0.1">
+<link type="text/css" rel="stylesheet" href="/css/style.css">
+<title>art5cs3</title>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  config: ["MMLorHTML.js"],
+  jax: ["input/TeX", "output/HTML-CSS", "output/NativeMML"],
+  extensions: ["MathMenu.js", "MathZoom.js"],
+  TeX: {
+    extensions: ["AMSmath.js", "AMSsymbols.js"],
+    equationNumbers: {autoNumber: "AMS"}
+  }
+});
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js"></script></head>
+<body>
+<h1>计算机程序设计的艺术</h1>
+<ul>
+<li>看到变与不变</li>
+</ul>
+<h2>第三卷:排序查找</h2>
+<ul>
+<li>为什么排序v查找重要?<ul>
+<li>可以缩短数据获取时间,加快运行效率.</li>
+<li>数据的组织结构影响算法.</li>
+<li><strong>数据的结构化</strong></li>
+</ul>
+</li>
+<li>对于一个手边的问题,第一次认识应该把自己的头脑清空(不要去想那些熟悉的套路),从而获得真正的直观的感性经验,进一步思考可以怎末做,别人怎末做,然后最后才是(典型的数据结构+算法)怎末做.</li>
+<li>上面这条原则,也要不时的改变.</li>
+</ul>
+<h2>排序</h2>
+<ul>
+<li>内部排序:数据全部保留在内存中.<ul>
+<li>最快的排序<script type="math/tex">O(n)</script>:将1:100 map到1:200(前提:有范围)</li>
+<li>插入排序:找max,min.往里面插入</li>
+<li>基数排序:个位排完十位排,...{名字表}</li>
+<li>计算比较次数显然不是测量排序方法有效性的唯一方式.</li>
+</ul>
+</li>
+<li>外部排序:数据部分保留在内存,部分在外存<ul>
+<li>大文件分成几个小文件,分别对每个小文件排序,对几个小文件进行多路归并排序.</li>
+<li>对文件进行随机采样统计,然后分段读取(每段讀一遍),并进行排序.</li>
+<li>将桶排序中的桶替换为文件.</li>
+<li>磁带的基数排序(列排序)<ul>
+<li>基数排序通常差于合并排序.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>磁带算法部分跳过,磁带机能够倒着转!(并读写内容)</li>
+<li>
+<p>替代选择(跳过)</p>
+<blockquote>
+<p>几乎所有的算法都值得去记住,因为在某些特定应用中他们是最好的.</p>
+</blockquote>
+</li>
+<li>
+<p>总结:</p>
+<ul>
+<li>直接插入:有序或者数量小:启发来源于打麻将</li>
+<li>快速排序:通用技术,适合随机数据</li>
+<li>堆排序:平均时间和最大时间都是快排的两倍</li>
+<li>排序例程是为可存储程序的计算机编写的第一个程序</li>
+</ul>
+</li>
+</ul>
+<h2>查找:查表:信息的存储与检索</h2>
+<ul>
+<li>顺序查找</li>
+<li>有序表查找:<ul>
+<li>二分查找,</li>
+<li>菲波那切查找: 不便于插入删除.菲波那切树</li>
+<li>内插查找</li>
+</ul>
+</li>
+<li>散列:(性能最佳)<ul>
+<li>避免重复值的函数是异常稀少的.</li>
+<li>生日悖论告诉我们很可能有不同的键,散列成相同的值</li>
+</ul>
+</li>
+<li>散列函数:<ul>
+<li>平方取中.效果不坏,但不够好</li>
+<li>除法:<script type="math/tex">h(K)=K \mod{M}</script> M是一个素数</li>
+<li>乘法:<script type="math/tex">h(K)=M(AK \mod{\omega})</script>[:page482:(5)]</li>
+</ul>
+</li>
+<li>一个好的散列函数应该:计算非常快(机器);使冲突极小化(数据)</li>
+<li>已经提出了许多的散列方法,但还没有那个方法被证明比上面的除法或者乘法更优越.</li>
+<li>解决冲突的方法:<ul>
+<li>通过<strong>拉链</strong>解决冲突:查找时间<script type="math/tex">O(n+k),n是head数,每个链顺序查找k次</script>
+<img alt="" src="pict/hash.svg"></li>
+<li>开放寻址法:留出足够的空间,在散列位置顺序查找直到为NULL,所以表不能到达快满的状态.</li>
+</ul>
+</li>
+<li>上述两种方法,再进行元素删除操作,都不能释放内存,只能将元素link=NULL</li>
+<li>散列有助于磁盘类设备的<strong>外部查找</strong>,把文件的存取次数极小化.</li>
+<li>散列和树的对比中:树的每一次的查找时间是相等且确定的<script type="math/tex">logN</script>,而散列是不确定的(概率上的平均查找次数是N/M;N:数据量,M散列规模),所以数据少的时候用散列,数据多的时候用平衡查找树.(1亿)</li>
+<li>对散列表的存储分配存在困难:太大了浪费并挤占其他程序的空间,太小了表会<strong>溢出</strong>(一级散列溢出转到二级散列...)</li>
+<li>使用散列时需要对概率论有巨大的信赖.因为散列仅仅在平均上来说是有效的.最坏的情况则是可怕的.因此不适用在那些同人类性命攸关的应用,(交通控制)</li>
+</ul>
+<h5>几种排序算法的实现</h5>
+<div class="codehilite"><pre><span></span><span class="c1">//</span>
+<span class="c1">//  //循环形式的二路归并排序</span>
+<span class="c1">//</span>
+<span class="cp">#include</span><span class="cpf">&lt;vector&gt;</span><span class="cp"></span>
+<span class="k">using</span><span class="o">::</span><span class="n">vector</span><span class="p">;</span>
+<span class="kt">void</span> <span class="nf">exchange</span><span class="p">(</span><span class="kt">int</span><span class="o">&amp;</span> <span class="n">A</span><span class="p">,</span><span class="kt">int</span><span class="o">&amp;</span> <span class="n">B</span><span class="p">,</span><span class="kt">int</span> <span class="n">C</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">C</span> <span class="o">=</span> <span class="n">A</span><span class="p">;</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">B</span><span class="p">;</span>
+    <span class="n">B</span> <span class="o">=</span> <span class="n">C</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="nf">show_numarray</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">numarray</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="k">for</span> <span class="n">each</span><span class="p">(</span><span class="k">auto</span> <span class="n">iter</span> <span class="n">in</span> <span class="n">numarray</span><span class="p">){</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">iter</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;,&#39;</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="cm">/*</span>
+<span class="cm">    归并排序长度为：2的n次方</span>
+<span class="cm">*/</span>
+<span class="cp">#include</span><span class="cpf">&lt;queue&gt;</span><span class="cp"></span>
+<span class="kt">void</span> <span class="nf">merge3</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">numarray</span><span class="p">,</span> <span class="kt">int</span> <span class="n">step</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="n">length</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">//建立两个队列 大小为step</span>
+    <span class="n">queue</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">s1</span><span class="p">,</span> <span class="n">s2</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">start</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="n">step</span> <span class="o">*</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="c1">//cout &lt;&lt; &quot;length is &quot; &lt;&lt; length &lt;&lt; endl;</span>
+<span class="nl">loop</span><span class="p">:</span>
+    <span class="c1">//将numarray中的元素加入两个队列中</span>
+    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">start</span><span class="p">;</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">end</span> <span class="o">&amp;&amp;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">length</span> <span class="p">){</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">end</span> <span class="o">-</span> <span class="n">step</span><span class="p">){</span>
+            <span class="n">s1</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">numarray</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+        <span class="p">}</span>
+        <span class="k">else</span><span class="p">{</span>
+            <span class="n">s2</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">numarray</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+        <span class="p">}</span>
+        <span class="n">i</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="c1">//将栈中的元素再放回数组</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="n">start</span><span class="p">;</span>
+    <span class="k">while</span> <span class="p">(</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">end</span> <span class="p">){</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">s1</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span> <span class="p">){</span>
+            <span class="n">numarray</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">s2</span><span class="p">.</span><span class="n">front</span><span class="p">();</span>
+            <span class="n">s2</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+        <span class="p">}</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">s2</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span> <span class="p">){</span>
+            <span class="n">numarray</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">s1</span><span class="p">.</span><span class="n">front</span><span class="p">();</span>
+            <span class="n">s1</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+        <span class="p">}</span>
+        <span class="k">else</span> <span class="p">{</span>   <span class="c1">// 都不为空</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">s1</span><span class="p">.</span><span class="n">front</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="n">s2</span><span class="p">.</span><span class="n">front</span><span class="p">()</span> <span class="p">){</span>
+                <span class="n">numarray</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">s1</span><span class="p">.</span><span class="n">front</span><span class="p">();</span>
+                <span class="n">s1</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+            <span class="p">}</span>
+            <span class="k">else</span><span class="p">{</span>
+                <span class="n">numarray</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">s2</span><span class="p">.</span><span class="n">front</span><span class="p">();</span>
+                <span class="n">s2</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="n">i</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">length</span><span class="p">){</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+        <span class="n">end</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">step</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">end</span> <span class="o">&gt;</span> <span class="n">length</span><span class="p">){</span>
+            <span class="n">end</span> <span class="o">=</span> <span class="n">length</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="c1">//cout &lt;&lt; start &lt;&lt; &quot;---&quot; &lt;&lt; end &lt;&lt; endl;</span>
+        <span class="k">goto</span> <span class="n">loop</span><span class="p">;</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+<span class="cm">/*</span>
+<span class="cm">    18-1-2  未完成</span>
+<span class="cm">    归并操作（merge），也叫归并算法，指的是将两个已经排序的序列合并成一个序列的操作。</span>
+<span class="cm">    归并排序算法依赖归并操作:二路归并</span>
+<span class="cm">*/</span>
+<span class="kt">void</span> <span class="nf">merge2</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">numarray</span><span class="p">,</span> <span class="kt">int</span> <span class="n">step</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="n">length</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">//逻辑太长导致考虑难以全面</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">tmp</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">step</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">step0</span> <span class="o">=</span> <span class="n">step</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">step1</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">step</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">a</span> <span class="o">&lt;=</span> <span class="n">step0</span> <span class="o">&amp;&amp;</span> <span class="n">b</span> <span class="o">&lt;=</span> <span class="n">step1</span><span class="p">){</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">numarray</span><span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">numarray</span><span class="p">[</span><span class="n">b</span><span class="p">]){</span>
+                <span class="n">tmp</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">numarray</span><span class="p">[</span><span class="n">a</span><span class="o">++</span><span class="p">]);</span>
+            <span class="p">}</span>
+            <span class="k">else</span><span class="p">{</span>
+                <span class="n">tmp</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">numarray</span><span class="p">[</span><span class="n">b</span><span class="o">++</span><span class="p">]);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">a</span> <span class="o">&gt;</span> <span class="n">step0</span> <span class="o">&amp;&amp;</span> <span class="n">b</span> <span class="o">&lt;</span> <span class="n">step1</span><span class="p">){</span>
+            <span class="n">tmp</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">numarray</span><span class="p">[</span><span class="n">b</span><span class="o">++</span><span class="p">]);</span>
+        <span class="p">}</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">a</span> <span class="o">&lt;</span> <span class="n">step0</span> <span class="o">&amp;&amp;</span> <span class="n">b</span> <span class="o">&gt;</span> <span class="n">step1</span><span class="p">){</span>
+            <span class="n">tmp</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">numarray</span><span class="p">[</span><span class="n">a</span><span class="o">++</span><span class="p">]);</span>
+        <span class="p">}</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">a</span> <span class="o">&gt;</span> <span class="n">step0</span> <span class="o">&amp;&amp;</span> <span class="n">b</span> <span class="o">&gt;</span> <span class="n">step1</span><span class="p">){</span>
+            <span class="n">a</span> <span class="o">+=</span> <span class="n">step</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">a</span> <span class="o">&gt;</span> <span class="n">length</span><span class="p">){</span>
+                <span class="k">while</span> <span class="p">(</span><span class="n">a</span> <span class="o">&lt;=</span> <span class="n">length</span><span class="p">){</span>
+                    <span class="n">tmp</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">numarray</span><span class="p">[</span><span class="n">a</span><span class="o">++</span><span class="p">]);</span>
+                <span class="p">}</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="n">step0</span> <span class="o">+=</span> <span class="mi">2</span><span class="o">*</span><span class="n">step</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+            <span class="n">b</span> <span class="o">+=</span> <span class="n">step</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+            <span class="n">step1</span> <span class="o">+=</span> <span class="mi">2</span><span class="o">*</span><span class="n">step</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">b</span> <span class="o">&gt;</span> <span class="n">length</span><span class="p">){</span>
+                <span class="n">b</span> <span class="o">-=</span> <span class="n">step</span><span class="p">;</span>
+                <span class="n">step1</span> <span class="o">=</span> <span class="n">length</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">i</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">else</span><span class="p">{</span>
+            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">a</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;_*_&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">b</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="c1">//缺少一个赋值函数</span>
+    <span class="n">show_numarray</span><span class="p">(</span><span class="n">tmp</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">merge1</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">numarray</span><span class="p">,</span><span class="kt">int</span> <span class="n">step</span><span class="p">,</span><span class="kt">unsigned</span> <span class="n">length</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">//基于交换 ： 方向就错了（一定要搞清楚算法）</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">step</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">length</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">step</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">){</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">numarray</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">numarray</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="n">j</span><span class="o">+</span><span class="n">step</span><span class="p">]){</span>
+                <span class="n">exchange</span><span class="p">(</span><span class="n">numarray</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="n">j</span><span class="p">],</span> <span class="n">numarray</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="n">j</span> <span class="o">+</span> <span class="n">step</span><span class="p">]);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="n">i</span> <span class="o">+=</span> <span class="n">step</span> <span class="o">*</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="c1">// 18-1-1 元旦 感冒状态</span>
+<span class="kt">void</span> <span class="nf">merge</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">numarray</span><span class="p">,</span> <span class="kt">int</span> <span class="n">step</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="n">length</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">//思路混乱</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">tmp</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">length</span><span class="p">;)</span>
+    <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="p">(</span><span class="n">j</span> <span class="o">&lt;</span> <span class="n">step</span> <span class="p">)</span> <span class="o">||</span> <span class="p">(</span><span class="n">k</span> <span class="o">&lt;</span> <span class="n">step</span> <span class="p">);)</span>
+        <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="n">step</span> <span class="o">&gt;=</span><span class="n">length</span><span class="p">){</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">length</span><span class="p">){</span>
+                    <span class="n">tmp</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">numarray</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="n">j</span><span class="p">]);</span>
+                    <span class="n">j</span><span class="o">++</span><span class="p">;</span>
+                <span class="p">}</span>
+                <span class="k">else</span><span class="p">{</span>
+                    <span class="k">break</span><span class="p">;</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+            <span class="k">else</span> <span class="k">if</span> <span class="p">((</span><span class="n">i</span> <span class="o">+</span> <span class="n">k</span> <span class="o">+</span> <span class="n">step</span><span class="p">)</span><span class="o">&lt;</span><span class="n">length</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">j</span> <span class="o">&lt;</span> <span class="n">step</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">numarray</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="n">j</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">numarray</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="n">k</span> <span class="o">+</span> <span class="n">step</span><span class="p">]){</span>
+                <span class="n">tmp</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">numarray</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="n">j</span><span class="p">]);</span>
+                <span class="n">j</span><span class="o">++</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="k">else</span> <span class="k">if</span> <span class="p">((</span><span class="n">i</span> <span class="o">+</span> <span class="n">k</span> <span class="o">+</span> <span class="n">step</span><span class="p">)</span><span class="o">&lt;</span><span class="n">length</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">k</span> <span class="o">&lt;</span> <span class="n">step</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">numarray</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">numarray</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="n">k</span> <span class="o">+</span> <span class="n">step</span><span class="p">]){</span>
+                <span class="n">tmp</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">numarray</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="n">k</span> <span class="o">+</span> <span class="n">step</span><span class="p">]);</span>
+                <span class="n">k</span><span class="o">++</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="k">else</span> <span class="k">if</span> <span class="p">((</span><span class="n">i</span> <span class="o">+</span> <span class="n">k</span> <span class="o">+</span> <span class="n">step</span><span class="p">)</span> <span class="o">==</span> <span class="n">length</span> <span class="o">||</span> <span class="p">(</span><span class="n">k</span> <span class="o">==</span> <span class="n">step</span><span class="p">)</span> <span class="p">){</span>
+                <span class="n">tmp</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">numarray</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="n">j</span><span class="p">]);</span>
+                <span class="n">j</span><span class="o">++</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">j</span><span class="o">==</span><span class="n">step</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">tmp</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">numarray</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="n">k</span> <span class="o">+</span> <span class="n">step</span><span class="p">]);</span>
+                <span class="n">k</span><span class="o">++</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="k">else</span> <span class="p">{</span>
+                <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;异常情况！&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">i</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;-&#39;</span> <span class="o">&lt;&lt;</span> <span class="n">j</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;-&#39;</span> <span class="o">&lt;&lt;</span> <span class="n">k</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="n">i</span> <span class="o">+=</span> <span class="n">step</span> <span class="o">*</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">tmp</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&lt;&lt;</span><span class="s">&quot;---&quot;</span><span class="o">&lt;&lt;</span> <span class="n">length</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">tmp</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">numarray</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">bi_merge_sort</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">numarray</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">unsigned</span> <span class="n">length</span> <span class="o">=</span> <span class="n">numarray</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">length</span><span class="o">/</span><span class="mi">2</span><span class="p">;)</span>
+    <span class="p">{</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span><span class="s">&quot;step is :&quot;</span><span class="o">&lt;&lt;</span> <span class="n">i</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+        <span class="n">merge3</span><span class="p">(</span><span class="n">numarray</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">length</span><span class="p">);</span>
+        <span class="n">i</span> <span class="o">*=</span> <span class="mi">2</span><span class="p">;</span>
+        <span class="n">show_numarray</span><span class="p">(</span><span class="n">numarray</span><span class="p">);</span>
+        <span class="c1">//break;</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+<span class="kt">void</span> <span class="nf">test</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">numarray</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">scale</span> <span class="o">=</span> <span class="mi">64</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">scale</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">numarray</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">scale</span><span class="o">-</span><span class="n">i</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">show_numarray</span><span class="p">(</span><span class="n">numarray</span><span class="p">);</span>
+    <span class="n">bi_merge_sort</span><span class="p">(</span><span class="n">numarray</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<ul>
+<li>快排</li>
+</ul>
+<div class="codehilite"><pre><span></span><span class="c1">//*************快排**************</span>
+<span class="c1">//  -2018-3-10</span>
+<span class="cp">#include</span><span class="cpf">&lt;vector&gt;</span><span class="cp"></span>
+<span class="cm">/*-----------------功能函数--------------------------*/</span>
+
+<span class="kt">void</span> <span class="nf">show_data</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">data</span><span class="p">){</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="k">for</span> <span class="n">each</span> <span class="p">(</span><span class="k">auto</span> <span class="n">iter</span> <span class="n">in</span> <span class="n">data</span><span class="p">){</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">iter</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="cm">/*linux下更改为</span>
+<span class="cm">    for (auto iter : data){</span>
+<span class="cm">        cout&lt;&lt;iter&lt;&lt;&quot; &quot;;</span>
+<span class="cm">    }</span>
+<span class="cm">    */</span>
+<span class="p">}</span>
+<span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+<span class="kt">void</span> <span class="n">bi_swap</span><span class="p">(</span><span class="n">T</span><span class="o">&amp;</span> <span class="n">A</span><span class="p">,</span><span class="n">T</span><span class="o">&amp;</span> <span class="n">B</span><span class="p">){</span>
+    <span class="k">static</span> <span class="n">T</span> <span class="n">C</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">C</span> <span class="o">=</span> <span class="n">A</span><span class="p">;</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">B</span><span class="p">;</span>
+    <span class="n">B</span> <span class="o">=</span> <span class="n">C</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="cm">/*检查数据的大小排列</span>
+<span class="cm">        默认为由小到大</span>
+<span class="cm">        返回值：不和趋势的元素数</span>
+<span class="cm">    大约：25s：50万int数的排序</span>
+<span class="cm">*/</span>
+<span class="kt">int</span> <span class="n">check_data</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">data</span><span class="p">,</span><span class="kt">bool</span> <span class="n">small2big</span><span class="o">=</span><span class="nb">true</span><span class="p">){</span>
+    <span class="kt">long</span> <span class="n">count</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+    <span class="kt">long</span> <span class="n">end</span><span class="o">=</span><span class="n">data</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+    <span class="n">assert</span><span class="p">(</span><span class="n">end</span><span class="o">&gt;=</span><span class="mi">2</span><span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">small2big</span><span class="p">){</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">long</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">end</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="n">count</span><span class="o">+=</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">?</span> <span class="mi">0</span> <span class="o">:</span> <span class="mi">1</span> <span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">else</span><span class="p">{</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">long</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">end</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="n">count</span><span class="o">+=</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">?</span> <span class="mi">0</span> <span class="o">:</span> <span class="mi">1</span> <span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&quot;不和大小趋势的元素有：&quot;</span><span class="o">&lt;&lt;</span><span class="n">count</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="n">count</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="cm">/**********百科官方版1**************************/</span>
+<span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+<span class="kt">void</span> <span class="n">quick_sort_recursive</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&amp;</span> <span class="n">arr</span><span class="p">,</span> <span class="kt">int</span> <span class="n">start</span><span class="p">,</span> <span class="kt">int</span> <span class="n">end</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">start</span> <span class="o">&gt;=</span> <span class="n">end</span><span class="p">)</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="n">T</span> <span class="n">mid</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="n">end</span><span class="p">];</span>
+    <span class="kt">int</span> <span class="n">left</span> <span class="o">=</span> <span class="n">start</span><span class="p">,</span> <span class="n">right</span> <span class="o">=</span> <span class="n">end</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">left</span> <span class="o">&lt;</span> <span class="n">right</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="n">left</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">mid</span> <span class="o">&amp;&amp;</span> <span class="n">left</span> <span class="o">&lt;</span> <span class="n">right</span><span class="p">)</span>
+            <span class="n">left</span><span class="o">++</span><span class="p">;</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="n">right</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">mid</span> <span class="o">&amp;&amp;</span> <span class="n">left</span> <span class="o">&lt;</span> <span class="n">right</span><span class="p">)</span>
+            <span class="n">right</span><span class="o">--</span><span class="p">;</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">swap</span><span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="n">left</span><span class="p">],</span> <span class="n">arr</span><span class="p">[</span><span class="n">right</span><span class="p">]);</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="n">left</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">arr</span><span class="p">[</span><span class="n">end</span><span class="p">])</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">swap</span><span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="n">left</span><span class="p">],</span> <span class="n">arr</span><span class="p">[</span><span class="n">end</span><span class="p">]);</span>
+    <span class="k">else</span>
+        <span class="n">left</span><span class="o">++</span><span class="p">;</span>
+    <span class="n">quick_sort_recursive</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">left</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="n">quick_sort_recursive</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">left</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">end</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span> 
+<span class="kt">void</span> <span class="n">quick_sort</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&amp;</span> <span class="n">arr</span><span class="p">,</span><span class="kt">int</span> <span class="n">len</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">quick_sort_recursive</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">len</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="cm">/****************开发过程版**************************/</span>
+
+<span class="c1">//每一步都要搞清楚，想不出来就写流程</span>
+<span class="c1">//分析出所有的递归过程中的情况，并用代码覆盖</span>
+<span class="c1">//</span>
+<span class="kt">int</span> <span class="n">flat</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">data</span><span class="p">,</span> <span class="kt">int</span> <span class="n">start</span><span class="p">,</span> <span class="kt">int</span> <span class="n">end</span><span class="p">){</span>
+    <span class="c1">//[1]get a number: 1\first data.    2\random data</span>
+    <span class="kt">int</span> <span class="n">wait2compare</span> <span class="o">=</span> <span class="n">start</span><span class="p">;</span>
+    <span class="c1">//cout &lt;&lt; endl &lt;&lt; wait2compare;</span>
+    <span class="n">start</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">end</span> <span class="o">&gt;</span> <span class="n">start</span> <span class="p">){</span>
+        <span class="c1">//[2]compare start,end;</span>
+        <span class="k">if</span> <span class="p">((</span><span class="n">data</span><span class="p">[</span><span class="n">start</span><span class="p">]</span><span class="o">&gt;</span><span class="n">data</span><span class="p">[</span><span class="n">wait2compare</span><span class="p">])</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">end</span><span class="p">]</span><span class="o">&lt;</span><span class="n">data</span><span class="p">[</span><span class="n">wait2compare</span><span class="p">])){</span>
+            <span class="n">bi_swap</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">start</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="n">end</span><span class="p">]);</span>
+            <span class="n">start</span><span class="o">++</span><span class="p">;</span>
+            <span class="n">end</span><span class="o">--</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">start</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">data</span><span class="p">[</span><span class="n">wait2compare</span><span class="p">]){</span>
+            <span class="n">start</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">end</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">data</span><span class="p">[</span><span class="n">wait2compare</span><span class="p">]){</span>
+            <span class="n">end</span> <span class="o">-=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="c1">//[3]change the two value</span>
+    <span class="n">data</span><span class="p">[</span><span class="n">wait2compare</span><span class="p">]</span><span class="o">&gt;</span><span class="n">data</span><span class="p">[</span><span class="n">end</span><span class="p">]</span> <span class="o">?</span> <span class="n">bi_swap</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">wait2compare</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="n">end</span><span class="p">])</span><span class="o">:</span><span class="mi">0</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">end</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="n">quick_sort1</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">data</span><span class="p">,</span><span class="kt">int</span> <span class="n">start</span><span class="p">,</span><span class="kt">int</span> <span class="n">end</span><span class="p">){</span>
+    <span class="c1">//递归操作首先调试完成非递归部分</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">end</span><span class="o">&gt;</span><span class="n">start</span><span class="p">){</span> 
+        <span class="c1">//cout &lt;&lt; endl &lt;&lt; &quot;参数：&quot; &lt;&lt; start &lt;&lt; &quot;-&quot; &lt;&lt; end;</span>
+        <span class="kt">int</span> <span class="n">middle</span> <span class="o">=</span> <span class="n">flat</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">);</span>
+        <span class="c1">//show_data(data);</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;middle&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">middle</span><span class="p">;</span>
+        <span class="n">quick_sort1</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">middle</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+        <span class="n">quick_sort1</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">middle</span><span class="p">,</span> <span class="n">end</span><span class="p">);</span>   <span class="c1">//为什么不减1?</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="cm">/****************无注释·泛型版**********************/</span>
+<span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+<span class="kt">int</span> <span class="n">flat1</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&amp;</span> <span class="n">data</span><span class="p">,</span> <span class="kt">int</span> <span class="n">start</span><span class="p">,</span> <span class="kt">int</span> <span class="n">end</span><span class="p">){</span>
+    <span class="kt">int</span> <span class="n">tmp</span> <span class="o">=</span> <span class="n">start</span><span class="o">++</span><span class="p">;</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">end</span> <span class="o">&gt;</span> <span class="n">start</span><span class="p">){</span>
+        <span class="k">if</span> <span class="p">((</span><span class="n">data</span><span class="p">[</span><span class="n">start</span><span class="p">]</span><span class="o">&gt;</span><span class="n">data</span><span class="p">[</span><span class="n">tmp</span><span class="p">])</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">end</span><span class="p">]</span><span class="o">&lt;</span><span class="n">data</span><span class="p">[</span><span class="n">tmp</span><span class="p">]))</span>   <span class="n">bi_swap</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">start</span><span class="o">++</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="n">end</span><span class="o">--</span><span class="p">]);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">start</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">data</span><span class="p">[</span><span class="n">tmp</span><span class="p">])</span>   <span class="n">start</span><span class="o">++</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">end</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">data</span><span class="p">[</span><span class="n">tmp</span><span class="p">])</span>     <span class="n">end</span><span class="o">--</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">data</span><span class="p">[</span><span class="n">tmp</span><span class="p">]</span><span class="o">&gt;</span><span class="n">data</span><span class="p">[</span><span class="n">end</span><span class="p">]</span> <span class="o">?</span> <span class="n">bi_swap</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">tmp</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="n">end</span><span class="p">])</span> <span class="o">:</span> <span class="kt">void</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>  <span class="c1">//更为严格的类型检查</span>
+    <span class="k">return</span> <span class="n">end</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+<span class="kt">void</span> <span class="n">quick_sort2</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&amp;</span> <span class="n">data</span><span class="p">,</span> <span class="kt">int</span> <span class="n">start</span><span class="p">,</span> <span class="kt">int</span> <span class="n">end</span><span class="p">){</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">end</span><span class="o">&gt;</span><span class="n">start</span><span class="p">){</span>
+        <span class="kt">int</span> <span class="n">middle</span> <span class="o">=</span> <span class="n">flat1</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">);</span>
+        <span class="n">quick_sort2</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">middle</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+        <span class="n">quick_sort2</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">middle</span><span class="p">,</span> <span class="n">end</span><span class="p">);</span>  
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="cm">/***************************************************/</span>
+<span class="kt">void</span> <span class="n">test1</span><span class="p">(){</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">data</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">end</span> <span class="o">=</span> <span class="mi">200</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">end</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">data</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">rand</span><span class="p">()</span><span class="o">%</span><span class="mi">100</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">show_data</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
+    <span class="n">quick_sort2</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">data</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+    <span class="n">show_data</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<ul>
+<li>利用神经网络来排序:排不成</li>
+</ul>
+<div class="codehilite"><pre><span></span><span class="c1">#需要从keras中导入相关的库</span>
+<span class="kn">from</span> <span class="nn">random</span> <span class="k">import</span> <span class="n">randint</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">keras</span>
+<span class="kn">from</span> <span class="nn">keras.layers</span> <span class="k">import</span> <span class="n">Dense</span><span class="p">,</span><span class="n">Activation</span>
+<span class="kn">from</span> <span class="nn">keras.layers</span> <span class="k">import</span> <span class="n">Dropout</span>
+<span class="kn">from</span> <span class="nn">keras.layers</span> <span class="k">import</span> <span class="n">Flatten</span>
+<span class="kn">from</span> <span class="nn">keras.layers</span> <span class="k">import</span> <span class="n">Input</span>
+<span class="kn">from</span> <span class="nn">keras.models</span> <span class="k">import</span> <span class="n">Model</span>
+
+<span class="k">def</span> <span class="nf">gene_data</span><span class="p">(</span><span class="n">length</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+    <span class="c1">#生成未排序的隨機數列</span>
+    <span class="k">assert</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">length</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">int</span><span class="p">)</span>
+    <span class="n">data_in</span><span class="o">=</span><span class="p">[]</span>
+    <span class="n">data_out</span><span class="o">=</span><span class="p">[]</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10000</span><span class="p">):</span>
+        <span class="n">tmp</span><span class="o">=</span><span class="p">[</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10000</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">length</span><span class="p">)]</span>
+        <span class="n">data_in</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">tmp</span><span class="p">])</span>
+        <span class="n">data_out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">tmp</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data_in</span><span class="p">)</span><span class="o">/</span><span class="mi">10000</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data_out</span><span class="p">)</span><span class="o">/</span><span class="mi">10000</span>
+
+<span class="k">def</span> <span class="nf">nn_sort</span><span class="p">():</span>
+    <span class="n">data_in</span><span class="p">,</span><span class="n">data_out</span><span class="o">=</span><span class="n">gene_data</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">data_in</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+    <span class="n">act</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span>
+
+    <span class="n">start</span><span class="o">=</span><span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1000</span><span class="p">))</span>
+    <span class="n">x</span><span class="o">=</span><span class="n">Dense</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span><span class="n">activation</span><span class="o">=</span><span class="n">act</span><span class="p">)(</span><span class="n">start</span><span class="p">)</span>  <span class="c1">#第一层初始化很重要</span>
+    <span class="c1">#x=Dense(300,activation=act )(x)</span>
+    <span class="n">x</span><span class="o">=</span><span class="n">Dense</span><span class="p">(</span><span class="mi">1200</span><span class="p">,</span><span class="n">activation</span><span class="o">=</span><span class="n">act</span> <span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="c1">#x=Dense(500,activation=act )(x)</span>
+    <span class="n">x</span><span class="o">=</span><span class="n">Flatten</span><span class="p">()(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">end</span><span class="o">=</span><span class="n">Dense</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span><span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">model_D</span><span class="o">=</span><span class="n">Model</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="n">start</span><span class="p">,</span><span class="n">outputs</span><span class="o">=</span><span class="n">end</span><span class="p">)</span>
+    <span class="n">model_D</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+    <span class="n">model_D</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s1">&#39;mse&#39;</span><span class="p">,</span><span class="n">optimizer</span><span class="o">=</span><span class="s1">&#39;adam&#39;</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span>
+    <span class="n">model_D</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data_in</span><span class="p">,</span><span class="n">data_out</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">36</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">validation_split</span><span class="o">=</span><span class="mf">0.2</span>
+                 <span class="p">)</span>
+    <span class="c1">#方案1：[已實現] 将输入和真实分布 统一转化为浮点表示。进行回归表示</span>
+    <span class="c1">#方案2：在神经网络的第一层作归一化。最后一层反归一化[*最大值，int()]。</span>
+
+<span class="n">nn_sort</span><span class="p">()</span>
+</pre></div>
+
+
+<hr>
+<h3>其他内容</h3>
+<p>分析与综合:分析的方法贯彻的是由整体到个体,由共同性到特异性.一个分析树是由上到下(由树根到树叶)的过程(这个工程中更多的看到的是忽略共通性后的不同点).综合的方法则是运用<strong>概括</strong>的方法,由个体到整体,由差异性到共同点,一颗分析树是由下到上(由树叶到树根)的过程,(这个工程中看到的更多的是忽略差异后的共通性)</p>
+<p>随机:即使你才中了开头,你也才不中他的结尾.我们常理解的随机是不可预测性,而计算机的随机讲求的是等可能性(1-10中的随机数),侧重不同,前一种随机往往就有局部的可能性不"随机".如色子连出三个6</p>
+<p>对新技术完全保密的人 &lt; 将新技术申请专利的人(专利时间有限)  &lt; free开源的人.</p>
+<p>不要操作原始数据,要把原始数据打包成压缩包,所有的操作都基于原始数据的备份数据之上.</p>
+<p>1、将链表和向量合并既方便插入、删除操作，又方便查找（数据结构复合）
+    类似：在向量上建立查找tree和索引表 【都是利用空间换时间】
+    复杂的数据结构不容易构建，而且容易出错。</p>
+<p>2、为什么不在数据结构初始化的时候就考虑到问题的规模（即对相应的数据规模进行估计）
+    1、数据结构的通用性（即无法做估计）
+    2、前后端分离的限制
+    3、尽量不做黑箱便于算法优化。</p>
+<p>3、人脑能记住的场景元素非常有限【而且必须有主线】 
+    所以函数即是功能 
+    功能要简单 
+    函数要小</p>
+<p>七、AdaBoost
+    Adaboost是一种迭代算法，
+    其核心思想是针对同一个训练集训练不同的分类器(弱分类器)，
+    然后把这些弱分类器集合起来，构成一个更强的最终分类器 (强分类器)。
+    其算法本身是通过改变数据分布来实现的，
+    它根据每次训练集之中每个样本的分类是否正确，
+    以及上次的总体分类的准确率，来确定每个样本的权值。
+    将修改过权值的新数据集送给下层分类器进行训练，
+    最后将每次训练得到的分类器融合起来，作为最后的决策分类器。</p>
+<hr>
+<h1>博弈论game</h1>
+<p>声明:本部分内容大部分来自互联网  </p>
+<h3>概念</h3>
+<ul>
+<li>网络来源概念<blockquote>
+<p>博弈论(Game Theory)，博弈论是指研究多个个体或团队之间在特定条件制约下的对局中利用相关方的策略，而实施对应策略的学科</p>
+</blockquote>
+</li>
+<li>决策主体在给定信息结构的下如何决策以最大化自己的效用,以及不同决策主体之间的均衡.</li>
+<li>参与人,策略集,效用构成一个基本博弈.</li>
+<li>公式
+<script type="math/tex; mode=display">G=\{P,A,S,I,U\}</script>
+<script type="math/tex">P:player玩家,独立决策并承担后果的人.利益最大化为目标</script>
+<br>
+<script type="math/tex">A:action动作:有限博弈||无限博弈</script>
+<br>
+<script type="math/tex">S:state状态:同时的动作:静态博弈;有先后顺序:动态博弈</script>
+<br>
+<script type="math/tex">I:informatioin信息:完全信息博弈||不完全信息博弈</script>
+<br>
+<script type="math/tex">U:utility(效用)利益:零和(zero sum)博弈||变和博弈</script>
+</li>
+<li><strong>合作博弈</strong>理论:团体理性,<strong>非合作博弈</strong>理论:个人理性,策略选择;</li>
+<li>人与人关系的研究:利益冲突,竞争,合作.</li>
+<li>人物:冯-诺依曼-&gt;纳什-&gt;...</li>
+</ul>
+<h3>例子</h3>
+<h4>囚徒困境:人与人间的不信任</h4>
+<ul>
+<li>坦白从宽抗拒从严:情景2\3</li>
+<li>查无实据:情景4</li>
+<li>证据事实清楚:情景1<br>
+<center>囚徒困境的所有情况列举</center></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">情况</th>
+<th align="left">囚徒A</th>
+<th align="left">囚徒B</th>
+<th align="left">A结果</th>
+<th align="left">B结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">情景1</td>
+<td align="left">招供</td>
+<td align="left">招供</td>
+<td align="left">4年</td>
+<td align="left">4年</td>
+</tr>
+<tr>
+<td align="left">情景2</td>
+<td align="left">招供</td>
+<td align="left">不招供</td>
+<td align="left">1年</td>
+<td align="left">5年</td>
+</tr>
+<tr>
+<td align="left">情景3</td>
+<td align="left">不招供</td>
+<td align="left">招供</td>
+<td align="left">5年</td>
+<td align="left">1年</td>
+</tr>
+<tr>
+<td align="left">情景4</td>
+<td align="left">不招供</td>
+<td align="left">不招供</td>
+<td align="left">0年</td>
+<td align="left">0年</td>
+</tr>
+</tbody>
+</table>
+<h5>有意思的地方:</h5>
+<ul>
+<li>对于其中一方来说:另一方不招供对于自己最好{别人承受代价:顶雷}</li>
+<li>对于任何一方来说:自己招供,都能让自己避免最坏的结果<ul>
+<li>{自己享受成果:贪婪}但也错失最好的结果</li>
+<li>核心就是不信任;陌生</li>
+</ul>
+</li>
+<li>如果是两个自私的人的话,为了避免最坏的结果他们都会选择招供.于是两个人得到了(4+4)8年的刑期</li>
+<li>如果是两个人互相信任或者舍己为人的话,两个人得到了0年的刑期.</li>
+<li>该困境说明了集体理性胜过个人理性的情况否定了每个人追求个人利益最大化就能使社会利益最大化的结论.</li>
+<li>改变情景1为&gt;=5年.囚徒就会选择不招供;</li>
+<li>展示的社会规则所带来的巨大影响.</li>
+</ul>
+<h5>现实案例</h5>
+<ul>
+<li>贸易壁垒;Trump关税战;</li>
+<li>美俄军备竞赛; </li>
+<li>同质企业间的价格战广告战;</li>
+</ul>
+<h4>智猪博弈(boxed pigs)</h4>
+<blockquote>
+<p>踏板与食槽分离:按动踏板食槽投入饲料.只有大猪才按的动踏板.</p>
+</blockquote>
+<ul>
+<li>暗示生产者与收益分派?</li>
+</ul>
+<hr>
+<h1>启发式算法</h1>
+<blockquote>
+<p>一个基于直观或经验构造的算法，在可接受的花费（指计算时间和空间）下给出待解决组合优化问题每一个实例的一个可行解，该可行解与最优解的偏离程度一般不能被预计</p>
+</blockquote>
+<hr>
+<h3>香农</h3>
+<ul>
+<li>信息就是用来消除不确定的东西</li>
+<li>香农指出：“人们只有在两种情况下有通信的需要。<ul>
+<li>其一，是自己有某种形式的消息要告知对方，而估计对方不知道这个消息；</li>
+<li>其二，是自己有某种疑问要询问对方，而估计对方能做出一定的解答</li>
+</ul>
+</li>
+<li>信息论是一门用数理统计方法来研究信息的度量、传递和变换规律的科学</li>
+</ul>
+</body>
+</html>

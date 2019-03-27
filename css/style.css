@@ -8,7 +8,20 @@ body {
   background-color :#dbf1d4;    /*#CC9966;#FFCC99*/
   padding: 30px; 
 }
-
+/*2019,3,27 横向div*/
+.div-contiener
+{
+    display: -webkit-flex;
+    display: flex;
+    width: auto;
+    height: auto;
+}
+.div-item
+{
+    width: auto;
+    height: auto;
+    margin: auto;
+}
 /* 超链接设置*/
 a {
   color: black; 

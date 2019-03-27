@@ -87,9 +87,14 @@
 [jupyter(URL)](https://nbviewer.jupyter.org/)|https://nbviewer.jupyter.org/
 [一个德国程序员](http://www.call-with-current-continuation.org/index.html)|http://www.call-with-current-continuation.org/index.html
 [安全客](https://www.anquanke.com/)|https://www.anquanke.com/
+[debian参考手册](https://www.debian.org/doc/manuals/debian-reference/)|https://www.debian.org/doc/manuals/debian-reference/|5
 []()|
 []()|
-
+[]()|
+[]()|
+[]()|
+[]()|
+[]()|
 
 ###文学;政策;新闻;经济
 链接|备注|评级

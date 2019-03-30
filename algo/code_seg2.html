@@ -1,0 +1,312 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="generator" content="ReText 7.0.1">
+<title>代码片段</title>
+</head>
+<body>
+<h1>代码片段</h1>
+<h3>多级链接跳转</h3>
+<ul>
+<li>结构示意图
+<img alt="" src="/pict/mapreduce_net.svg"></li>
+<li>代码：</li>
+</ul>
+<div class="codehilite"><pre><span></span><span class="k">import</span> <span class="n">Base</span><span class="o">.</span><span class="n">Iterators</span><span class="o">.</span><span class="n">Stateful</span>
+<span class="k">import</span> <span class="n">Base</span><span class="o">.</span><span class="n">Filesystem</span><span class="o">.</span><span class="n">filesize</span>
+<span class="k">import</span> <span class="n">Base</span><span class="o">.</span><span class="n">Filesystem</span><span class="o">.</span><span class="n">walkdir</span>
+<span class="k">import</span> <span class="n">Base</span><span class="o">.</span><span class="n">Filesystem</span><span class="o">.</span><span class="n">rm</span>
+<span class="k">using</span> <span class="n">Logging</span>
+<span class="cm">#=========================================</span>
+<span class="cm">网页内容:分类提取：</span>
+<span class="cm">    类别：超链接，文本，图像&lt;img&gt;，其他</span>
+<span class="cm">    class:1」    2」    3」       4」</span>
+<span class="cm">======================================#</span>
+<span class="k">function</span> <span class="n">get_context_from_html!</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span><span class="n">url_list</span><span class="p">,</span><span class="n">Pattern</span><span class="p">,</span><span class="n">class</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+  <span class="c">#file|iostream =&gt; link_list</span>
+  <span class="c">#change place ： url_list</span>
+    <span class="n">tmp</span><span class="o">=</span><span class="s">&quot;&quot;</span>
+  <span class="k">try</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="kp">in</span> <span class="n">eachline</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">occursin</span><span class="p">(</span><span class="n">Pattern</span><span class="p">,</span><span class="n">line</span><span class="p">)</span>
+            <span class="n">m</span><span class="o">=</span><span class="n">match</span><span class="p">(</span><span class="n">Pattern</span><span class="p">,</span><span class="n">line</span><span class="p">)</span>
+            <span class="n">tmp</span><span class="o">=</span><span class="n">m</span><span class="o">.</span><span class="n">match</span>
+            <span class="k">if</span> <span class="n">class</span><span class="o">==</span><span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">length</span><span class="p">(</span><span class="n">tmp</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">10</span>
+                <span class="c">#push!(url_list,tmp[7:end-1])</span>
+                <span class="c">#StringIndexError :变长编码索引困难</span>
+                <span class="n">push!</span><span class="p">(</span><span class="n">url_list</span><span class="p">,</span><span class="n">tmp</span><span class="p">[</span><span class="mi">7</span><span class="o">:</span><span class="n">prevind</span><span class="p">(</span><span class="n">tmp</span><span class="p">,</span><span class="n">lastindex</span><span class="p">(</span><span class="n">tmp</span><span class="p">))])</span>
+            <span class="k">elseif</span> <span class="n">class</span><span class="o">==</span><span class="mi">2</span> 
+                <span class="n">push!</span><span class="p">(</span><span class="n">url_list</span><span class="p">,</span><span class="n">tmp</span><span class="p">)</span>  <span class="c">#暂时如此</span>
+            <span class="k">elseif</span> <span class="n">class</span><span class="o">==</span><span class="mi">3</span> <span class="o">&amp;&amp;</span> <span class="n">length</span><span class="p">(</span><span class="n">tmp</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">50</span>
+                <span class="n">push!</span><span class="p">(</span><span class="n">url_list</span><span class="p">,</span><span class="n">tmp</span><span class="p">[</span><span class="mi">2</span><span class="o">:</span><span class="n">prevind</span><span class="p">(</span><span class="n">tmp</span><span class="p">,</span><span class="n">lastindex</span><span class="p">(</span><span class="n">tmp</span><span class="p">))])</span>
+            <span class="k">end</span>
+            <span class="c">#println(m.match) #查看匹配的内容</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+  <span class="k">catch</span> <span class="nb">e</span>
+    <span class="n">println</span><span class="p">(</span><span class="n">tmp</span><span class="p">,</span><span class="n">length</span><span class="p">(</span><span class="n">tmp</span><span class="p">))</span>
+    <span class="n">throw</span><span class="p">(</span><span class="nb">e</span><span class="p">)</span>
+  <span class="k">end</span>
+    <span class="k">return</span> <span class="n">url_list</span>
+<span class="k">end</span>
+<span class="cm">#==================================</span>
+<span class="cm">    构建网络上的多级链接跳转</span>
+<span class="cm">        1、map func：link in array-&gt; 文件buffer -&gt;links</span>
+<span class="cm">        2、reduce func: links-&gt; set -&gt;add_to(array)</span>
+<span class="cm">===============================#</span>
+<span class="k">function</span> <span class="n">from_link2links!</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="n">fileName</span><span class="o">=</span><span class="s">&quot;tmp.txt&quot;</span> <span class="c">#下载的html文件缓存</span>
+<span class="c">#正则表达式模式定义</span>
+    <span class="c">#Pattern=r&quot;&lt;img.+?&gt;&quot;  #匹配&lt;a&gt;&lt;/a&gt;</span>
+    <span class="c">#Pattern=r&quot;&gt;[^&lt;a-zA-Z]+?[^&gt;]&lt;&quot;  #文本</span>
+    <span class="n">Pattern</span><span class="o">=</span><span class="sr">r&quot;href=\&quot;https?.+?\&quot;&quot;</span>  <span class="c">#匹配  href=“http ：”</span>
+    <span class="n">new_urls</span><span class="o">=</span><span class="kt">Set</span><span class="p">{</span><span class="n">String</span><span class="p">}()</span>
+<span class="c">#download使用curl</span>
+  <span class="k">try</span>
+    <span class="n">run</span><span class="p">(</span><span class="sb">`curl -g -f --retry 0 -m 10 -o </span><span class="si">$fileName</span><span class="sb"> </span><span class="si">$url</span><span class="sb">`</span><span class="p">)</span><span class="c">#每次写入自动覆盖原有文件内容</span>
+    <span class="c">#download 无法设置-m 10 ；无法链接的google要等5min</span>
+    <span class="c">#修改Base.download：没用 -y 10</span>
+  <span class="k">catch</span> <span class="nb">e</span>
+    <span class="nd">@error</span> <span class="s">&quot;错误为：</span><span class="si">$e</span><span class="s"> &quot;</span>
+  <span class="k">end</span>
+    <span class="n">get_context_from_html!</span><span class="p">(</span><span class="n">fileName</span><span class="p">,</span><span class="n">new_urls</span><span class="p">,</span><span class="n">Pattern</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">new_urls</span>
+<span class="k">end</span>
+<span class="k">function</span> <span class="n">check_url</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="c">#进一步处理url</span>
+
+<span class="k">end</span>
+<span class="k">function</span> <span class="n">build_htmlSet</span><span class="p">(</span><span class="n">dir_name</span><span class="o">=</span><span class="s">&quot;htmlfile/&quot;</span><span class="p">)</span>
+    <span class="n">result_file</span><span class="o">=</span><span class="s">&quot;link_palace.txt&quot;</span>  <span class="c">#link 存储位置</span>
+    <span class="n">URL_list</span><span class="o">=</span><span class="kt">Array</span><span class="p">{</span><span class="n">String</span><span class="p">,</span><span class="mi">1</span><span class="p">}()</span>
+    <span class="n">URL_set</span><span class="o">=</span><span class="kt">Set</span><span class="p">{</span><span class="n">String</span><span class="p">}()</span> <span class="c">#link集合</span>
+
+    <span class="k">for</span> <span class="n">line</span> <span class="kp">in</span> <span class="n">eachline</span><span class="p">(</span><span class="n">result_file</span><span class="p">)</span>
+        <span class="n">push!</span><span class="p">(</span><span class="n">URL_list</span><span class="p">,</span><span class="n">line</span><span class="p">)</span>
+        <span class="n">push!</span><span class="p">(</span><span class="n">URL_set</span><span class="p">,</span><span class="n">line</span><span class="p">)</span>
+        <span class="nd">@info</span> <span class="n">line</span>  <span class="c">#从本地文件中初始化URL列表</span>
+    <span class="k">end</span>
+<span class="nd">@label</span> <span class="n">start</span>    
+    <span class="n">urls_set_list</span><span class="o">=</span><span class="n">map</span><span class="p">(</span><span class="n">from_link2links!</span><span class="p">,</span><span class="n">URL_list</span> <span class="p">)</span>
+    <span class="n">URL_list</span><span class="o">=</span><span class="kt">Array</span><span class="p">{</span><span class="n">String</span><span class="p">,</span><span class="mi">1</span><span class="p">}()</span>
+    <span class="k">for</span> <span class="n">u_set</span> <span class="kp">in</span> <span class="n">urls_set_list</span>
+        <span class="k">for</span> <span class="n">url</span> <span class="kp">in</span> <span class="n">u_set</span>
+        <span class="c">#reduce url:检测url的质量</span>
+            <span class="c">#check_url(url)</span>
+        <span class="c">#url -&gt; set</span>
+            <span class="k">if</span> <span class="n">url</span> <span class="o">∉</span> <span class="n">URL_set</span>
+                <span class="n">push!</span><span class="p">(</span><span class="n">URL_set</span><span class="p">,</span><span class="n">url</span><span class="p">)</span>
+                <span class="n">push!</span><span class="p">(</span><span class="n">URL_list</span><span class="p">,</span><span class="n">url</span><span class="p">)</span>
+            <span class="k">end</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+
+    <span class="nd">@info</span> <span class="s">&quot;URL_set的大小为：</span><span class="si">$</span><span class="p">(</span><span class="n">length</span><span class="p">(</span><span class="n">URL_set</span><span class="p">)</span> <span class="p">)</span><span class="s">&quot;</span>
+    <span class="nd">@info</span> <span class="s">&quot;URL_list的大小为： </span><span class="si">$</span><span class="p">(</span><span class="n">length</span><span class="p">(</span><span class="n">URL_list</span><span class="p">))</span><span class="s">&quot;</span>
+    <span class="nd">@info</span> <span class="s">&quot;URL_list的随机元素：</span><span class="si">$</span><span class="p">(</span><span class="n">rand</span><span class="p">(</span><span class="n">URL_list</span><span class="p">)</span> <span class="p">)</span><span class="s">&quot;</span>
+    <span class="n">flush</span><span class="p">(</span><span class="n">io</span><span class="p">)</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">length</span><span class="p">(</span><span class="n">URL_set</span><span class="p">)</span><span class="o">&lt;</span><span class="mi">10_0000</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">length</span><span class="p">(</span><span class="n">URL_list</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="c">#结束条件：URL_list为空，或者链接集合达到1k</span>
+        <span class="nd">@goto</span> <span class="n">start</span> 
+    <span class="k">end</span>
+
+  <span class="nd">@info</span> <span class="s">&quot;结果存入文件&quot;</span>
+    <span class="n">open</span><span class="p">(</span><span class="n">result_file</span><span class="p">,</span><span class="s">&quot;w&quot;</span><span class="p">)</span> <span class="k">do</span> <span class="n">io</span>
+        <span class="k">for</span> <span class="n">node</span> <span class="kp">in</span> <span class="n">URL_set</span>
+            <span class="n">write</span><span class="p">(</span><span class="n">io</span><span class="p">,</span><span class="n">node</span><span class="o">*</span><span class="sc">&#39;\n&#39;</span><span class="p">)</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+  <span class="nd">@info</span> <span class="s">&quot;deal_html runing is end! </span><span class="si">$count</span><span class="s">&quot;</span>
+
+<span class="k">end</span>
+<span class="c">#可用stdout 重定向改变输出到文件 ，但对@info等的输出无效</span>
+<span class="c">#io = open(&quot;log.txt&quot;, &quot;w+&quot;) redirect_stdout(io)</span>
+<span class="n">io</span> <span class="o">=</span> <span class="n">open</span><span class="p">(</span><span class="s">&quot;log.txt&quot;</span><span class="p">,</span> <span class="s">&quot;w+&quot;</span><span class="p">)</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">SimpleLogger</span><span class="p">(</span><span class="n">io</span><span class="p">)</span>
+<span class="n">global_logger</span><span class="p">(</span><span class="n">logger</span><span class="p">)</span>
+<span class="nd">@time</span> <span class="n">build_htmlSet</span><span class="p">()</span>
+<span class="n">flush</span><span class="p">(</span><span class="n">io</span><span class="p">)</span>
+<span class="n">close</span><span class="p">(</span><span class="n">io</span><span class="p">)</span>
+</pre></div>
+
+
+<h3>链接筛选</h3>
+<div class="codehilite"><pre><span></span><span class="cm">#========================================</span>
+<span class="cm">    提取URL文件中的首页链接</span>
+<span class="cm">=====================================#</span>
+<span class="k">function</span> <span class="n">cut_url</span><span class="p">(</span><span class="n">file_name</span><span class="o">::</span><span class="n">String</span><span class="p">)</span>
+    <span class="n">main_url</span><span class="o">=</span><span class="kt">Set</span><span class="p">{</span><span class="n">String</span><span class="p">}()</span>
+    <span class="n">pattern</span><span class="o">=</span><span class="sr">r&quot;//.+?/&quot;</span>
+
+    <span class="k">for</span> <span class="n">line</span> <span class="kp">in</span> <span class="n">eachline</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span>
+    <span class="c">#正则表达式形式：</span>
+        <span class="c">#m=match(pattern,line) @show m.match[3:end-1]</span>
+    <span class="c">#split函数：</span>
+        <span class="n">str_list</span><span class="o">=</span><span class="n">split</span><span class="p">(</span><span class="n">line</span><span class="p">,</span><span class="s">&quot;/&quot;</span><span class="p">)</span>
+      <span class="k">try</span>
+        <span class="n">url_str</span><span class="o">=</span><span class="n">str_list</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+        <span class="n">push!</span><span class="p">(</span><span class="n">main_url</span><span class="p">,</span><span class="n">url_str</span><span class="p">)</span>
+      <span class="k">catch</span> <span class="nb">e</span>
+        <span class="nd">@error</span> <span class="n">line</span>
+        <span class="k">continue</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+    <span class="n">io</span><span class="o">=</span><span class="n">open</span><span class="p">(</span><span class="s">&quot;tmp.txt&quot;</span><span class="p">,</span><span class="s">&quot;w&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">iter</span> <span class="kp">in</span> <span class="n">sort!</span><span class="p">(</span><span class="n">collect</span><span class="p">(</span><span class="n">main_url</span><span class="p">)</span> <span class="p">)</span>
+        <span class="n">write</span><span class="p">(</span><span class="n">io</span><span class="p">,</span><span class="n">iter</span><span class="o">*</span><span class="sc">&#39;\n&#39;</span><span class="p">)</span>
+    <span class="k">end</span>
+    <span class="n">flush</span><span class="p">(</span><span class="n">io</span><span class="p">)</span>
+    <span class="n">close</span><span class="p">(</span><span class="n">io</span><span class="p">)</span>
+    <span class="nd">@info</span> <span class="s">&quot;函数cur_url 结束.&quot;</span>
+<span class="k">end</span>
+<span class="cm">#==============================</span>
+<span class="cm">    过滤掉url中的 edu，gov项</span>
+<span class="cm">===========================#</span>
+<span class="k">function</span> <span class="n">del_edugov</span><span class="p">(</span><span class="n">fileName</span><span class="p">)</span>
+    <span class="c">#查看文件中的行数：cat fileName | wc -l</span>
+    <span class="c">#文件转码：iconv -f ISO-8859-14 -t UTF-8 tmp.txt -o tmp1.txt</span>
+    <span class="n">url_list</span><span class="o">=</span><span class="p">[]</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="kp">in</span> <span class="n">eachline</span><span class="p">(</span><span class="n">fileName</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">occursin</span><span class="p">(</span><span class="s">&quot;edu&quot;</span><span class="p">,</span><span class="n">line</span><span class="p">)</span> <span class="k">continue</span> <span class="k">end</span>
+        <span class="k">if</span> <span class="n">occursin</span><span class="p">(</span><span class="s">&quot;gov&quot;</span><span class="p">,</span><span class="n">line</span><span class="p">)</span> <span class="k">continue</span> <span class="k">end</span>
+
+        <span class="n">push!</span><span class="p">(</span><span class="n">url_list</span><span class="p">,</span><span class="n">line</span><span class="p">)</span>
+    <span class="k">end</span>
+    <span class="n">io</span><span class="o">=</span><span class="n">open</span><span class="p">(</span><span class="n">fileName</span><span class="p">,</span><span class="s">&quot;w&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">iter</span> <span class="kp">in</span> <span class="n">url_list</span>
+        <span class="n">write</span><span class="p">(</span><span class="n">io</span><span class="p">,</span><span class="n">iter</span><span class="o">*</span><span class="sc">&#39;\n&#39;</span><span class="p">)</span>
+    <span class="k">end</span>
+    <span class="n">flush</span><span class="p">(</span><span class="n">io</span><span class="p">)</span>
+    <span class="n">close</span><span class="p">(</span><span class="n">io</span><span class="p">)</span>
+    <span class="nd">@info</span> <span class="s">&quot;函数del_edugov 结束。&quot;</span>
+<span class="k">end</span>
+
+<span class="c">#cut_url(&quot;link_palace.txt&quot;)</span>
+<span class="c">#del_edugov(&quot;tmp1.txt&quot;)</span>
+</pre></div>
+
+
+<h3>遍历ipv4</h3>
+<div class="codehilite"><pre><span></span><span class="cm">#===============================================</span>
+<span class="cm">    IP: 255.255.255.255-&gt; 0.0.0.0</span>
+<span class="cm">    尝试从IP地址遍历 网站 [42_9496_7296=256^4]</span>
+
+<span class="cm">===========================================#</span>
+<span class="k">import</span> <span class="n">Base</span><span class="o">.</span><span class="n">Filesystem</span><span class="o">.</span><span class="n">filesize</span>
+<span class="k">function</span> <span class="n">findAllSite_fromIP</span><span class="p">()</span>
+    <span class="c">#io_ip=IOBuffer(read=true,write=true,maxsize=800)</span>
+    <span class="c">#split(String(take!(io_ip)),&#39;\n&#39;)</span>
+    <span class="n">io_ip</span><span class="o">=</span><span class="kt">Channel</span><span class="p">{</span><span class="n">String</span><span class="p">}(</span><span class="mi">10000</span><span class="p">)</span>
+<span class="cm">#=</span>
+<span class="cm">#too slow</span>
+<span class="cm">    task=@async begin</span>
+<span class="cm">        for ip1=0:255</span>
+<span class="cm">          for ip2=0:255</span>
+<span class="cm">            for ip3=0:255</span>
+<span class="cm">              for ip4=0:255</span>
+<span class="cm">                IP=&quot;$(repr(ip4)).$(repr(ip3)).$(repr(ip2)).$(repr(ip1))&quot;</span>
+<span class="cm">                #write(io_ip,IP*&#39;\n&#39;)</span>
+<span class="cm">                put!(io_ip,IP) #放入管道</span>
+<span class="cm">              end</span>
+<span class="cm">            end</span>
+<span class="cm">          end</span>
+<span class="cm">        end</span>
+<span class="cm">    end</span>
+<span class="cm">=#</span>
+    <span class="n">task</span><span class="o">=</span><span class="nd">@async</span> <span class="k">begin</span>
+        <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="p">(</span><span class="mi">256</span><span class="o">^</span><span class="mi">4</span><span class="p">)</span>
+            <span class="c">#使用4个随机数</span>
+            <span class="n">IP</span><span class="o">=</span><span class="s">&quot;</span><span class="si">$</span><span class="p">(</span><span class="n">repr</span><span class="p">(</span><span class="n">rand</span><span class="p">(</span><span class="mi">0</span><span class="o">:</span><span class="mi">255</span><span class="p">)))</span><span class="s">.</span><span class="si">$</span><span class="p">(</span><span class="n">repr</span><span class="p">(</span><span class="n">rand</span><span class="p">(</span><span class="mi">0</span><span class="o">:</span><span class="mi">255</span><span class="p">)))</span><span class="s">.</span><span class="si">$</span><span class="p">(</span><span class="n">repr</span><span class="p">(</span><span class="n">rand</span><span class="p">(</span><span class="mi">0</span><span class="o">:</span><span class="mi">255</span><span class="p">)))</span><span class="s">.</span><span class="si">$</span><span class="p">(</span><span class="n">repr</span><span class="p">(</span><span class="n">rand</span><span class="p">(</span><span class="mi">0</span><span class="o">:</span><span class="mi">255</span><span class="p">)))</span><span class="s">&quot;</span>
+            <span class="n">put!</span><span class="p">(</span><span class="n">io_ip</span><span class="p">,</span><span class="n">IP</span><span class="p">)</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+    <span class="n">bind</span><span class="p">(</span><span class="n">io_ip</span><span class="p">,</span><span class="n">task</span><span class="p">)</span>
+<span class="nd">@info</span> <span class="s">&quot;开始检测URL...&quot;</span>
+    <span class="n">count</span><span class="o">=</span><span class="mi">0</span>
+    <span class="n">i</span><span class="o">=</span><span class="mi">1</span>
+    <span class="n">io</span><span class="o">=</span><span class="n">open</span><span class="p">(</span><span class="s">&quot;tmp2ip_http.txt&quot;</span><span class="p">,</span><span class="s">&quot;w&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">IP</span> <span class="kp">in</span> <span class="n">io_ip</span>
+        <span class="n">count</span><span class="o">+=</span><span class="mi">1</span>
+        <span class="k">if</span> <span class="n">count</span> <span class="o">&gt;=</span><span class="mi">1000_0000</span>
+        <span class="n">count</span><span class="o">=</span><span class="mi">0</span>
+        <span class="n">println</span><span class="p">(</span><span class="s">&quot;</span><span class="si">$i</span><span class="s"> 个千万ip ：</span><span class="si">$</span><span class="p">(</span><span class="n">IP</span><span class="p">)</span><span class="s">&quot;</span><span class="p">)</span>
+        <span class="n">i</span><span class="o">+=</span><span class="mi">1</span>
+      <span class="k">end</span>
+      <span class="k">try</span>
+        <span class="n">run</span><span class="p">(</span><span class="sb">`curl -m 10 http://</span><span class="si">$</span><span class="p">(</span><span class="n">IP</span><span class="p">)</span><span class="sb"> -o tmp.txt`</span><span class="p">)</span>
+        <span class="n">tmpsize</span><span class="o">=</span><span class="n">filesize</span><span class="p">(</span><span class="s">&quot;tmp.txt&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">tmpsize</span> <span class="o">&gt;</span> <span class="mi">100</span> 
+            <span class="n">write</span><span class="p">(</span><span class="n">io</span><span class="p">,</span><span class="n">IP</span><span class="o">*</span><span class="sc">&#39;\n&#39;</span><span class="p">)</span>
+            <span class="n">flush</span><span class="p">(</span><span class="n">io</span><span class="p">)</span>
+        <span class="k">end</span>
+        <span class="n">rm</span><span class="p">(</span><span class="s">&quot;tmp.txt&quot;</span><span class="p">)</span>
+      <span class="k">catch</span> <span class="nb">e</span>
+        <span class="k">continue</span>
+      <span class="k">end</span>
+
+    <span class="k">end</span>
+    <span class="n">close</span><span class="p">(</span><span class="n">io</span><span class="p">)</span>
+<span class="nd">@info</span> <span class="s">&quot;无效URL数量：</span><span class="si">$</span><span class="p">(</span><span class="n">count</span><span class="p">)</span><span class="s">&quot;</span>
+<span class="k">end</span>
+<span class="c">#findAllSite_fromIP() </span>
+<span class="c">#由于速度太慢 几乎不可用</span>
+</pre></div>
+
+
+<h3>线性同余计算 随机数</h3>
+<div class="codehilite"><pre><span></span><span class="k">function</span> <span class="n">seed</span><span class="p">(</span><span class="n">X_0</span><span class="o">=</span><span class="mi">4678_9298_0981</span><span class="p">)</span>
+    <span class="n">m</span><span class="o">=</span><span class="mi">1000_0000_0000</span>
+    <span class="n">a</span><span class="o">=</span><span class="mi">8276_3234_4621</span>
+    <span class="n">c</span><span class="o">=</span><span class="mi">3789_0237_8437</span>
+    <span class="n">X_1</span><span class="o">=</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">X_0</span><span class="o">+</span><span class="n">c</span><span class="p">)</span><span class="o">%</span><span class="n">m</span>
+    <span class="k">return</span> <span class="n">X_1</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">c</span>
+<span class="k">end</span>
+<span class="k">function</span> <span class="n">linear_rand</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+    <span class="n">X_n</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="n">seed</span><span class="p">()</span>
+    <span class="n">num_list</span><span class="o">=</span><span class="kt">Array</span><span class="p">{</span><span class="kt">Int64</span><span class="p">,</span><span class="mi">1</span><span class="p">}()</span>
+    <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">num</span>
+        <span class="c">#X_nplus1=abs((a*X_n+c)%m)</span>
+        <span class="c">#X_nplus1=(round(ℯ^c)*round(X_n*pi)+a)%m</span>
+        <span class="c">#X_nplus1=abs(round(a*tanh(X_n)+c)%m)</span>
+        <span class="c">#@show X_nplus1</span>
+        <span class="n">push!</span><span class="p">(</span><span class="n">num_list</span><span class="p">,</span><span class="n">X_nplus1</span><span class="p">)</span>
+        <span class="n">X_n</span><span class="o">=</span><span class="n">X_nplus1</span>
+    <span class="k">end</span>
+    <span class="k">return</span> <span class="n">num_list</span>
+<span class="k">end</span>
+<span class="k">import</span> <span class="n">PyPlot</span><span class="o">.</span><span class="n">plot</span>
+<span class="k">function</span> <span class="n">使用分布检验随机数生成</span><span class="p">()</span>
+    <span class="c">#tmp=sort!(randn(1000))</span>
+    <span class="n">tmp</span><span class="o">=</span><span class="n">sort!</span><span class="p">(</span><span class="n">linear_rand</span><span class="p">(</span><span class="mi">1000</span><span class="p">))</span>
+    <span class="n">plot</span><span class="p">(</span><span class="n">tmp</span><span class="p">)</span>
+    <span class="n">show</span><span class="p">()</span>
+<span class="k">end</span>
+<span class="n">使用分布检验随机数生成</span><span class="p">()</span>
+</pre></div>
+
+
+<h3>循环与递归</h3>
+<div class="codehilite"><pre><span></span><span class="k">function</span> <span class="n">阶乘_循环</span><span class="p">(</span><span class="n">num</span><span class="o">::</span><span class="kt">BigInt</span><span class="p">)</span>
+    <span class="n">one</span><span class="o">=</span><span class="mi">1</span>
+    <span class="k">if</span> <span class="n">num</span><span class="o">==</span><span class="mi">1</span> <span class="k">return</span> <span class="mi">1</span> <span class="k">end</span>
+    <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">2</span><span class="o">:</span><span class="n">num</span>
+        <span class="n">one</span><span class="o">*=</span><span class="n">i</span>
+    <span class="k">end</span>
+    <span class="k">return</span> <span class="n">one</span>
+<span class="k">end</span>
+<span class="k">function</span> <span class="n">阶乘_递归</span><span class="p">(</span><span class="n">num</span><span class="o">::</span><span class="kt">BigInt</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">num</span> <span class="o">==</span><span class="mi">1</span>  <span class="k">return</span> <span class="mi">1</span> <span class="k">end</span>
+    <span class="k">return</span> <span class="n">num</span><span class="o">*</span><span class="n">阶乘_递归</span><span class="p">(</span><span class="n">num</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">end</span>
+<span class="k">function</span> <span class="n">test</span><span class="p">()</span>
+    <span class="n">asd</span><span class="o">::</span><span class="kt">BigInt</span><span class="o">=</span><span class="mi">500</span>
+    <span class="nd">@time</span> <span class="n">result1</span><span class="o">=</span><span class="n">阶乘_递归</span><span class="p">(</span><span class="n">asd</span><span class="p">)</span>
+    <span class="nd">@time</span> <span class="n">result2</span><span class="o">=</span><span class="n">阶乘_循环</span><span class="p">(</span><span class="n">asd</span><span class="p">)</span> 
+    <span class="nd">@assert</span> <span class="n">result1</span> <span class="o">==</span> <span class="n">result2</span>
+    <span class="c">#阶乘较优</span>
+<span class="k">end</span>
+<span class="n">test</span><span class="p">()</span>
+</pre></div>
+</body>
+</html>

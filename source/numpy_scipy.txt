@@ -1,0 +1,313 @@
+#2017-11-27 library moring:
+
+# numpy 学习使用
+
+#大写为矩阵，小写为向量
+import numpy as np
+
+B.min(axis=0) #取出每一列的最小值
+B.max(axis=1) #取出每一行的最大值
+
+B.sum()  #全局加和
+B.sum(axis=1) #每一行的加和
+
+np.floor(A)  #取底
+A is D  #A和D 相同
+A is not D #A 和D不同
+
+A.dtype #int64
+A.shape #(5,5)
+A.arange(12).reshape(3,4)
+
+C=np.arange(1,2).reshape(3,4)  #生成序列 再次划分为3行四列
+(A == 22 )
+(A == A[1])
+(A == B)
+
+a=np.arange(12)
+b=a
+b.shape=3.4
+
+id(A)  #A的编号
+E=A   #浅拷贝  同一内存
+E=A.copy() #深拷贝  不同内存块
+
+import numpy.matlib as mb
+
+mb.base  #is a array mb来自的对象
+mb.flat[3]  #第三个数（从零开始d）
+mb.T   #转置
+mb.prod(0) #各列元素相乘
+
+/****************************************************/
+
+18-3-9晚：
+版本信息：
+	import numpy as np
+	print(np.__version__)
+一维数组：
+	arr = np.arange(10)
+指定类型：
+	np.full((3, 3), True, dtype=bool)
+	np.ones((3,3), dtype=bool)
+筛选项：
+	arr[arr % 2 == 1]
+赋值：
+	arr[arr % 2 == 1] = -1
+	>array([ 0, -1,  2, -1,  4, -1,  6, -1,  8, -1])
+赋值给新对象：
+	out = np.where(arr % 2 == 1, -1, arr)
+	#arr不变
+整形：
+	arr.reshape(2, -1)  
+	# Setting to -1 automatically decides the number of cols
+	a = np.arange(10).reshape(2,-1)
+	b = np.repeat(1, 10).reshape(2,-1)
+纵向链接：
+	np.concatenate([a, b], axis=0)
+	np.vstack([a, b])
+	np.r_[a, b]
+横向拼接：
+	np.concatenate([a, b], axis=1)
+	np.hstack([a, b])
+	np.c_[a, b]
+扩展：
+	a = np.array([1,2,3])
+	np.r_[np.repeat(a, 3), np.tile(a, 3)]
+查找共同项：
+	a = np.array([1,2,3,2,3,4,3,4,5,6])
+	b = np.array([7,2,10,2,7,4,9,4,9,8])
+	np.intersect1d(a,b)
+a中删除b：
+	np.setdiff1d(a,b)
+两个array中的相同元素的索引
+	np.where(a==b)
+array按条件过滤:
+	index = np.where((a >= 5) & (a <= 10))
+	a[index]
+	
+	a[(a>=5) & (a<=10)]
+将自己写的python函数maxx用于np
+	pair_max = np.vectorize(maxx, otypes=[float])
+交换前两列：
+	arr[:, [1,0,2]]
+交换两行：
+	arr[[1,0,2], :]
+2darray的行颠倒：
+	arr[::-1]
+2darray的列颠倒：
+	arr[:,::-1]
+有范围的随机初始化：
+	rand_arr = np.random.randint(low=5, high=10, size=(5,3)) + np.random.random((5,3))
+	#5-10的随机数，初始化5行3列
+	rand_arr = np.random.uniform(5,10, size=(5,3))
+设置小数点精度：
+	np.set_printoptions(precision=3)
+设置随机数种子
+	np.random.seed(100)
+科学表示法
+	rand_arr = np.random.random([3,3])/1e3
+限制打印长度：
+	np.set_printoptions(threshold=6)
+	np.set_printoptions(threshold=np.nan)  #全部打印
+从文本中导入数据集
+	url = 'https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data'
+	np.genfromtxt(url, delimiter=',', dtype='object'
+	species = np.array([row[4] for row in iris_1d])
+一维变二维（4列）
+	2dtres[:4]
+平均值，中位数，标准差：“
+	mu, med, sd = np.mean(sepallength), np.median(sepallength), np.std(sepallength)
+归一化：
+	Smax, Smin = sepallength.max(), sepallength.min()
+	S = (sepallength - Smin)/(Smax - Smin)
+	
+	S = (sepallength - Smin)/sepallength.ptp()
+百分数：
+	np.percentile(sepallength, q=[5, 95])
+随机插值：
+	np.random.seed(100)
+	iris_2d[np.random.randint(150, size=20), np.random.randint(4, size=20)] = np.nan
+找到缺失值的位置：
+	print("Number of missing values: \n", np.isnan(iris_2d[:, 0]).sum())
+	print("Position of missing values: \n", np.where(np.isnan(iris_2d[:, 0])))
+多条件过滤：
+	condition = (iris_2d[:, 2] > 1.5) & (iris_2d[:, 0] < 5.0)
+	iris_2d[condition]
+	
+	np.corrcoef(iris[:, 0], iris[:, 2])[0, 1]
+找到关联：
+	from scipy.stats.stats import pearsonr  
+	corr, p_value = pearsonr(iris[:, 0], iris[:, 2])
+检测null值：
+	np.isnan(iris_2d).any()
+用0代替所有的缺失值：
+	iris_2d[np.isnan(iris_2d)] = 0
+np.unique(species, return_counts=True)
+	？？
+数值到文本的映射：
+	petal_length_bin = np.digitize(iris[:, 2].astype('float'), [0, 3, 5, 10])
+	label_map = {1: 'small', 2: 'medium', 3: 'large', 4: np.nan}
+	petal_length_cat = [label_map[x] for x in petal_length_bin]
+添加新列：
+	ut = np.hstack([iris_2d, volume])
+随机采样：
+	np.random.seed(100)
+	a = np.array(['Iris-setosa', 'Iris-versicolor', 'Iris-virginica'])
+	species_out = np.random.choice(a, 150, p=[0.5, 0.25, 0.25])
+按列排序：
+	print(iris[iris[:,0].argsort()][:20])
+获得top5的位置：
+	np.partition(a, kth=-5)[-5:]
+	？a。argsort（）
+随机初始化：
+	np.random.randint(1,11,size=(6, 10))
+多维变一维：
+	array_of_arrays = np.array([arr1, arr2, arr3])
+排列项：？？
+	print(a.argsort().argsort())
+多维数组中排列项：
+	print(a.ravel().argsort().argsort().reshape(a.shape))
+计算每一行的最大值：
+	np.amax(a, axis=1)
+去掉所有的缺失值：
+	a[~np.isnan(a)]
+两个数组间的欧氏距离：
+	dist = np.linalg.norm(a-b)
+np.sign() np.diff()??
+第n个重复值的下标：
+	np.where(x == 1)[0][n-1]
+datetime64转换为datetime
+	from datetime import datetime
+	dt64.astype(datetime) 
+moving_average(Z, n=3).round(2)
+np.arange(start, end, step)
+arr_2d = np.concatenate(array_of_arrays)
+
+
+
+# scipy 使用
+
+#scipy可以与其它标准科学计算程序库进行比较，
+比如GSL(GNU C或C++科学计算库)，或者Matlab工具箱
+#重新发明造轮子，导致了充满漏洞的，未经优化的，很难分享和维护的代码
+
+scipy.cluster 	矢量量化 / K-均值
+scipy.constants 	物理和数学常数
+scipy.fftpack 	傅里叶变换
+scipy.integrate 	积分程序
+scipy.interpolate 	插值
+scipy.io 	数据输入输出
+scipy.linalg 	线性代数程序
+scipy.ndimage 	n维图像包
+scipy.odr 	正交距离回归
+scipy.optimize 	优化
+scipy.signal 	信号处理
+scipy.sparse 	稀疏矩阵
+scipy.spatial 	空间数据结构和算法
+scipy.special 	任何特殊数学函数
+scipy.stats 	统计
+scipy.misc 
+   Miscellaneous routines:杂项程序
+
+
+NumPy是一个定义了数值数组和矩阵类型和它们的[基本运算]的语言扩展
+SciPy是另一种使用NumPy来做高等数学、信号处理、优化、统计和许多其它[科学任务]的语言扩展。
+
+
+import numpy
+from scipy import packagename  #scipy 包含numpy的所有函数
+
+
+     cluster                      --- Vector Quantization / Kmeans
+     fftpack                      --- Discrete Fourier Transform algorithms
+     integrate                    --- Integration routines
+     interpolate                  --- Interpolation Tools
+     io                           --- Data input and output
+     linalg                       --- Linear algebra routines
+     linalg.blas                  --- Wrappers to BLAS library
+     linalg.lapack                --- Wrappers to LAPACK library
+     misc                         --- Various utilities that don't have
+                                      another home.
+     ndimage                      --- n-dimensional image package
+     odr                          --- Orthogonal Distance Regression
+     optimize                     --- Optimization Tools
+     signal                       --- Signal Processing Tools
+     sparse                       --- Sparse Matrices
+     sparse.linalg                --- Sparse Linear Algebra
+     sparse.linalg.dsolve         --- Linear Solvers
+     sparse.linalg.dsolve.umfpack --- :Interface to the UMFPACK library:
+                                      Conjugate Gradient Method (LOBPCG)
+     sparse.linalg.eigen          --- Sparse Eigenvalue Solvers
+     sparse.linalg.eigen.lobpcg   --- Locally Optimal Block Preconditioned
+                                      Conjugate Gradient Method (LOBPCG)
+     spatial                      --- Spatial data structures and algorithms
+     special                      --- Special functions
+     stats                        --- Statistical Functions
+     
+Everything private should be named starting with an underscore as much as possible.
+
+******************scipy tutorial***********************
+Scipy builds on Numpy
+	In [5]: np.cast['d'](np.pi)
+	Out[5]: array(3.14159265)
+	In [6]: np.cast['i'](np.pi)
+	Out[6]: array(3, dtype=int32)
+	In [8]: np.r_[0:3]
+	Out[8]: array([0, 1, 2])
+	In [21]: np.select([x<0,x>0],[1,x+2])
+	Out[21]: array([1, 1, 1, 0, 3, 4])
+numerous:许多
+ parabolic cylinder: 抛物柱面
+ elliptic:椭圆
+ derivatives:导数,派生物
+ special:
+ 	数学和物理上的函数,还有底层的统计函数
+ integrate:
+ 	各种积分函数
+ 	>>> from scipy import integrate
+	>>> N = 5
+	>>> def f(t, x):  #被积函数
+...		    return np.exp(-x*t) / t**N
+	>>> integrate.nquad(f, [[1, np.inf],[0, np.inf]])  #两个积分区间
+	(0.20000000000002294, 1.2239614263187945e-08)
+	
+	Gaussian quadrature:高斯求积
+	odeint:常微分方程
+optimization:最优化
+	minimize
+	Global (brute-force) optimization routines
+	least_squares \ curve_fit
+	minimize_scalar\ newton
+	root
+interpolation:
+	1-D interpolation (interp1d)
+	Multivariate data interpolation (griddata)
+	Spline interpolation
+	Using radial basis functions for smoothing/interpolation
+	[使用平滑曲线连接各个数据点]
+fftpack:
+	快速傅立业变换
+signal:
+	信号处理工具箱
+	一些滤波函数
+	数字图像处理中的滤波器:高斯etc
+linalg:
+	线性代数
+	scipy.linalg contains all the functions in numpy.linalg. 
+	plus some other more advanced ones not contained in numpy.linalg
+	分块对角阵,等矩阵和矩阵操作
+scipy.sparse.linalg.eigs:
+	包装ARPACK[fortran]
+	求解特征值和特征向量
+	from scipy.sparse.csgraph import dijkstra
+spatial:
+	KDTree:
+	空间数据结构和算法
+statistics:
+	统计学:累计分布函数,各种分布scipy.stats.genhalflogistic
+	直方图等
+ndimage:
+	高维图像处理
+io
+	.sav .mat 文件的存取和转换

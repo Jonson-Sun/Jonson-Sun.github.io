@@ -208,7 +208,7 @@
 [中文互联网数据资讯中心](http://www.199it.com/)|http://www.199it.com/
 [arXiv](https://arxiv.org/)|https://arxiv.org/，论文共享|3
 [python电子书](http://blog.sina.com.cn/s/blog_751bd9440102wn8s.html)|http://blog.sina.com.cn/s/blog_751bd9440102wn8s.html，资源|5
-[dilidili](http://www.dilidili.wang)|http://www.dilidili.wang|6
+[dilidili](http://www.dilidili.name)|http://www.dilidili.name|6
 [图库](https://tuchong.com/)|https://tuchong.com/
 [图片素材](http://www.quanjing.com/)|http://www.quanjing.com/
 [脚本之家:电子书](https://www.jb51.net/books/)|https://www.jb51.net/books/

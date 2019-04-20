@@ -24,11 +24,11 @@
 [战国文字字形检索](http://www.wenzi.cn/pages/czjs.asp)|http://www.wenzi.cn/pages/czjs.asp
 [科普中国](http://www.kepu.net.cn/gb/ydrhcz/ydrhcz_zpzs/index.html)|http://www.kepu.net.cn/gb/ydrhcz/ydrhcz_zpzs/index.html
 [国防科工局](http://cheos.org.cn/)|http://cheos.org.cn/
-[]()|
-[]()|
-[]()|
-[]()|
-[]()|
+[水雨情网](http://xxfb.mwr.cn/index.html)|全国水雨情信息
+[中国气象局](http://www.cma.gov.cn/)|
+[手语图文教学](http://www.cdpf.org.cn/special/zgsy/node_305701.htm)|手语是拼字母|5
+[社科院语言研究所](http://ling.cass.cn/)||4
+[外文出版社](http://www.flp.com.cn/main/newsmore.cfm?sSnom=M3)|资源下载|3
 []()|
 []()|
 []()|
@@ -91,7 +91,7 @@
 [debian参考手册](https://www.debian.org/doc/manuals/debian-reference/)|https://www.debian.org/doc/manuals/debian-reference/|5
 [CppCoreGuidelines](http://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines)|http://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines|5
 [linux wiki](https://wiki.linuxfoundation.org/start)|https://wiki.linuxfoundation.org/start|4
-[]()|
+[pytorch](https://pytorch.apachecn.org/#/)|pytroch中文文档
 []()|
 []()|
 []()|
@@ -128,14 +128,27 @@
 [上饶视听网站](http://m.0793.tv/folder38/folder41/)|http://m.0793.tv/folder38/folder41/
 [电台之家](http://www.radio366.com/)|http://www.radio366.com/
 [蜻蜓FM](http://www.qingting.fm/radios/1649)|http://www.qingting.fm/radios/1649
-[]()|
-[]()|
-[]()|
-[]()|
-[]()|
-[]()|
-[]()|
-[]()|
+[中国广播](http://www.radio.cn/pc-portal/erji/radioStation.html)|国内的各个广播电台;内容可下载|6
+[国家应急广播](http://www.cneb.gov.cn/)|灾害预警|4
+[中央人民广播电台](http://www.cnr.cn/)|网页做的很干净|
+[中经视频](http://cen.ce.cn/cevideo/index_21315.shtml)|外国经济观察
+[cssn](http://iwep.cssn.cn/)|中国社科院经济与政治研究所
+[中国经济网](http://m.ce.cn/)|消息准确较及时|3
+[新民周刊](http://www.xinminweekly.com.cn/)|电子报|2
+[国务院发展研究中心](http://www.drc.gov.cn/xsyzcfx/)|网站|4
+[中科院科普文章](http://www.cas.cn/kx/kpwz/)|有配图|3
+[哲学期刊数据库](http://www.nssd.org/journal/cn/81310X/)|哲学动态|4
+[中国地情网](http://diqing.difangzhi.cssn.cn/)|地方志|1
+[国家保密局](http://www.gjbmj.gov.cn/n1/2019/0329/c409092-31003419.html)|计算机病毒处理|3
+[农业部](http://www.moa.gov.cn/xw/)|三农问题|5
+[中国网](http://www.china.com.cn/opinion/think/node_7252670.htm)|智库中国|3
+[特殊食品检测备案查询系统](http://210.12.189.163:39023/InspectionAgency/Index)|
+[中国科普博览](http://www.kepu.net.cn/gb/special/zt_ggc/)||5
+[联合国](https://www.un.org/zh/)|联合国中文官网|5
+[fray.com](http://fray.com/issue3/)|一本特殊的故事书
+[插画作者](http://www.anabenaroya.com/)|看不懂的艺术,艺术就是抽象+夸张?|2
+[]()||
+
 
 
 ###艺术
@@ -169,6 +182,15 @@
 [纯黑直播间](https://www.zhanqi.tv/blackgk)|https://www.zhanqi.tv/blackgk
 [电影蜜蜂](http://www.dybee.tv/movie/rihan)|http://www.dybee.tv/movie/rihan|6
 [一起来mv](http://www.170mv.com)|http://www.170mv.com|4
+[社科网艺术频道](http://art.cssn.cn/ysx/)|http://art.cssn.cn/ysx/
+[ZOL壁纸](http://desk.zol.com.cn/pc/)|种类很多,免费下载|5
+[熊猫频道](http://live.ipanda.com/xmcd/)|直播|3
+[扬天音乐下载](http://www.ytmp3.cn/)||4
+[]()|
+[]()|
+[]()|
+[]()|
+[]()|
 []()|
 []()|
 []()|
@@ -191,10 +213,28 @@
 [虚拟乐器](http://www.virtualmusicalinstruments.com/)|http://www.virtualmusicalinstruments.com/
 [人社部证件查询](http://59.252.162.99/)|http://59.252.162.99/
 [IPv6测试网站](http://test-ipv6.com/)|http://test-ipv6.com/|2
-[]()|
-[]()|
-[]()|
+[LMMS](https://lmms.io/showcase/)|软件制作音乐|3
+[godot](https://godotengine.org/download/linux)|2D,3D游戏引擎|3
+[Blender](https://www.blender.org/)|3D素材设计|3
+[gimp](https://www.gimp.org/)|2D素材设计|
+[特种设备信息查询](http://www.cnse.gov.cn/)|全国特种设备公示信息查询平台|3
+[wiki多语词典](https://zh.wiktionary.org/wiki/Wiktionary:%E9%A6%96%E9%A1%B5)|
 
+###商业
+链接|备注|评级
+:-|:-|:-:
+[娃哈哈](https://www.wahaha.com.cn/)|很多饮料都是他出的(冰糖雪梨)|3
+[中国产业信息网](https://www.chyxx.com/sitemap.html)|pdf可下载|5
+[财富中文网](http://www.fortunechina.com/)|500强|5
+[]()|
+[]()|
+[]()|
+[]()|
+[]()|
+[]()|
+[]()|
+[]()|
+[]()|
 
 
 ###其他
@@ -220,10 +260,18 @@
 [台湾异体字字典](http://140.111.1.40/)|http://140.111.1.40/
 [随便听听](http://fm.taihe.com/#)|http://fm.taihe.com/#
 [白宫](https://www.whitehouse.gov)|https://www.whitehouse.gov
+[flyai](https://www.flyai.com/)|人工智能竞赛|5
 []()|
 []()|
 []()|
-
+[]()|
+[]()|
+[]()|
+[]()|
+[]()|
+[]()|
+[]()|
+[]()|
 
 <hr>
 </body>

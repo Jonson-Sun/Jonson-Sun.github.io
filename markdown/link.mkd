@@ -261,8 +261,8 @@
 [随便听听](http://fm.taihe.com/#)|http://fm.taihe.com/#
 [白宫](https://www.whitehouse.gov)|https://www.whitehouse.gov
 [flyai](https://www.flyai.com/)|人工智能竞赛|5
-[]()|
-[]()|
+[Vxworks](https://www.windriver.com/products/vxworks/)|波音787的操作系统
+[Integrity-178B](https://www.ghs.com/products/safety_critical/integrity-do-178b.html)|b-2,F-16,F-22,F-35,空客A380的操作系统
 []()|
 []()|
 []()|

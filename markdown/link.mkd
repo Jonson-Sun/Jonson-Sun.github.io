@@ -29,7 +29,7 @@
 [手语图文教学](http://www.cdpf.org.cn/special/zgsy/node_305701.htm)|手语是拼字母|5
 [社科院语言研究所](http://ling.cass.cn/)||4
 [外文出版社](http://www.flp.com.cn/main/newsmore.cfm?sSnom=M3)|资源下载|3
-[]()|
+[雷达知识](http://www.radartutorial.eu/index.en.html)|雷达教程|5
 []()|
 []()|
 []()|
@@ -92,9 +92,9 @@
 [CppCoreGuidelines](http://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines)|http://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines|5
 [linux wiki](https://wiki.linuxfoundation.org/start)|https://wiki.linuxfoundation.org/start|4
 [pytorch](https://pytorch.apachecn.org/#/)|pytroch中文文档
-[]()|
-[]()|
-[]()|
+[ip查询](http://ip.tool.chinaz.com)|查询IP对应的公司|5
+[中文wiki](https://wc.yooooo.us/)|wiki百科的一个镜像 |
+[英文wiki](https://en.m.wikipedia.org/wiki/Main_Page)|英文维基百科的一个镜像|5
 []()|
 
 ###文学;政策;新闻;经济

@@ -95,7 +95,21 @@
 [ip查询](http://ip.tool.chinaz.com)|查询IP对应的公司|5
 [中文wiki](https://wc.yooooo.us/)|wiki百科的一个镜像 |
 [英文wiki](https://en.m.wikipedia.org/wiki/Main_Page)|英文维基百科的一个镜像|5
-[]()|
+[实时编译](https://godbolt.org/)|C++,ada,rust等语言的汇编和16进制表示|6
+[]()||
+[]()||
+[]()||
+[]()||
+[]()||
+[]()||
+[]()||
+[]()||
+[]()||
+[]()||
+
+
+
+
 
 ###文学;政策;新闻;经济
 链接|备注|评级
@@ -148,7 +162,11 @@
 [fray.com](http://fray.com/issue3/)|一本特殊的故事书
 [插画作者](http://www.anabenaroya.com/)|看不懂的艺术,艺术就是抽象+夸张?|2
 []()||
-
+[]()||
+[]()||
+[]()||
+[]()||
+[]()||
 
 
 ###艺术

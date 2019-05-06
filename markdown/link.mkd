@@ -1,6 +1,7 @@
 # 常用链接
 
 ###科学
+
 链接|备注|评级
 :-|:-|:-:
 [維基百科](https://en.wikipedia.org)|https://zh.wikipedia.org，中文版已被墙，英文版可用，https://en.wikipedia.org|4
@@ -42,6 +43,7 @@
 []()|
 
 ###技术
+
 链接|备注|评级
 :-|:-|:-:
 [菜鸟教程](https://www.gushiwen.org)|https://www.gushiwen.org，真不错|5
@@ -96,9 +98,9 @@
 [中文wiki](https://wc.yooooo.us/)|wiki百科的一个镜像 |
 [英文wiki](https://en.m.wikipedia.org/wiki/Main_Page)|英文维基百科的一个镜像|5
 [实时编译](https://godbolt.org/)|C++,ada,rust等语言的汇编和16进制表示|6
-[]()||
-[]()||
-[]()||
+[fast.ai](https://www.fast.ai)|教程,英文|
+[tensorflow 数据集列表](https://github.com/tensorflow/datasets/blob/master/docs/datasets.md#wmt17_translatezh-en)|包含声音,图像,文本,翻译,视频|
+[tensorflow各种模型](https://github.com/tensorflow/models)||
 []()||
 []()||
 []()||
@@ -112,6 +114,7 @@
 
 
 ###文学;政策;新闻;经济
+
 链接|备注|评级
 :-|:-|:-:
 [草根网](http://www.caogen.com/)|http://www.caogen.com/ ，政策观点
@@ -218,6 +221,7 @@
 
 
 ###工具网站
+
 链接|备注|评级
 :-|:-|:-:
 [pdf在线转换](https://smallpdf.com/cn/pdf-to-word)|https://smallpdf.com/cn/pdf-to-word
@@ -239,6 +243,7 @@
 [wiki多语词典](https://zh.wiktionary.org/wiki/Wiktionary:%E9%A6%96%E9%A1%B5)|
 
 ###商业
+
 链接|备注|评级
 :-|:-|:-:
 [娃哈哈](https://www.wahaha.com.cn/)|很多饮料都是他出的(冰糖雪梨)|3
@@ -256,6 +261,7 @@
 
 
 ###其他
+
 链接|备注|评级
 :-|:-|:-:
 [百度搜索](http://www.baidu.com)|http://www.baidu.com，速度快，难以快速找到想要内容|2

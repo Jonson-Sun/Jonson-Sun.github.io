@@ -1,4 +1,25 @@
+<br>
+<br>
+
 # 常用链接
+<br>
+<br>
+
+---
+<br>
+<br>
+既然已经有了搜索引擎还记下这么多的链接做什么?  
+
+- 搜索引擎带来便利的同时也对信息进行了**过滤**
+- 重要的经常浏览的网站每次都搜一遍**浪费**时间
+- 认识到自己的知识范围的**侧重**以便平衡
+
+<br>
+
+---
+
+<br>
+<br>
 
 ###科学
 
@@ -95,8 +116,6 @@
 [linux wiki](https://wiki.linuxfoundation.org/start)|https://wiki.linuxfoundation.org/start|4
 [pytorch](https://pytorch.apachecn.org/#/)|pytroch中文文档
 [ip查询](http://ip.tool.chinaz.com)|查询IP对应的公司|5
-[中文wiki](https://wc.yooooo.us/)|wiki百科的一个镜像 |
-[英文wiki](https://en.m.wikipedia.org/wiki/Main_Page)|英文维基百科的一个镜像|5
 [实时编译](https://godbolt.org/)|C++,ada,rust等语言的汇编和16进制表示|6
 [fast.ai](https://www.fast.ai)|教程,英文|
 [tensorflow 数据集列表](https://github.com/tensorflow/datasets/blob/master/docs/datasets.md#wmt17_translatezh-en)|包含声音,图像,文本,翻译,视频|

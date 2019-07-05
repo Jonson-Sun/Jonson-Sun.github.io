@@ -67,6 +67,8 @@
 
 链接|备注|评级
 :-|:-|:-:
+[mozilla开发者文档](https://developer.mozilla.org/zh-CN/)|web内容:mathml,http,...|
+||
 [菜鸟教程](https://www.gushiwen.org)|https://www.gushiwen.org，真不错|5
 [一译中文·python](http://python.usyiyi.cn)|http://python.usyiyi.cn，机器翻译的文档|3
 [python软件库](https://pypi.python.org/pypi)|https://pypi.python.org/pypi
@@ -120,7 +122,7 @@
 [fast.ai](https://www.fast.ai)|教程,英文|
 [tensorflow 数据集列表](https://github.com/tensorflow/datasets/blob/master/docs/datasets.md#wmt17_translatezh-en)|包含声音,图像,文本,翻译,视频|
 [tensorflow各种模型](https://github.com/tensorflow/models)||
-[]()||
+[V语言官网](https://vlang.io/)||
 []()||
 []()||
 []()||
@@ -229,7 +231,7 @@
 [俄罗斯海豚音](http://vitas.com.ru)|维塔斯个人网站
 [樱花动漫](http://www.imomoe.io/)|http://www.imomoe.io/|更新及时，在线观看;很全
 [音乐圈](https://www.yueqiquan.com/)|各种乐器的使用介绍|3
-[]()|
+[穷游网](https://place.qyer.com/)|世界各国旅游目的地简介
 []()|
 []()|
 []()|

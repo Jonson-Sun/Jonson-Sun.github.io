@@ -122,8 +122,8 @@
 [fast.ai](https://www.fast.ai)|教程,英文|
 [tensorflow 数据集列表](https://github.com/tensorflow/datasets/blob/master/docs/datasets.md#wmt17_translatezh-en)|包含声音,图像,文本,翻译,视频|
 [tensorflow各种模型](https://github.com/tensorflow/models)||
-[V语言官网](https://vlang.io/)||
-[]()||
+[V语言官网](https://vlang.io/)|V语言待完善|
+[MSDN](https://msdn.microsoft.com/zh-cn/library/ms310241)|微软的开发文档|
 []()||
 []()||
 []()||

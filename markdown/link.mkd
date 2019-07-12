@@ -124,7 +124,7 @@
 [tensorflow各种模型](https://github.com/tensorflow/models)||
 [V语言官网](https://vlang.io/)|V语言待完善|
 [MSDN](https://msdn.microsoft.com/zh-cn/library/ms310241)|微软的开发文档|
-[]()||
+[zhangmeishan](https://github.com/zhangmeishan)||
 []()||
 []()||
 []()||
@@ -187,7 +187,7 @@
 [插画作者](http://www.anabenaroya.com/)|看不懂的艺术,艺术就是抽象+夸张?|2
 [俄罗斯卫星通讯社](http://sputniknews.cn/)|消息简单，简短，简约|
 [城市化网](http://www.ciudsrc.com/)||
-[]()||
+[经济学人下载地址](https://getmyte.com/)||
 []()||
 []()||
 []()||
@@ -232,7 +232,7 @@
 [樱花动漫](http://www.imomoe.io/)|http://www.imomoe.io/|更新及时，在线观看;很全
 [音乐圈](https://www.yueqiquan.com/)|各种乐器的使用介绍|3
 [穷游网](https://place.qyer.com/)|世界各国旅游目的地简介
-[]()|
+[极速漫画网](http://www.1kkk.com/)|一拳超人
 []()|
 []()|
 []()|

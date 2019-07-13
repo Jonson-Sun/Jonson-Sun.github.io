@@ -1,0 +1,423 @@
+
+代码片段
+计算 菲波那切
+
+    function fib(n::Int64=10)
+    #1->40: 69s
+        @assert n >= 0
+        if n==0 || n==1
+            return n==0 ? 0 : 1
+        else
+            return fib(n-1) + fib(n-2)
+        end
+    end
+
+    function fib2(N::Int)
+    # 1->40: 0.31s
+        @assert N >= 0
+        fib_list=[0,1]
+        if N==0 || N==1
+            return N==0 ? 0 : 1
+        else
+            for i=2:N
+                push!(fib_list,(fib_list[i]+fib_list[i-1]) )
+            end
+        end
+        return fib_list[end]
+    end
+
+function test()
+    for i=1:40
+        println("fib($i)的结果为 ： ",fib2(i) )
+    end
+end
+test()
+
+摇奖
+
+    好像不太随机，试了几次，一直没抽到“阿呆”
+
+function 开奖()
+    奖级别=[1,1,2,6]  #一等奖一个...
+    选手名字=Set(["卡卡西","鸣人","佐助","小樱","志乃","新之助","风间彻","妮妮","正男","阿呆"])
+    中奖名单=Dict()  #可以保存名单到文件
+
+    println("奖品类型",length(奖级别),"选手数量",length(选手名字))
+    @assert sum(奖级别)==length(选手名字)  "奖品数量和人的数量不匹配!"
+    N=1
+    for 奖品数量 in 奖级别
+        for i = 1:奖品数量
+            获奖者=rand(选手名字)
+            中奖名单[获奖者]=N
+            pop!(选手名字,获奖者)
+        end
+        N+=1
+    end
+    sort!(中奖名单,by   x => values(x) )
+    for 人 in keys(中奖名单)
+        println("中奖人:$人  --- : $(中奖名单[人]) 等奖")
+    end
+end
+开奖()
+
+给markdown文件添加目录索引
+
+function startwith(head,line)
+    #println(line[1],head,line[1]==head)
+    if line[1] == head  #第一个字符相同
+        return true
+    else
+        return false
+    end
+end
+
+function sub_head(head_list,need2sub='#')
+#使用数字替换掉所有的#
+    count=1
+    for line in head_list
+        line=replace(line, need2sub => "~" )
+        head_list[count]=line
+        count+=1
+    end
+end
+
+function 包装(head_list)
+    local mark_count=1
+    for line in head_list
+        head_list[mark_count]="<a href=\"#chapter-$mark_count\">" * line  *  "</a>  \n"
+        mark_count+=1
+    end
+
+    pushfirst!(head_list,"\n ---  \n ")
+    pushfirst!(head_list,"目录：  ")
+    push!(head_list,"\n ---    \n")
+end
+
+function add_index2markdown()
+#给markdown文件按照头（#）添加目录索引
+    Markdown_file="/home/asen/文档/war.md"
+    mark_count=1  #标记#头的出现次数
+    head_list=[]  #存储头内容
+    new_str=""
+
+    open(Markdown_file,"r+") do io
+        for line in eachline(io)
+            if length(line) < 2  #避免空行导致的bounderror
+                continue
+            end
+            if startwith('#',line)
+                push!(head_list,line)
+                substr="<a id=\"chapter-$mark_count\"></a>    \n" 
+                new_str *= substr  *   line * '\n'
+                mark_count+=1
+            else
+                new_str *= line  * '\n'
+            end
+        end
+        sub_head(head_list)
+        包装(head_list)
+    end
+    open(Markdown_file,"w") do io
+        for line in reverse(head_list)
+            #println(line)
+            new_str=line * new_str
+        end
+        #print(new_str)
+        write(io,new_str)
+    end
+    println("markdown 文件添加目录（页内索引）完成。")
+end
+add_index2markdown()
+
+# 第二版 : 只提取二级标题
+
+function 包装(head_list,need2sub="##")
+    local mark_count=1
+    for line in head_list
+		line=replace(line, need2sub => "~ $mark_count ~" )
+        head_list[mark_count]="<a href=\"#章-$mark_count\">" * line  *  "</a>\n\n"
+        mark_count+=1
+    end
+    pushfirst!(head_list,"\n ---  \n ")
+    pushfirst!(head_list,"**目录**：  ")
+    push!(head_list,"\n ---    \n")
+end
+function add_index2markdown()
+	#给markdown文件按照头（##）添加目录索引
+    Markdown_file="银行法西斯.md"
+    mark_count=1  #标记#头的出现次数
+    head_list=[]  #存储头内容
+    new_str=""
+
+    for line in eachline(Markdown_file)
+        if startswith(line,"##") && (line[3]!='#')
+            push!(head_list,line)
+            substr="<a id=\"章-$mark_count\"></a>\n" 
+            new_str *= '\n'*line*substr
+            mark_count+=1
+        else
+			new_str *= line  * "\n"
+        end
+    end
+    包装(head_list)
+    
+    open("tmp.md","w") do io
+		str=""
+		[str=str*line for line in head_list]
+        new_str=str * new_str
+        write(io,new_str)
+    end
+    println("markdown 文件添加目录（页内索引）完成。")
+end
+add_index2markdown()
+
+
+
+
+熵值计算：Julia版
+
+#============================================
+            计算熵（Julia version）232s
+============================================#
+using PyPlot
+function compute_entropy()
+    dir_name="/path/corpus.txt"
+    word_freq_table=Dict{Char,UInt64}()   #时间缩短为57s
+    Global_entropy,all_num=0,0
+
+    @info "读取文件。。。"
+    open(dir_name,"r") do F
+        for line in eachline(F)   #去掉断行检查时间缩短为47s
+            for word in line
+                if word in keys(word_freq_table)
+                    word_freq_table[word]+=1
+                else
+                    word_freq_table[word]=1
+                end
+            end
+        end
+    end
+    word_num=length(word_freq_table)
+    @show "词频表的长度为$word_num"
+    all_num=sum(values(word_freq_table))  #sum 与for 性能相近
+
+    println("all_num=$all_num 计算熵。。。")
+    P =freq::UInt64 -> freq/all_num
+    entropy= prob::Float64 -> -prob*log2(prob)
+#=
+    open("entropy_tmp.txt","w") do io
+        for (k,v) in sort(collect(word_freq_table),by=x->x[2])
+            val1=P(v)
+            val2=entropy(val1)
+            write(io,"$k \t freq  $v  \t 概率：$(val1)  \t 熵：$(val2)  \n")
+            Global_entropy+=val2
+        end
+    end
+=#
+    @info Global_entropy
+#=
+    Global_entropy=sum(
+    [entropy(P(i)) for i in values(word_freq_table)]) 
+     #表达方式更紧凑，没有性能提升
+    println("the entropy is : ",Global_entropy)
+
+    @info ("start plot ...")
+    tmp=[P(i) for i in values(word_freq_table)]
+    plot(tmp)
+    show()
+=#
+end
+#@time compute_entropy()
+
+去掉字符串中的标点的四种方法
+
+import Base.Unicode.ispunct
+
+function del_punct(line)
+    #去掉标点符号的四种方法
+    tmp=""
+    for word in line
+        #ispunct(word) || (tmp=tmp*word) 
+        #ispunct(word) ? true : tmp=tmp*word
+        #if !ispunct(word) tmp=tmp*word  end
+        !ispunct(word) && (tmp=tmp*word)
+    end
+    return tmp
+end
+
+asd="asdfhg34,./,g56uuj678i78ol./p;oyjdthhs.;/lyjfgh"
+println(del_punct(asd))
+
+通过存储链接名的文件下载内容
+
+import Base.Iterators.Stateful
+import Base.Filesystem.filesize
+import Base.Filesystem.walkdir
+import Base.Filesystem.rm
+
+
+function get_PathName_from_dir(dir_name)
+    #目录名->iter(file_name)
+    #walkdir :是深度优先搜索
+    filename_list=[]
+    function get_filename(dir_one)
+        for (root,dirs,files) in walkdir(dir_one)
+            for file in files
+                push!(filename_list,(root*'/'*file) )
+            end
+        end
+    end
+    get_filename(dir_name)
+    return Stateful(filename_list)
+end
+
+
+function get_url_from_file(filename)
+    #从存储链接的文件中获取：主题名-url
+    NameUrl=Dict()
+    for line in eachline(filename)
+        name,url,other=split(line,['!','?'])
+        NameUrl[name]=url
+    end
+    return Stateful(collect(NameUrl) )
+end
+
+function get_context_from_net2()
+    dir_name="tmp/"
+    for file_name in get_PathName_from_dir("Baidu")
+        for (name,url) in get_url_from_file(file_name)
+            try
+                download(url,dir_name*name*".html")
+            catch 
+                continue
+            end
+        end
+        break
+    end  
+    println("文件下载完成")
+end
+
+function get_context_from_net()
+    proxy=`-x 182.106.140.122:80` #curl 使用代理 -x ip：port
+    retry=`--retry 7  --retry-delay 10  --retry-max-time 10 ` #重试次数，间隔
+    #直接通过url无法下载，why？
+    #command=`wget https://www.baidu.com -O filename`
+    #暂时使用名字代替
+    #curl: (56) Received HTTP code 502
+    #速度太慢，先下5万
+    for file_name in get_PathName_from_dir("Baidu")
+        for (name,url) in get_url_from_file(file_name)
+            command=`curl $(proxy) $(retry) https://baike.baidu.com/item/$(name) -o htmlfile/$(name).html`
+            try
+                run(command)
+            catch 
+                continue
+            end
+        end
+    end  
+    println("文件下载完成")
+end
+
+function rm_null_file()
+    #去掉空文件
+    dir_name="htmlfile/"
+    count::Int64=0
+    for file_name in readdir(dir_name)  #默认是本目录
+        if filesize(dir_name*file_name) < 10
+            rm(dir_name*file_name)
+            count+=1
+        end
+    end
+    @info "空文件的数量为： $count ;\n "
+end
+
+function main()
+    get_context_from_net()
+    rm_null_file()
+end
+
+main()
+#
+#   测试函数
+#
+function test_get_PathName_from_dir(dir_name)
+    iter=get_PathName_from_dir(dir_name)
+    for file in iter
+        println(file)       
+    end
+end
+
+function test_get_url_from_file()
+    iter=get_url_from_file("Baidu/地理/阿根廷.txt")
+    count=0
+    for (N,U) in iter
+        count+=1
+        println("名字：$N  \t 链接：$U")
+        if count>10 break end
+    end
+end
+
+function test()
+    test_get_PathName_from_dir()
+    test_get_url_from_file()
+end
+#test()
+
+提取本地目录中html文件的链接
+
+function get_context_from_html!(file_name,url_list,Pattern,class=1)
+  #change url_list
+  #class:1=>url  ; 2=>picture ;3=>text
+    tmp=""
+    for line in eachline(file_name)
+        if occursin(Pattern,line)
+            m=match(Pattern,line)
+          #掐头去尾-> 纯url
+            tmp=m.match
+            if class==1 && length(tmp)>10
+                try
+                    #push!(url_list,tmp[7:end-1])
+                    #StringIndexError :变长编码索引困难
+                    push!(url_list,tmp[7:prevind(tmp,lastindex(tmp))])
+                catch e
+                    println(tmp,length(tmp))
+                    throw(e)
+                end
+            end
+            #println(m.match) #查看匹配的内容
+        end
+    end
+    return url_list
+end
+#==================================
+    将本地目录中的html网页中的链接提取出来
+        html文件目录  ->  superlink文件
+===============================#
+function deal_html(dir_name="htmlfile/")
+  #正则表达式模式定义
+    #Pattern=r"^<a .*</a>$"  #匹配<a></a>
+    Pattern=r"href=\"https?.+?\""  #匹配  href=“https：”
+  #结构，变量定义
+    class=1  #class:1=>url  ; 2=>picture ;3=>text
+    result_file="superlink.txt"
+    fileName_iter=get_PathName_from_dir(dir_name)
+    url_list=Array{String,1}()
+  @info "逐个文件处理..."
+    for fileName in fileName_iter
+        println(fileName)
+        get_context_from_html!(fileName,url_list,Pattern,class)
+      #break
+    end
+  #for url in url_list println(url) end
+  @info "结果存入文件"
+    open(result_file,"w") do io
+        for node in Set(url_list)
+            write(io,node*'\n')
+        end
+    end
+    @info "deal_html runing is end!"
+end
+deal_html()
+
+
+

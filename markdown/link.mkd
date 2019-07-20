@@ -127,7 +127,7 @@
 [V语言官网](https://vlang.io/)|V语言待完善|
 [MSDN](https://msdn.microsoft.com/zh-cn/library/ms310241)|微软的开发文档|
 [zhangmeishan](https://github.com/zhangmeishan)||
-[]()||
+[HTML5](https://www.html5tricks.com/)|html5技巧,教程等|
 []()||
 []()||
 []()||

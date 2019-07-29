@@ -36,6 +36,88 @@
 <li>一个优秀的软件的寿命会比提供构造这个软件的基本技术的公司的寿命还要长</li>
 <li></li>
 </ul>
+<pre><code>#include&lt;assert.h&gt;
+#include&lt;iostream&gt;
+#include&lt;functional&gt;
+using namespace std;
+void learn1()
+{
+//自动类型推断
+    auto shu = 123454;
+    cout &lt;&lt; &quot;auto type is :&quot; &lt;&lt; shu &lt;&lt; endl;
+//空指针
+    int* pot = nullptr;
+    if (pot == NULL) cout &lt;&lt; &quot;point is null.&quot;;
+    else cout &lt;&lt; &quot;nullptr is not NULL.&quot;;
+//强类型枚举
+    enum class options {none,one,two,all};
+    options you = options::one;
+    options me = options::all;
+    if (you == me){
+        cout &lt;&lt; &quot;\n咱俩一样。&quot;;
+    }
+    else{
+        cout &lt;&lt; &quot;\n咱俩不一样哦。&quot;;
+    }
+//lambda 匿名函数
+    auto lambda = [](int x, int y){return x + y; };
+    cout &lt;&lt; &quot;\nlambda(3,4) = &quot; &lt;&lt; lambda(3, 4) &lt;&lt; endl;
+    function&lt;int(int, int)&gt; lambda1 = [](int x, int y){return x + y; };
+    cout &lt;&lt; &quot;lambda1(3,4) = &quot; &lt;&lt; lambda1(3, 4) &lt;&lt; endl;
+//引用的和传值 效果
+    int i = 3;
+    int j = 4;
+    function&lt;int(void)&gt; f = [i, &amp;j]{return i + j; };
+    i = 20, j = 50;
+    cout &lt;&lt; &quot;f(i,&amp;j) = &quot; &lt;&lt; f() &lt;&lt; endl;  //53 
+//初始化
+    int n = [](int x, int y){return x + y; }(3,4);
+    cout &lt;&lt; &quot;lambda exp n is : &quot; &lt;&lt; n &lt;&lt; endl;
+//nested 嵌套
+    int twoplusthree = [](int x){return [](int y){return y * 2; }(x)+3; }(5);
+    cout &lt;&lt; &quot;twoplusthree is: &quot; &lt;&lt; twoplusthree &lt;&lt; endl; 
+	//结果：13 5初始化的x，x初始化的y。y==5，返回5*2，在返回5*2+3.=13  传入的是括号里的值
+    //for(;;[](){}) 正则表达式用在这里
+//静态断言
+    static const int size = 1;
+    static_assert(size &lt; 10, &quot;size is wrong!&quot;);
+//随机数
+    //std::random_device rd;
+}
+//文件流：非C++11
+	string str1;
+	ifstream foursign;
+	foursign.open("foursign.txt");
+	if (foursign.is_open()){
+		cout << "四签名文件已打开。" << endl;
+		getline(foursign, str1);
+	}
+	foursign.close();
+	
+	ofstream tmp("tmplog.txt");
+	tmp.write(sentence);
+	tmp.close();
+	std::vector<string> sentence;
+	
+	
+//函数对象  class 换为struct不行
+	class funcobj
+	{
+	public:
+		bool operator()() const
+		{
+			cout << "函数对象调用成功。\n"<<endl;
+			return true;
+		}
+	};
+	funcobj jonson;
+	jonson();
+
+
+
+</code></pre>
+
+
 <h2>Boost</h2>
 <p>Boris Schäling(2008-2010)</p>
 <hr>

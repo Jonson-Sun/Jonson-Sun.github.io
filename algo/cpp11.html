@@ -84,38 +84,38 @@ void learn1()
 //随机数
     //std::random_device rd;
 }
-//文件流：非C++11
-	string str1;
-	ifstream foursign;
-	foursign.open("foursign.txt");
-	if (foursign.is_open()){
-		cout << "四签名文件已打开。" << endl;
-		getline(foursign, str1);
-	}
-	foursign.close();
-	
-	ofstream tmp("tmplog.txt");
-	tmp.write(sentence);
-	tmp.close();
-	std::vector<string> sentence;
-	
-	
-//函数对象  class 换为struct不行
-	class funcobj
-	{
-	public:
-		bool operator()() const
-		{
-			cout << "函数对象调用成功。\n"<<endl;
-			return true;
-		}
-	};
-	funcobj jonson;
-	jonson();
-
-
-
 </code></pre>
+<hr>
+<div class="codehilite"><pre><span></span><span class="o">//</span><span class="nt">文件流</span><span class="err">：</span><span class="nt">非C</span><span class="o">++</span><span class="nt">11</span>
+    <span class="nt">string</span> <span class="nt">str1</span><span class="o">;</span>
+    <span class="nt">ifstream</span> <span class="nt">foursign</span><span class="o">;</span>
+    <span class="nt">foursign</span><span class="p">.</span><span class="nc">open</span><span class="o">(</span><span class="s2">&quot;foursign.txt&quot;</span><span class="o">);</span>
+    <span class="nt">if</span> <span class="o">(</span><span class="nt">foursign</span><span class="p">.</span><span class="nc">is_open</span><span class="o">())</span><span class="p">{</span>
+        <span class="err">cout</span> <span class="err">&lt;&lt;</span> <span class="err">&quot;四签名文件已打开。&quot;</span> <span class="err">&lt;&lt;</span> <span class="err">endl</span><span class="p">;</span>
+        <span class="err">getline(foursign,</span> <span class="err">str1)</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="nt">foursign</span><span class="p">.</span><span class="nc">close</span><span class="o">();</span>
+
+    <span class="nt">ofstream</span> <span class="nt">tmp</span><span class="o">(</span><span class="s2">&quot;tmplog.txt&quot;</span><span class="o">);</span>
+    <span class="nt">tmp</span><span class="p">.</span><span class="nc">write</span><span class="o">(</span><span class="nt">sentence</span><span class="o">);</span>
+    <span class="nt">tmp</span><span class="p">.</span><span class="nc">close</span><span class="o">();</span>
+    <span class="nt">std</span><span class="p">::</span><span class="nd">vector</span><span class="o">&lt;</span><span class="nt">string</span><span class="o">&gt;</span> <span class="nt">sentence</span><span class="o">;</span>
+
+
+<span class="o">//</span><span class="nt">函数对象</span>  <span class="nt">class</span> <span class="nt">换为struct不行</span>
+    <span class="nt">class</span> <span class="nt">funcobj</span>
+    <span class="p">{</span>
+    <span class="n">public</span><span class="p">:</span>
+        <span class="n">bool</span> <span class="nf">operator</span><span class="p">()()</span> <span class="n">const</span>
+        <span class="err">{</span>
+            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;函数对象调用成功。\n&quot;</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+            <span class="err">return</span> <span class="err">true</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="err">}</span><span class="o">;</span>
+    <span class="nt">funcobj</span> <span class="nt">jonson</span><span class="o">;</span>
+    <span class="nt">jonson</span><span class="o">();</span>
+</pre></div>
+
 
 
 <h2>Boost</h2>

@@ -1,0 +1,1040 @@
+<!DOCTYPE HTML>
+<html>
+ <head>
+  <meta charset="utf-8"/>
+  <title>
+   BOOST LEARN
+  </title>
+  <link href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.1/styles/github.min.css" rel="stylesheet"/>
+  <style type="text/css">
+   li,ol,p,ul{line-height:24px}a,button,input,select,textarea{margin:0;vertical-align:baseline}a,button:hover{text-decoration:none}a,ol,ul{padding:0}hr,td,th{text-align:left}body{background:#000;font-family:Georgia,Palatino,serif;color:#EEE;line-height:1;padding:30px;margin:auto;max-width:42em}h1,h2{text-align:center}h1,h2,h3,h4{font-weight:400}h1,h2,h3,h4,h5,p{margin-bottom:24px;padding:0}h1{font-size:48px}h2{font-size:36px;margin:24px 0 6px}h3{font-size:24px}h4{font-size:21px}h5{font-size:18px}a{color:#61BFC1}a:hover{text-decoration:underline}a:visited{color:#466B6C}ol,ul{margin:0}li ul{margin-left:24px}ol,p,ul{font-size:16px;max-width:540px}pre{padding:0 24px;max-width:800px;white-space:pre-wrap}code{font-family:Consolas,Monaco,Andale Mono,monospace;line-height:1.5;font-size:13px}button,input,label,select,textarea{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif}aside{display:block;float:right;width:390px}blockquote{border-left:.5em solid #eee;padding:0 2em;margin-left:0;max-width:476px}blockquote cite{font-size:14px;line-height:20px;color:#bfbfbf}blockquote p{color:#666;max-width:460px}hr{width:540px;margin:0 auto 0 0;color:#999}button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}button,input[type=button],input[type=reset],input[type=submit]{cursor:pointer;-webkit-appearance:button}input:not([type=image]),textarea{-webkit-box-sizing:content-box;-moz-box-sizing:content-box;box-sizing:content-box}input[type=search]{-webkit-appearance:textfield;-webkit-box-sizing:content-box;-moz-box-sizing:content-box;box-sizing:content-box}input[type=search]::-webkit-search-decoration{-webkit-appearance:none}input,label,select,textarea{font-size:13px;line-height:normal;margin-bottom:18px}input[type=checkbox],input[type=radio]{cursor:pointer;margin-bottom:0}input[type=password],input[type=text],select,textarea{display:inline-block;width:210px;padding:4px;font-size:13px;line-height:18px;height:18px;color:gray;border:1px solid #ccc;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;-webkit-transition:border linear .2s,box-shadow linear .2s;-moz-transition:border linear .2s,box-shadow linear .2s;transition:border linear .2s,box-shadow linear .2s;-webkit-box-shadow:inset 0 1px 3px rgba(0,0,0,.1);-moz-box-shadow:inset 0 1px 3px rgba(0,0,0,.1);box-shadow:inset 0 1px 3px rgba(0,0,0,.1)}input[type=file],select{height:27px;line-height:27px}textarea{height:auto}:-moz-placeholder{color:#bfbfbf}::-webkit-input-placeholder{color:#bfbfbf}input[type=password]:focus,input[type=text]:focus,textarea:focus{outline:0;border-color:rgba(82,168,236,.8);-webkit-box-shadow:inset 0 1px 3px rgba(0,0,0,.1),0 0 8px rgba(82,168,236,.6);-moz-box-shadow:inset 0 1px 3px rgba(0,0,0,.1),0 0 8px rgba(82,168,236,.6);box-shadow:inset 0 1px 3px rgba(0,0,0,.1),0 0 8px rgba(82,168,236,.6)}button{display:inline-block;padding:4px 14px;font-size:13px;line-height:18px;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;-webkit-box-shadow:inset 0 1px 0 rgba(255,255,255,.2),0 1px 2px rgba(0,0,0,.05);-moz-box-shadow:inset 0 1px 0 rgba(255,255,255,.2),0 1px 2px rgba(0,0,0,.05);box-shadow:inset 0 1px 0 rgba(255,255,255,.2),0 1px 2px rgba(0,0,0,.05);background-color:#0064cd;background-repeat:repeat-x;background-image:-khtml-gradient(linear,left top,left bottom,from(#049cdb),to(#0064cd));background-image:-moz-linear-gradient(top,#049cdb,#0064cd);background-image:-ms-linear-gradient(top,#049cdb,#0064cd);background-image:-webkit-gradient(linear,left top,left bottom,color-stop(0,#049cdb),color-stop(100%,#0064cd));background-image:-webkit-linear-gradient(top,#049cdb,#0064cd);background-image:-o-linear-gradient(top,#049cdb,#0064cd);background-image:linear-gradient(top,#049cdb,#0064cd);color:#fff;text-shadow:0 -1px 0 rgba(0,0,0,.25);border:1px solid #004b9a;-webkit-transition:.1s linear all;-moz-transition:.1s linear all;transition:.1s linear all;border-color:#0064cd #0064cd #003f81;border-color:rgba(0,0,0,.1) rgba(0,0,0,.1) rgba(0,0,0,.25)}button:hover{color:#fff;background-position:0 -15px}button:active{-webkit-box-shadow:inset 0 3px 7px rgba(0,0,0,.15),0 1px 2px rgba(0,0,0,.05);-moz-box-shadow:inset 0 3px 7px rgba(0,0,0,.15),0 1px 2px rgba(0,0,0,.05);box-shadow:inset 0 3px 7px rgba(0,0,0,.15),0 1px 2px rgba(0,0,0,.05)}button::-moz-focus-inner{padding:0;border:0}mark{background-color:#ff69b4}table{border-collapse:collapse}td,th{border:1px solid #fff;padding:.5rem}.hljs{display:block;overflow-x:auto;padding:.5em;background:#2b2b2b;color:#bababa}.hljs-emphasis,.hljs-strong{color:#a8a8a2}.hljs-bullet,.hljs-link,.hljs-literal,.hljs-number,.hljs-quote,.hljs-regexp{color:#6896ba}.hljs-code,.hljs-selector-class{color:#a6e22e}.hljs-emphasis{font-style:italic}.hljs-attribute,.hljs-keyword,.hljs-name,.hljs-section,.hljs-selector-tag,.hljs-variable{color:#cb7832}.hljs-params{color:#b9b9b9}.hljs-string{color:#6a8759}.hljs-addition,.hljs-built_in,.hljs-builtin-name,.hljs-selector-attr,.hljs-selector-id,.hljs-selector-pseudo,.hljs-subst,.hljs-symbol,.hljs-template-tag,.hljs-template-variable,.hljs-type{color:#e0c46c}.hljs-comment,.hljs-deletion,.hljs-meta{color:#7f7f7f}
+  </style>
+ </head>
+ <body>
+  <p>
+   <br/>
+   <br/>
+  </p>
+  <h1 id="boost">
+   boost 备忘录
+  </h1>
+  <p>
+   <br/>
+   <br/>
+  </p>
+  <p>
+   时间::  2019年
+   <br/>
+   <br/>
+   <br/>
+  </p>
+  <hr/>
+  <div class="toc">
+   <ul>
+    <li>
+     <a href="#boost">
+      boost 备忘录
+     </a>
+     <ul>
+      <li>
+       <a href="#tokenizer">
+        tokenizer:分词
+       </a>
+      </li>
+      <li>
+       <a href="#pool">
+        内存池:pool
+       </a>
+      </li>
+      <li>
+       <a href="#_1">
+        安全数值库
+       </a>
+      </li>
+      <li>
+       <a href="#_2">
+        文件和目录操作
+       </a>
+      </li>
+      <li>
+       <a href="#multiprecision">
+        大数: multiprecision
+       </a>
+      </li>
+      <li>
+       <a href="#timer">
+        运行时间测量:timer
+       </a>
+      </li>
+      <li>
+       <a href="#boostrandom">
+        随机数 boost::random
+       </a>
+      </li>
+      <li>
+       <a href="#coroutine2">
+        协程 coroutine2
+       </a>
+      </li>
+      <li>
+       <a href="#string-algo">
+        串算法库 string algo
+       </a>
+      </li>
+      <li>
+       <a href="#circular-buffervector">
+        Circular Buffer{循环缓冲,vector}
+       </a>
+      </li>
+      <li>
+       <a href="#serialization">
+        序列化 Serialization
+       </a>
+      </li>
+      <li>
+       <a href="#_3">
+        其他内容
+       </a>
+       <ul>
+        <li>
+         <a href="#_4">
+          日志功能的简单实现
+         </a>
+        </li>
+        <li>
+         <a href="#cprint">
+          C++实现print
+         </a>
+        </li>
+       </ul>
+      </li>
+     </ul>
+    </li>
+    <li>
+     <a href="#_5">
+      其他未详细看的内容
+     </a>
+    </li>
+    <li>
+     <a href="#_6">
+      笔记
+     </a>
+    </li>
+    <li>
+     <a href="#_7">
+      完
+     </a>
+    </li>
+   </ul>
+  </div>
+  <hr/>
+  <h2 id="tokenizer">
+   tokenizer:分词
+  </h2>
+  <pre><code>#include&lt;boost/tokenizer.hpp&gt;
+using  namespace boost;
+bool tokenizer_test()
+{
+    string s = "This is a test";
+    tokenizer&lt;&gt; token1(s);
+    for(auto item:token1){
+        cout&lt;&lt;item&lt;&lt;endl;//空格划分 
+    }
+  //第二种:
+    string str = ";;I|love||-the--one;is;you|";
+    char_separator&lt;char&gt; sep("-;|");
+    tokenizer&lt;char_separator&lt;char&gt;&gt; token2(str, sep);
+            //escaped_list_separator&lt;char&gt; 
+            //offset_separator
+    for(auto item:token2){
+        cout&lt;&lt;item&lt;&lt;" ";//I love the one is you
+    }
+    cout&lt;&lt;endl;
+  //第三种:
+    string s1 = "12252001";
+    int offsets[] = {2,2,4};
+    offset_separator f(offsets, offsets+3);
+    tokenizer&lt;offset_separator&gt; tok(s1,f);
+    for(auto item:tok){
+        cout&lt;&lt;item &lt;&lt;" "; //12 25 2001 
+    }
+    cout&lt;&lt;endl;
+    return true;
+}
+</code></pre>
+  <h2 id="pool">
+   内存池:pool
+  </h2>
+  <pre><code>#include&lt;boost/pool/pool.hpp&gt;
+using namespace boost;
+//
+//内存池操作:head-only library
+//std:vector使用:pool_allocator
+//std:list使用:fast_pool_allocator
+//
+#include&lt;boost/pool/singleton_pool.hpp&gt;
+#include&lt;boost/pool/object_pool.hpp&gt;
+#include&lt;boost/pool/pool_alloc.hpp&gt;
+#include&lt;boost/pool/poolfwd.hpp&gt;
+#include&lt;boost/pool/simple_segregated_storage.hpp&gt;
+struct X{int i;};
+bool pool_test()
+{
+    //形式1
+    boost::pool&lt;&gt; p(sizeof(int));
+    for (int i = 0; i &lt; 10000; ++i)
+    {
+        void * const t = p.malloc();
+    }
+    //形式2
+    boost::object_pool&lt;X&gt; p1;
+    for (int i = 0; i &lt; 10000; ++i){X * const t = p1.malloc();}
+
+    //形式3
+    typedef boost::singleton_pool&lt;X, sizeof(int)&gt; my_pool;
+    for (int i = 0; i &lt; 10000; ++i){
+        void * const t = my_pool::malloc();
+    }
+    my_pool::purge_memory();
+
+    return true;    
+}
+</code></pre>
+  <h2 id="_1">
+   安全数值库
+  </h2>
+  <pre><code>//  The Safe Numerics library i
+//C++14,依赖较多;溢出报错
+//
+
+#include &lt;boost/safe_numerics/safe_integer.hpp&gt;
+using namespace boost::safe_numerics;
+safe&lt;int&gt; func(safe&lt;int&gt; x, safe&lt;int&gt; y){
+  return x + y;
+}
+</code></pre>
+  <h2 id="_2">
+   文件和目录操作
+  </h2>
+  <pre><code>-lboost_filesystem
+#include&lt;boost/filesystem.hpp&gt;
+using namespace boost;
+//前面必须有#inlcude&lt;boost/*&gt;
+//否则:error: ‘boost’ is not a namespace-name
+
+
+//文件系统
+// absolute   canonical
+// copy  copy_directory copy_file  copy_symlink
+// create_directories   create_directory   create_hard_link     create_symlink
+// exists[存在性]  equivalent   hard_link_count
+// initial_path. is_directory, is_empty
+// is_other is_regular_file  is_symlink
+// last_write_time    permissions    read_symlink    relative
+// remove  remove_all  rename  resize_file   space
+// status  status_known   symlink_status   system_complete
+bool fs_test()
+{
+    auto filename="log.txt";
+    filesystem::path p1{"/usr/bin"};
+    cout&lt;&lt;"文件大小为:"&lt;&lt;filesystem::file_size(filename)&lt;&lt;"字节"&lt;&lt;endl;
+    cout&lt;&lt;"常规文件:"&lt;&lt;filesystem::is_regular_file(filename)&lt;&lt;endl;
+    cout&lt;&lt;"是目录:"&lt;&lt;filesystem::is_directory(p1)&lt;&lt;endl;
+    int i=0;
+    for (filesystem::directory_entry&amp; item : filesystem::directory_iterator(p1)){
+        //cout&lt;&lt;item.path()&lt;&lt;endl;  //文件的路径
+        cout&lt;&lt;item.path().filename()&lt;&lt;endl; //只有文件名
+        i++;
+        if(i&gt;10)break;
+    }
+    cout&lt;&lt;"根路径:"&lt;&lt; p1.root_path() &lt;&lt;endl;
+    cout&lt;&lt;"名字"&lt;&lt;p1.stem()&lt;&lt;endl;
+    cout&lt;&lt;"后缀"&lt;&lt;p1.extension()&lt;&lt;endl;
+    cout&lt;&lt;"为空:"&lt;&lt;p1.empty()&lt;&lt;endl;
+    cout&lt;&lt;"绝对路径:"&lt;&lt;p1.is_absolute()&lt;&lt;endl;
+    cout&lt;&lt;"有root_name: "&lt;&lt;(p1.has_root_name()?"true":"false")&lt;&lt;endl;
+    cout&lt;&lt;"有根目录:"&lt;&lt;p1.has_root_directory()&lt;&lt;endl;
+    cout&lt;&lt;"有根路径:"&lt;&lt;p1.has_root_path()&lt;&lt;endl;
+    cout&lt;&lt;"有相对路径:"&lt;&lt;p1.has_relative_path()&lt;&lt;endl;
+    cout&lt;&lt;"有父目录:"&lt;&lt;p1.has_parent_path()&lt;&lt;endl;
+    cout&lt;&lt;"有文件名:"&lt;&lt;p1.has_filename()&lt;&lt;endl;
+    cout&lt;&lt;"有stem;"&lt;&lt;p1.has_stem()&lt;&lt;endl;
+    cout&lt;&lt;"有后缀;"&lt;&lt;p1.has_extension()&lt;&lt;endl;
+    cout&lt;&lt;"string表示:"&lt;&lt;p1.string()&lt;&lt;endl;
+    cout&lt;&lt;"通用string表示:"&lt;&lt;p1.generic_string()&lt;&lt;endl;
+    auto p2=filesystem::current_path();
+    cout&lt;&lt;"当前目录为:"&lt;&lt;p2.string()&lt;&lt;endl;
+    cout&lt;&lt;"状态:"&lt;&lt;status(p2).type()&lt;&lt;endl;
+    cout&lt;&lt;"状态:"&lt;&lt;status(p2).permissions()&lt;&lt;endl;
+    cout&lt;&lt;"最后修改时间:"&lt;&lt;last_write_time(p2)&lt;&lt;endl;
+    filesystem::rename(filename,"log_record.txt");
+    remove("log_record.txt");
+    return true;
+}
+</code></pre>
+  <h2 id="multiprecision">
+   大数: multiprecision
+  </h2>
+  <pre><code>//
+//uint128_t,uint256_t,uint512_t,uint1024_t;
+//int128_t      ...
+//cpp_rational
+//
+#include&lt;boost/multiprecision/cpp_int.hpp&gt; //慢,gmp_int快
+#include&lt;boost/multiprecision/cpp_bin_float.hpp&gt;
+#include&lt;boost/multiprecision/cpp_dec_float.hpp&gt;
+//#include&lt;boost/multiprecision/gmp.hpp&gt;  //mpf_float,mpf_float_50,mpf_float_500,mpf_float_1000
+//#include&lt;boost/multiprecision/mpfr.hpp&gt; //mpfr_float,mpfr_float_100,mpfr_float_1000
+#include&lt;boost/multiprecision/float128.hpp&gt;
+#include&lt;boost/multiprecision/cpp_complex.hpp&gt;
+
+
+bool multiprecision_func()
+{
+    multiprecision::cpp_int big_int=1234254;//任意精度int
+    big_int=big_int*big_int*big_int*big_int*big_int;
+    cout&lt;&lt;"int大数为:"&lt;&lt;big_int&lt;&lt;endl;
+
+    multiprecision::cpp_bin_float_100   big_float=0.234345456;
+    big_float*=big_float;
+    cout&lt;&lt;"float大数为:"&lt;&lt;big_float&lt;&lt;endl;
+
+    multiprecision::cpp_complex_100 complex1={123,234};
+    cout&lt;&lt;"实部"&lt;&lt;complex1.real()&lt;&lt;endl;
+    cout&lt;&lt;"虚部"&lt;&lt;imag(complex1)&lt;&lt;endl;
+
+    multiprecision::cpp_rational rat_val=123;
+    for(unsigned i=1;i&lt;1000;i++ ){
+        rat_val*=i;
+    }
+    cout&lt;&lt;std::cout.precision(10)&lt;&lt;endl;//设置小数精度
+    cout&lt;&lt;"有理数:"&lt;&lt;rat_val&lt;&lt;endl;
+    return true;
+}
+</code></pre>
+  <h2 id="timer">
+   运行时间测量:timer
+  </h2>
+  <pre><code>//      运行时间测量函数
+//  -lboost_timer -lboost_chrono
+//  还有timer类:用于定时等
+#include &lt;boost/timer/timer.hpp&gt;
+bool sub_func()
+{
+    timer::auto_cpu_timer sub_t;
+    cout&lt;&lt;"子函数调用时间"&lt;&lt;endl;
+    return true;
+}
+bool timer_test()
+{
+    timer::auto_cpu_timer t;//定义时开始计时
+    cout&lt;&lt;"计时间过程"&lt;&lt;endl;
+    vector&lt;string&gt; asd{"qweasd","asdxcv","dfgyert","tyugvhbn"};
+    for(auto i:asd){
+        cout&lt;&lt;i&lt;&lt;endl;
+    }
+    sub_func();
+    return true;
+}
+</code></pre>
+  <h2 id="boostrandom">
+   随机数 boost::random
+  </h2>
+  <pre><code>//
+// 各种分布:仍待探索
+//
+#include&lt;boost/random/bernoulli_distribution.hpp&gt;
+#include&lt;boost/random/beta_distribution.hpp&gt;
+#include&lt;boost/random/binomial_distribution.hpp&gt;
+#include&lt;boost/random/cauchy_distribution.hpp&gt;
+#include&lt;boost/random/chi_squared_distribution.hpp&gt;
+#include&lt;boost/random/discrete_distribution.hpp&gt;
+#include&lt;boost/random/exponential_distribution.hpp&gt;
+#include&lt;boost/random/extreme_value_distribution.hpp&gt;
+#include&lt;boost/random/gamma_distribution.hpp&gt;
+#include&lt;boost/random/fisher_f_distribution.hpp&gt;
+#include&lt;boost/random/generate_canonical.hpp&gt;
+#include&lt;boost/random/geometric_distribution.hpp&gt;
+#include&lt;boost/random/hyperexponential_distribution.hpp&gt;
+#include&lt;boost/random/laplace_distribution.hpp&gt;
+#include&lt;boost/random/lognormal_distribution.hpp&gt;
+#include&lt;boost/random/negative_binomial_distribution.hpp&gt;
+#include&lt;boost/random/non_central_chi_squared_distribution.hpp&gt;
+#include&lt;boost/random/normal_distribution.hpp&gt;
+#include&lt;boost/random/piecewise_constant_distribution.hpp&gt;
+#include&lt;boost/random/piecewise_linear_distribution.hpp&gt;
+#include&lt;boost/random/poisson_distribution.hpp&gt;
+#include&lt;boost/random/student_t_distribution.hpp&gt;
+#include&lt;boost/random/triangle_distribution.hpp&gt;
+#include&lt;boost/random/uniform_int_distribution.hpp&gt;
+#include&lt;boost/random/uniform_real_distribution.hpp&gt;
+#include&lt;boost/random/weibull_distribution.hpp&gt;
+
+#include&lt;boost/random/uniform_01.hpp&gt;
+#include&lt;boost/random/uniform_smallint.hpp&gt;
+#include&lt;boost/random/uniform_on_sphere.hpp&gt;
+
+
+//
+//  生成器  
+//
+#include&lt;boost/random/linear_congruential.hpp&gt; //minstd_rand0  minstd_rand rand48
+#include&lt;boost/random/additive_combine.hpp&gt;    //ecuyer1988
+#include&lt;boost/random/shuffle_order.hpp&gt;       //knuth_b, kreutzer1986
+#include&lt;boost/random/taus88.hpp&gt;              //taus88
+#include&lt;boost/random/inversive_congruential.hpp&gt;//hellekalek1995
+#include&lt;boost/random/mersenne_twister.hpp&gt;    //mt11213b, mt19937
+#include&lt;boost/random/lagged_fibonacci.hpp&gt;    
+//lagged_fibonacci607, lagged_fibonacci1279, lagged_fibonacci2281
+//lagged_fibonacci3217, lagged_fibonacci4423, lagged_fibonacci9689
+//lagged_fibonacci19937, lagged_fibonacci23209, lagged_fibonacci44497
+#include&lt;boost/random/ranlux.hpp&gt;
+//ranlux3, ranlux4, ranlux64_3,ranlux64_4, ranlux3_01, ranlux4_01
+//ranlux64_3_01, ranlux64_4_01, ranlux24, ranlux48
+
+///
+///其他
+///
+#include&lt;boost/random/seed_seq.hpp&gt;
+#include&lt;boost/random/random_number_generator.hpp&gt;
+#include&lt;boost/random/generate_canonical.hpp&gt;
+
+
+random::mt19937 rng;
+int rand_one(int start=1,int end=600){
+    //random::uniform_int_distribution&lt;&gt; diset(start,end);
+    //random::student_t_distribution&lt;&gt; diset;
+    random::normal_distribution&lt;&gt; diset(start,end);
+
+    return diset(rng);
+}
+int gailv(){
+    double probabilities[] = {0.1, 0.2, 0.1, 0.3, 0.1, 0.2};
+    random::discrete_distribution&lt;&gt; dist(probabilities);
+    return dist(rng)+1;
+}
+#include&lt;boost/random/random_device.hpp&gt;
+random::random_device rng1;
+bool mima(){
+//该函数需要:-lboost_random
+    string table="abcdefghijklmnopqrstuvwxyz1234567890";
+
+    random::uniform_int_distribution&lt;&gt; index_dist(0, 35);
+    for(int i=0;i&lt;10;i++){
+        cout&lt;&lt;table[index_dist(rng1)]&lt;&lt;",";
+    }
+    cout&lt;&lt;"mima"&lt;&lt;endl;
+    return true;
+}
+bool rand_test()//再试试其他的分布和生成器
+{
+    int s=0,s1=0,m=0,e1=0,e=0;
+    int start=1;
+    int end=600;
+
+    for(int i=0;i&lt;1000;i++){
+        int tmp=rand_one();
+        //int tmp=gailv();
+        if(tmp&lt;= (end/5))s++;
+        else if(tmp&lt;= (end*0.4))s1++;
+        else if(tmp&lt;= (end*0.6))m++;
+        else if(tmp&lt;= (end*0.8))e1++;
+        else e++;
+    }
+    cout&lt;&lt;"从小到达的数量:"
+        &lt;&lt;s&lt;&lt;"-"
+        &lt;&lt;s1&lt;&lt;"-"
+        &lt;&lt;m&lt;&lt;"-"
+        &lt;&lt;e1&lt;&lt;"-"
+        &lt;&lt;e&lt;&lt;endl;
+
+    //mima();
+
+    return true;
+}
+</code></pre>
+  <h2 id="coroutine2">
+   协程 coroutine2
+  </h2>
+  <pre><code>//
+// coroutine2 :provides asymmetric coroutines.
+//  协程: 相当于python的yield 程序在任一位置中断或恢复执行
+//      关键 就是执行的流程控制
+//      The implementation uses Boost.Context for context switching
+//  适合事件驱动模型
+//  实现: fcontext_t:默认实现,基于汇编,有平台依赖,性能最好
+//       ucontext_t:跨平台,性能稍差
+//  对称协程:显示yield;非对称协程:隐式转移控制权[本库实现方式]
+//  编译选项:-lboost_context
+//
+#include &lt;boost/coroutine2/all.hpp&gt;
+bool called_func(coroutines2::coroutine&lt;void&gt;::push_type &amp; qwe)//无值传递
+{
+    cout &lt;&lt; "一 ";
+    qwe();
+    cout &lt;&lt; "二 ";
+    qwe();
+    cout &lt;&lt; "三 ";
+    return true;
+}
+bool call_func()
+{
+    //push_type 与 pull_type 的位置可互换 从push开始向下执行
+    coroutines2::coroutine&lt;void&gt;::pull_type goto_qwe(called_func);
+    cout &lt;&lt; "1 ";
+    goto_qwe();
+    cout &lt;&lt; "2 ";
+    goto_qwe();
+    cout &lt;&lt; "3 "&lt;&lt;endl;
+    return true;
+}
+bool called_func1(coroutines2::coroutine&lt;unsigned int&gt;::push_type&amp; qwe)//有值传递
+{
+    for(int i=0;i&lt;10;i++){
+        cout &lt;&lt;i&lt;&lt; " ";
+        qwe(++i);
+    }
+    return true;
+}
+bool call_func1()
+{
+    coroutines2::coroutine&lt;unsigned int&gt;::pull_type goto_qwe(called_func1);
+    /*
+    //第一种方法:
+    unsigned int  i=1;
+    for(;i&lt;10;i++){
+        cout &lt;&lt;goto_qwe.get()&lt;&lt;" ";
+        goto_qwe();
+    }
+    //第二种方法
+    using iter = coroutines2::coroutine&lt;unsigned int&gt;::pull_type::iterator;
+    for (iter start = begin(goto_qwe); start != end(goto_qwe); ++start) {
+    cout&lt;&lt; *start &lt;&lt; " ";
+    }
+    */
+    //第三种方法:
+    for(auto val:goto_qwe){
+        cout&lt;&lt;val&lt;&lt;" "; 
+    }
+
+    cout &lt;&lt;endl;
+    return true;
+}
+</code></pre>
+  <h2 id="string-algo">
+   串算法库 string algo
+  </h2>
+  <pre><code>#include&lt;iostream&gt;
+#include&lt;string&gt;
+#include&lt;boost/algorithm/string_regex.hpp&gt;
+#include&lt;boost/algorithm/string.hpp&gt; // split join replace
+#include &lt;boost/lexical_cast.hpp&gt;
+#include &lt;boost/convert.hpp&gt;
+#include &lt;boost/regex.hpp&gt;
+
+using namespace boost;
+
+void show_str(string one_str){cout&lt;&lt;one_str+";"&lt;&lt;endl;}
+bool str_opt()
+{
+    string one_str="   啊撒了123看到    年份,12314s gdfg1bf. SDFG345SDFUK    ";
+    cout&lt;&lt;"1、size:"&lt;&lt;one_str.size()&lt;&lt;endl;
+    cout&lt;&lt;"2、length:"&lt;&lt;one_str.length()&lt;&lt;endl;
+    //to_lower(),to_upper(one_str); show_str(one_str);
+    cout&lt;&lt;"3、转为小写"&lt;&lt;to_lower_copy(one_str) &lt;&lt;endl;
+
+    // 去掉开头结尾空格trim(),trim_left,trim_right,trim_left_copy
+    //trim_copy_if(str, boost::is_alnum());
+    cout&lt;&lt;"4、去开头空格："&lt;&lt;trim_left_copy(one_str)&lt;&lt;endl;
+
+    cout&lt;&lt;"5、starts_with:"&lt;&lt;starts_with(" BBCSDRFG","BBC")&lt;&lt;endl;
+    cout&lt;&lt;"6、ends_with："&lt;&lt;ends_with("踩踩julia","julia") &lt;&lt;endl;
+
+    cout&lt;&lt;"7、contains(包含 in)："&lt;&lt;contains("123zhong456","zhong") &lt;&lt;endl;
+    cout&lt;&lt;"8、equals（串相等）"&lt;&lt;equals("julia123","julia123") &lt;&lt;endl;
+    cout&lt;&lt;"9、字典序比较："&lt;&lt; lexicographical_compare("abvfg","bwerf")&lt;&lt;endl;
+    //cout&lt;&lt;"10、all(元素相同):"&lt;&lt;all("aaaaa",[](char i){return i=='a'?true:false;}) &lt;&lt;endl;
+    cout&lt;&lt;"10、all(元素相同):"&lt;&lt;all("aaaaa",is_any_of("a") ) &lt;&lt;endl;
+
+    //find_last,find_nth,
+    cout&lt;&lt;"11、find_first:"&lt;&lt;find_first(one_str,"123") &lt;&lt;endl;  //怎么用?返回123不是索引
+        //if(find_first(one_str,"看到")){cout&lt;&lt;"找到了"&lt;&lt;endl;}else{cout&lt;&lt;"未找到"&lt;&lt;endl;}
+    cout&lt;&lt;"12、检索头"&lt;&lt;find_head(one_str,6) &lt;&lt;endl;  //find_tail
+    iterator_range&lt;string::iterator&gt; iter1=find_token(one_str,is_any_of("312"));
+    cout&lt;&lt;"13、find_token:"&lt;&lt;string(iter1.begin(),iter1.end()) &lt;&lt;endl;  //怎么用???
+
+    regex re1{"[0-9]+"};
+    iterator_range&lt;string::iterator&gt; iter=find_regex(one_str,re1);
+    cout&lt;&lt;"14、find_regex:"&lt;&lt;string(iter.begin(),iter.end()) &lt;&lt;endl;
+    //cout&lt;&lt;"15、find："&lt;&lt;find(one_str,first_finder("查找的串",is_iequal()) ) &lt;&lt;endl;
+
+    //{replace | erase}_{first | last | all | nth | head | tail | regex}_{copy|""}
+    // 28中组合
+    replace_first(one_str,"啊撒了","Julia");show_str(one_str);
+    replace_last(one_str,"年份","天狼星");show_str(one_str);
+    replace_all(one_str,"gdf","aab");show_str(one_str);
+    erase_all(one_str,"1");show_str(one_str);  //删除所有的1
+    //replace_all_regex_copy()
+
+    //find_all,find_all_regex,iter_find,iter_split
+    vector&lt;string&gt; neirong;
+    find_all_regex(neirong,one_str,re1);
+    cout&lt;&lt;"16、find_all_regex 个数"&lt;&lt;neirong.size()&lt;&lt;" "&lt;&lt;neirong[1]&lt;&lt;endl;  //****常用****
+    find_all(neirong,one_str,"23");
+    cout&lt;&lt;"17、find_all: "&lt;&lt;neirong[1]&lt;&lt;endl;
+
+    vector&lt;string&gt; str_vec;
+    regex e{"\\s+"};
+    //split(str_vec,one_str,is_any_of(" "));
+    split_regex(str_vec,one_str,e);
+    for(auto val:str_vec){cout&lt;&lt;val+"+"&lt;&lt;endl;}
+
+    //join,join_if（比join多个谓词）
+    string single_str=join(str_vec,"+");
+    cout&lt;&lt;"18、join连接："&lt;&lt;single_str&lt;&lt;endl;
+    unsigned int y=142;
+    cout&lt;&lt;"19、字面量转换 : "&lt;&lt;lexical_cast&lt;string&gt;(y)&lt;&lt;endl; //类型转换142-&gt;"142"    
+    //string s2 = convert&lt;string&gt;(100).value();
+    //cout&lt;&lt;"20.convert: "&lt;&lt; s2&lt;&lt;endl;
+
+
+    //finder
+    //{first,last,nth,head,tail,token,range,regex}_finder
+
+    //Formatters 格式化器
+    //const_formatter,identity_formatter,empty_formatter,regex_formatter
+
+    //迭代器 
+    //find_iterator,split_iterator
+
+
+    return true;
+}
+</code></pre>
+  <h2 id="circular-buffervector">
+   Circular Buffer{循环缓冲,vector}
+  </h2>
+  <pre><code>#include &lt;boost/circular_buffer.hpp&gt;
+bool buffer()
+{
+    circular_buffer&lt;string&gt; buffer5(5);
+    buffer5.push_back("1.sdf");
+    buffer5.push_back("2.啊撒");
+    buffer5.push_back("3.撒地方了");
+    buffer5.push_back("4.333");
+    buffer5.push_back("5.让他鱼");
+    string example=buffer5[3];
+    buffer5[3]="4.电饭锅";
+    buffer5.pop_back();
+    buffer5.pop_front();
+    for(auto i : buffer5){
+        cout&lt;&lt;"["&lt;&lt;i&lt;&lt;endl;
+    }
+    return true;
+}
+</code></pre>
+  <h2 id="serialization">
+   序列化 Serialization
+  </h2>
+  <pre><code>//  ===     ========================
+//              
+//   1. 非自定义对象:写个函数(文件名,对象,存储方式)直接存储
+//   2. 自定义对象: 在类中添加方法
+//
+//   编译时添加lib库 : -lboost_serialization
+//
+//  ===     ========================
+#include &lt;boost/archive/text_oarchive.hpp&gt;
+#include &lt;boost/archive/text_iarchive.hpp&gt;
+#include &lt;boost/archive/text_woarchive.hpp&gt; //宽字符 utf8
+#include &lt;boost/archive/text_wiarchive.hpp&gt;
+
+#include &lt;boost/archive/xml_oarchive.hpp&gt;
+#include &lt;boost/archive/xml_iarchive.hpp&gt;
+#include &lt;boost/archive/xml_woarchive.hpp&gt;
+#include &lt;boost/archive/xml_wiarchive.hpp&gt;
+
+#include &lt;boost/archive/binary_oarchive.hpp&gt;
+#include &lt;boost/archive/binary_iarchive.hpp&gt;
+
+#include &lt;boost/serialization/vector.hpp&gt;
+#include &lt;boost/serialization/map.hpp&gt;
+#include &lt;boost/serialization/set.hpp&gt;
+//
+//  自定义类 的序列化
+//
+class self_def
+{
+public:
+    //类内数据定义
+    vector&lt;float&gt; aaa;
+    set&lt;string&gt; bbb;
+    string ccc;
+
+    friend class boost::serialization::access;
+
+    template&lt;class Archive&gt;
+    void serialize(Archive &amp;ar,unsigned int version)
+    {
+        ar &amp; aaa &amp; bbb &amp; ccc ;//读取,写入均可
+    }
+
+    self_def(vector&lt;float&gt;&amp; val1,set&lt;string&gt;&amp; val2,string val3){
+        this-&gt;aaa=val1;
+        this-&gt;bbb=val2;
+        this-&gt;ccc=val3;
+    }
+    self_def(){};
+
+};
+//
+//  函数对象 实现序列化与反序列化
+//
+template&lt;class object&gt;
+class Arch_out
+{
+public:
+    bool operator()(string filename,object&amp; obj,string type="xml")
+    {
+        ofstream out_stream(filename);
+
+        if(type=="text"){
+            archive::text_oarchive out_ar(out_stream);
+            out_ar&lt;&lt;obj; 
+        }
+        else if(type=="xml"){
+            archive::xml_oarchive out_ar(out_stream);
+            out_ar&lt;&lt;BOOST_SERIALIZATION_NVP(obj); 
+        }
+        else{}
+
+        // out_ar &amp;&amp; obj;  //相同
+        return true;
+    }
+    friend class boost::serialization::access;
+};
+template&lt;class object&gt;
+class Arch_in  //该class代码未测试
+{
+public:
+    bool operator()(string filename,object&amp; obj,string type="xml")
+    {
+        ifstream in_stream(filename);
+
+        if(type=="text"){
+            archive::text_iarchive in_ar(in_stream);
+            in_ar&gt;&gt;obj; 
+        }
+        else if(type=="xml"){
+            archive::xml_iarchive in_ar(in_stream);
+            in_ar&gt;&gt;BOOST_SERIALIZATION_NVP(obj); 
+        }
+        else{}
+        return true;
+    }
+    friend class boost::serialization::access;
+};
+
+//
+//  泛型 实现序列化与反序列化
+//
+template&lt;class object&gt;
+bool arch_out(string filename,object&amp; obj,string type="xml")
+{
+    ofstream out_stream(filename);
+    //多试几种存储方式
+    if(type=="txt"){
+        archive::text_oarchive out_ar(out_stream);
+        out_ar&lt;&lt;obj;
+    }
+    else if(type=="xml"){
+        archive::xml_oarchive out_ar(out_stream);
+        out_ar&lt;&lt;BOOST_SERIALIZATION_NVP(obj);
+    }
+    else if(type=="bin"){
+        archive::binary_oarchive out_ar(out_stream);
+        out_ar&lt;&lt;obj;
+    }
+    /*对‘vtable for boost::archive::codecvt_null&lt;wchar_t&gt;’未定义的引用
+    //      -lboost_wserialization 加上无效,难道依赖C++20的u8string
+
+    if(type=="wtxt"){
+        wofstream out_stream(filename);
+        archive::text_woarchive out_ar(out_stream);
+        out_ar&lt;&lt;obj;
+    }
+    else if(type=="wxml"){
+        wofstream out_stream(filename);
+        archive::xml_woarchive out_ar(out_stream);
+        out_ar&lt;&lt;BOOST_SERIALIZATION_NVP(obj);
+    } */
+    else{
+        //type参数的内容:未知
+        cerr&lt;&lt;"type 参数错误"&lt;&lt;endl;
+    }
+    out_stream.close();
+    return true;
+}
+template&lt;class object&gt;
+bool arch_in(string filename,object&amp; obj,string type="xml")
+{
+    ifstream in_stream(filename);//stringstream is ok
+
+    if(type=="txt"){
+        archive::text_iarchive in_ar(in_stream);
+        in_ar&gt;&gt;obj;
+    }
+    else if(type=="xml"){
+        archive::xml_iarchive in_ar(in_stream);
+        in_ar&gt;&gt;BOOST_SERIALIZATION_NVP(obj);
+    }
+    else if(type=="bin"){//binary 
+        archive::binary_iarchive in_ar(in_stream);
+        in_ar&gt;&gt;obj;
+    }
+    /*
+    else if(type=="wtxt"){
+        wifstream in_stream(filename);
+        archive::text_wiarchive in_ar(in_stream);
+        in_ar&gt;&gt;obj;
+    }
+    else if(type=="wxml"){
+        wifstream in_stream(filename);
+        archive::xml_wiarchive in_ar(in_stream);
+        in_ar&gt;&gt;BOOST_SERIALIZATION_NVP(obj);
+    } */
+    else{
+    //wait to fill
+    }
+    in_stream.close();
+    return true;
+}
+//
+//  序列化测试函数
+//
+#include&lt;map&gt;
+#include&lt;set&gt;
+bool Serial_test()
+{
+    //1. 多试几种类型 map set vector&lt;int string long&gt;
+    vector&lt;long&gt; example_obj{234,456,2342456,6784523,7897435,123457};
+    map&lt;string,long&gt; map_tmp{{"C++",1},{"julia",2},{"python",3},{"Perl",4}};
+    set&lt;string&gt; set_tmp{"喀什的愤怒","速度快了女","sdlvn","所得率几年","送到了房间"};
+
+    set&lt;string&gt; tmp;
+
+
+    //2. 多次类型
+    auto filename="archive";
+    //方法1 函数对象
+    //Arch_out&lt;vector&lt;long&gt;&gt; CC;
+    //CC(filename,example_obj);
+    //方法2 泛型
+    //*
+    vector&lt;string&gt; type{"txt","bin","xml"};
+    for(auto ll:type){
+        arch_out(filename,set_tmp,ll);
+        arch_in(filename,tmp,ll);
+        //for(auto i:tmp){cout&lt;&lt;i.first&lt;&lt;"="&lt;&lt;i.second&lt;&lt;" ";} //map
+        for(auto i:tmp){cout&lt;&lt;i&lt;&lt;" ";}
+        cout&lt;&lt;ll&lt;&lt;"_tested"&lt;&lt;endl;
+    }//
+    //方法3 自定义类的序列化
+    vector&lt;float&gt; val1={3.12443,5.2347,2345.3456,2345.789};
+    set&lt;string&gt; val2={"喀什的愤怒","速度快了女","sdlvn","所得率几年","送到了房间"};
+    string val3="撒的开ak sdnf发那可asdf怜检索2354;多次";
+
+    self_def item1{val1,val2,val3};
+    self_def item2;
+
+    ofstream out_stream(filename);
+    archive::text_oarchive out_ar(out_stream);
+    out_ar&lt;&lt;item1;
+    out_stream.close();
+
+    ifstream in_stream(filename);
+    archive::text_iarchive in_ar(in_stream);
+    in_ar&gt;&gt;item2;
+    /*
+    arch_out&lt;self_def&gt;(filename,item1,"txt");  //该部分出现的错误,尚未解决
+    arch_in &lt;self_def&gt;(filename,item2,"txt");   //暂时使用上面七行代码解决
+    */
+    cout&lt;&lt;item2.aaa[0]&lt;&lt;endl;;
+    cout&lt;&lt;item2.bbb.size()&lt;&lt;endl;
+    cout&lt;&lt;item2.ccc&lt;&lt;endl;
+
+    return true;
+}
+</code></pre>
+  <p>
+   -lboost_serialization   编译时需要添加的命令后缀
+  </p>
+  <h2 id="_3">
+   其他内容
+  </h2>
+  <h3 id="_4">
+   日志功能的简单实现
+  </h3>
+  <pre><code>using namespace std;
+#include&lt;vector&gt;
+#include&lt;fstream&gt;
+bool writelines(vector&lt;string&gt; log_record)
+{
+    ofstream log_file("log.txt",ios::app);
+    for(auto item:log_record){
+        log_file&lt;&lt;item&lt;&lt;endl;
+    }
+    return true;
+}
+vector&lt;string&gt; log_record{"项目执行日志\n","时间:2019- \n"};
+bool log_add(string log_info,bool write2file=false)
+{
+    log_record.push_back(log_info);
+    if(write2file==true){
+        writelines(log_record);
+        log_record.clear();
+    }
+    return true;
+}
+//调用方式:
+//  log_add("项目执行结束.",true);
+//将上述代码放到main函数前
+</code></pre>
+  <h3 id="cprint">
+   C++实现print
+  </h3>
+  <pre><code>//
+// this code from boost doc
+//  print("为恶哦","asdf","啊撒地方",123);
+//
+void print(){}
+template&lt;class T, class... Ts&gt;
+void print(const T&amp; x, const Ts&amp;... xs)
+{
+    cout &lt;&lt; x;
+    print(xs...);
+}
+</code></pre>
+  <h1 id="_5">
+   其他未详细看的内容
+  </h1>
+  <pre><code>//=========================================
+//      boost 的 相关库
+//
+//  Range:增强stl 的可读性
+//  core:核心工具,无依赖,元编程的小函数,
+//  tribool: &lt;boost/logic/tribool.hpp&gt;: 三值:true,false,indeterminate
+//  beast:网络编程:request,repose
+//  Graph:图论中的图,
+//  icl:区间,interval_set,interval_map
+//
+//
+//
+//
+//===================================
+
+//
+//Higher-order functions
+//
+//1.函数指针:&amp;函数名 2.函数对象 
+//包含:BOOST_HOF_STATIC_FUNCTION,BOOST_HOF_STATIC_LAMBDA
+//      BOOST_HOF_LIFT(函数名)
+//感觉没啥用啊
+//
+//
+constexpr auto pi=3.141592657;
+constexpr auto two_pi=2*pi;//常量表达式:编译时求值
+cout&lt;&lt;"常量表达式"&lt;&lt;two_pi&lt;&lt;endl;
+</code></pre>
+  <h1 id="_6">
+   笔记
+  </h1>
+  <ul>
+   <li>
+    //proto:领域专用语言;嵌入式;表达式模板
+   </li>
+   <li>
+    //statechart:transform a UML statechart into executable C++ code
+   </li>
+   <li>
+    //DLL:动态链接库的使用
+   </li>
+   <li>
+    //Boost.System:扩展的错误报告
+   </li>
+   <li>
+    //process:子进程,使用pipe通信
+   </li>
+   <li>
+    //Interprocess:进程间通信
+   </li>
+   <li>
+    //fiber: 可以在线程间转移???
+   </li>
+   <li>
+    //lockfree: 生产者消费者数据结构
+   </li>
+   <li>
+    //xpressive:正则表达式模板库
+   </li>
+   <li>
+    //    1.regex_match() 2.regex_search() 3.regex_replace ()
+   </li>
+   <li>
+    //    4. regex_iterator&lt;&gt;  5.regex_token_iterator&lt;&gt;
+   </li>
+   <li>
+    //Signals2 :信号&amp;&amp;槽(未看)
+   </li>
+   <li>
+    //minmax:比min和max比较次数少
+   </li>
+  </ul>
+  <p>
+   //什么时候用多线程?
+   <br/>
+   //  1.大规模网络爬虫
+   <br/>
+   //  2.大规模网络请求
+   <br/>
+   //  3.密集的计算任务
+   <br/>
+   //noexcept: 该关键字告诉编译器，函数中不会发生异常
+   <br/>
+   //  确定函数不发生异常的根据,或判断标准是什么?
+   <br/>
+   //token :  an individual instance of a type of symbol
+  </p>
+  <p>
+   <strong>
+    regex:有时间再看!!!!
+   </strong>
+  </p>
+  <hr/>
+  <p>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+  </p>
+  <h1 id="_7">
+   完
+  </h1>
+  <p>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+  </p>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.1/highlight.min.js">
+  </script>
+  <script>
+   hljs.initHighlightingOnLoad();
+  </script>
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript">
+  </script>
+  <script type="text/javascript">
+   MathJax.Hub.Config({"showProcessingMessages" : false,"messageStyle" : "none","tex2jax": { inlineMath: [ [ "$", "$" ] ] }});
+  </script>
+ </body>
+</html>

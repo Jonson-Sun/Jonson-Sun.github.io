@@ -73,6 +73,7 @@
 
 链接|备注|评级
 :-|:-|:-:
+[gnome帮助文档](https://help.gnome.org/)|首页中文,其他英文||
 [boost简介 ](https://theboostcpplibraries.com/)|英文版|
 [boost简介](http://zh.highscore.de/cpp/boost/)|中文|5
 [mozilla开发者文档](https://developer.mozilla.org/zh-CN/)|web内容:mathml,http,...|

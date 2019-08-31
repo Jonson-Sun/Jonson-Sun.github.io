@@ -146,7 +146,7 @@
 [zhangmeishan](https://github.com/zhangmeishan)||
 [HTML5](https://www.html5tricks.com/)|html5技巧,教程等|
 [系统](distrotest.net)|时用200中linux和unix系统|
-[]()||
+[freecode](http://freshmeat.sourceforge.net/)|linux开源软件|3
 []()||
 
 
@@ -157,6 +157,7 @@
 
 链接|备注|评级
 :-|:-|:-:
+[国家金融与发展实验室](http://www.nifd.cn)|数据->宏观杠杆率|3
 [草根网](http://www.caogen.com/)|http://www.caogen.com/ ，政策观点
 [世界名著](http://www.xiexingcun.com/World/index.htm)|http://www.xiexingcun.com/World/index.htm
 [名著阅读吧]()|
@@ -255,7 +256,7 @@
 [穷游网](https://place.qyer.com/)|世界各国旅游目的地简介
 [极速漫画网](http://www.1kkk.com/)|一拳超人
 [好恐怖](https://www.haokongbu.com/)|电影下载网站
-[]()|
+[吹月](http://www.chuiyue.com/)|戏曲大全|5
 []()|
 []()|
 []()|

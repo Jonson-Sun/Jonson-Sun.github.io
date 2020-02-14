@@ -455,68 +455,126 @@
      </td>
     </tr>
     <tr>
-     <td align="left">
-      工作区设置
-     </td>
-     <td align="left">
-      xfwm4-workspace-settings
-     </td>
-     <td align="left">
-     </td>
+     <td align="left">工作区设置  </td>
+     <td align="left">xfwm4-workspace-settings</td>
+     <td align="left">     </td>
     </tr>
     <tr>
-     <td align="left">
-      图片查看
-     </td>
-     <td align="left">
-      ristretto
-     </td>
-     <td align="left">
-     </td>
+     <td align="left">图片查看 </td>
+     <td align="left">ristretto</td>
+     <td align="left">    </td>
+    </tr>
+	<tr>
+     <td align="left">     </td>
+     <td align="left">GIMP   </td>
+     <td align="left">图片编辑  </td>
+    </tr>
+	<tr>
+     <td align="left">     </td>
+     <td align="left">Inkscape  </td>
+     <td align="left">设计图片 </td>
     </tr>
     <tr>
-     <td align="left">
-      媒体播放器
-     </td>
-     <td align="left">
-      mpv
-     </td>
-     <td align="left">
-      界面简洁
-     </td>
+     <td align="left">媒体播放器</td>
+     <td align="left">mpv，Smplayer</td>
+     <td align="left">界面简洁</td>
     </tr>
     <tr>
-     <td align="left">
-     </td>
-     <td align="left">
-      Smplayer
-     </td>
-     <td align="left">
-     </td>
-    </tr>
+     <td align="left">     </td>
+     <td align="left">VLC</td>
+     <td align="left"></td>    </tr>
     <tr>
-     <td align="left">
-      视频生成
-     </td>
-     <td align="left">
-      ffDiaporama
-     </td>
-     <td align="left">
-      图片生成视频
-     </td>
-    </tr>
-    <tr>
-     <td align="left">
-      音量管理
-     </td>
-     <td align="left">
-      pavucontrol
-     </td>
-     <td align="left">
-     </td>
-    </tr>
+     <td align="left">视频生成</td>
+     <td align="left">ffDiaporama</td>
+     <td align="left">图片生成视频</td>    </tr>
+	<tr><td align="left"></td>
+     	<td align="left">flowblade</td>
+		<td align="left">剪视频时用</td></tr>
+    <tr><td align="left">音量管理</td>
+     	<td align="left">pavucontrol</td>
+     	<td align="left">？</td></tr>
+	<tr><td align="left"></td>
+     	<td align="left">netease</td>
+		<td align="left">网易云音乐：听歌</td></tr>
+	<tr><td align="left">其他</td>
+     	<td align="left">scribus</td>
+		<td align="left">出版物？</td></tr>
+	<tr><td align="left"></td>
+     	<td align="left"></td>
+		<td align="left"></td></tr>
+	<tr><td align="left"></td>
+     	<td align="left"></td>
+		<td align="left"></td></tr>
+	<tr><td align="left"></td>
+     	<td align="left"></td>
+		<td align="left"></td></tr>
+	<tr><td align="left"></td>
+     	<td align="left"></td>
+		<td align="left"></td></tr>
+	<tr><td align="left"></td>
+     	<td align="left"></td>
+		<td align="left"></td></tr>
+	<tr><td align="left"></td>
+     	<td align="left"></td>
+		<td align="left"></td></tr>
+	<tr><td align="left"></td>
+     	<td align="left"></td>
+		<td align="left"></td></tr>
+	<tr><td align="left"></td>
+     	<td align="left"></td>
+		<td align="left"></td></tr>
    </tbody>
   </table>
+	 
+	 
+	 <hr>
+	 <h2>debug</h2>
+	 <h3>1. 软件管理错误：</h3><br>
+	 
+	dpkg之所以能够对每个包的状态了如指掌，是因为dpkg数据库/var/lib/dpkg/status<br>
+	这个文本文件中记录了软件仓库中软件包的安装状态。<br>
+	详细参考man dpkg；<br>
+	half-installed和half-configured是常见的错误状态<br>
+
+	错误状态大概就有6种，安装、删除出错都会将软件包的状态标记成其中之一！它们的状态都要被修改成：install ok installed ; deinstall ok not-installed或purge ok not-installed。<br>
+
+	要将错误状态修改成not-install状态，需要删除软件包的描述，删除Section行下面的全部。（不要把别的应用删掉！！！！！）<br>
+
+	例子：只要修改成：<br>
+	<br>
+		>Package: xemacs-mule<br>
+		>Status: purge ok not-installed<br>
+		>Priority: optional<br>
+		>Section: libs<br>
+	<br>
+	然后卸载掉该应用即可<br>
+	最好备份！虽然我没这么做<br>
+	 <br>
+	 <hr>
+	 <h3>2. </h3><br>
+	 <br>
+	 <hr>
+	 <h3>3.</h3><br>
+	 <br>
+	 <hr>
+	 <h3>4.</h3><br>
+	 <br>
+	 <hr>
+	 <h3>5.</h3><br>
+	 <br>
+	 <hr>
+	 <h3>6.</h3><br>
+	 <br>
+	 <hr>
+	 <h3>7.</h3><br>
+	 <br>
+	 <hr>
+	 <h3>8.</h3><br>
+	 <br>
+	 <hr>
+	 <h3></h3><br>
+	 <br>
+	 <hr>
   <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.1/highlight.min.js">
   </script>
   <script>
